@@ -1,4 +1,4 @@
-# TS-Soft-Builded
+# TS-Soft-Built
 TS抜き(DTV)関連ソフトウェアのビルド済みアーカイブです。
 
 ## 概要
