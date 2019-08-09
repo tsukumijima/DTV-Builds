@@ -12,7 +12,7 @@ BonDriver 関連ファイルは同梱していません。各自でセットア�
 また、個人的にフォントは全て Meiryo UI に統一しています。  
 基本的に動くかどうかの保証はありません。自己責任にてお願いします。
 
-## 内容
+## ダウンロード
  - **TVTest**
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TVTest-0.10.0-190203.zip)
