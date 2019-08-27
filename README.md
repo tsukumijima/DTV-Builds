@@ -11,6 +11,8 @@ BonDriver関連ファイルをセットアップするだけで利用できる�
 BonDriver 関連ファイルは同梱していません。各自でセットアップしてください。  
 また、個人的にフォントは全て Meiryo UI に統一しています。  
 基本的に動くかどうかの保証はありません。自己責任にてお願いします。
+ffmpeg は pthread などライブラリ全部入りでビルドしています。  
+4.2 以降は字幕の扱いが変わったとかで TS のエンコードは失敗するみたいです…
 
 ## ダウンロード
  - **TVTest**
@@ -23,3 +25,7 @@ BonDriver 関連ファイルは同梱していません。各自でセットア�
  - **TSTask**
    - TSTask-0.2.0 … [TSTask-0.2.0.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TSTask-0.2.0.zip)
    - TSTask-SPHD-0.2.0 … [TSTask-SPHD-0.2.0.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TSTask-SPHD-0.2.0.zip)
+ - **ffmpeg**
+   - ffmpeg-4.1.1 … [ffmpeg-4.1.1.7z](https://github.com/tsukumijima/TS-Soft-Built/raw/master/ffmpeg-4.1.1.7z)
+   - ffmpeg-4.1.4 … [ffmpeg-4.1.4.7z](https://github.com/tsukumijima/TS-Soft-Built/raw/master/ffmpeg-4.1.4.7z)
+   - ffmpeg-4.2 … [ffmpeg-4.2.7z](https://github.com/tsukumijima/TS-Soft-Built/raw/master/ffmpeg-4.2.7z)
