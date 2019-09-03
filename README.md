@@ -26,6 +26,7 @@ ffmpeg は pthread などのライブラリ全部入りでビルドしていま�
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-190814 … [EDCB-190814.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/EDCB-190814.zip)
    - EDCB-190721 … [EDCB-190721.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/EDCB-190721.zip)
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/TS-Soft-Built/raw/master/EDCB-190623.zip)
