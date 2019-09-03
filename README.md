@@ -12,14 +12,13 @@ BonDriver 関連ファイルは同梱していません。各自でセットア�
 また、個人的にフォントは全て Meiryo UI に統一しています。  
 基本的に動くかどうかの保証はありません。自己責任にてお願いします。
 
-BonDriverProxyEx は B25 デコード版をビルドしています。  
-BonDriver_Proxy や BonDriver_Splitter も同梱しています。
-BonDriverProxyEx の方が B25 デコード出来たり、BonDriver を自動選択出来たりと上位互換です。
-BonDriverProxyEx の方を使うことをお勧めします。  
+EDCB は現在主流の xtne6f 版 に EpgTimer 関連のパッチを当てた tkntrec 版をビルドしています。  
+BonDriverProxyEx は B25 Decode 版をビルドしています。  
+BonDriver_Proxy や BonDriver_Splitter も同梱しています。  
 BonDriver_Proxy と BonDriver_Splitter は BonDriverProxy と BonDriverProxyEx で共通です。
 
 ffmpeg は pthread などのライブラリ全部入りでビルドしています。  
-4.2 以降は字幕の扱いが変わったとかで TS のエンコードは失敗するみたいです…
+ffmpeg 4.2 以降は字幕の扱いが変わったらしく TS のエンコードに失敗するらしいです…
 
 ## ダウンロード
  - **TVTest**
