@@ -12,7 +12,8 @@ BonDriver 関連ファイルは同梱していません。各自でセットア�
 また、フォントは全て Meiryo UI に統一しています。  
 基本的に動くかどうかの保証はありません。自己責任にてお願いします。
 
-EDCB は現在主流の xtne6f 版 に EpgTimer 関連のパッチを当てた tkntrec 版をビルドしています。  
+[TVTest](https://github.com/tsukumijima/TVTest) はよく使われるプラグイン一式も同梱しています。  
+[EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版 に EpgTimer 関連のパッチを当てた tkntrec 版をビルドしています。  
 BonDriverProxyEx は B25 Decode 版をビルドしています。  
 BonDriver_Proxy や BonDriver_Splitter も同梱しています。  
 BonDriver_Proxy と BonDriver_Splitter は BonDriverProxy と BonDriverProxyEx で共通です。
