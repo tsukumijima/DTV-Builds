@@ -1,0 +1,90 @@
+﻿
+=====================================================================
+                       TVTest 0.10.0 - 2020/02/02                    
+=====================================================================
+
+◆ ビルドにあたって
+
+・VS2019 でビルドしています。別途ランタイムが必要かもしれません。
+・32bit 版・64bit 版両方を同梱しています。TVTest_32bit 以下が 32bit 版、TVTest_64bit 以下が 64bit 版です。
+・プラグインのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと以外の変更は行っていません（ C++ の知識がない…）。
+・変更したコードは https://github.com/tsukumijima/TVTest にて公開しています。
+・NicoJK・TVCaptionMod2 設定ファイルを同梱しています（後述）。
+  ・そのため、NicoJK・TVCaptionMod2 の設定をカスタマイズしている場合、単純に上書きしてしまうと設定ファイルも同梱されているもので上書きされてしまいます。
+  ・設定を上書きしたくない場合は、ファイルをリネームして上書きされないようにしてから上書きしてください。
+・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
+
+◆ 同梱ファイル (TVTest 本体に付属のファイル以外)
+
+TVTest を利用する上で必須、またはあった方が良さそうなファイルを一緒に同梱しています。
+
+・B25.tvcas … CasProcessor プラグインが使用する CAS 関連のファイル ( TVCAS_B25.tvcas 互換)
+  ・地デジ・BS・CS110 の再生に使用します
+  ・https://github.com/logue/TvCas をビルドしたものを同梱しています
+・SPHD.tvcas … CasProcessor プラグインが使用する CAS 関連のファイル ( TVCAS_B1.tvcas 互換)
+  ・スカパー！プレミアムサービス の再生に使用します
+  ・B25.tvcas 同様 https://github.com/logue/TvCas をビルドしたものを同梱しています
+・BonDriver_Pipe.dll … パイプ経由で TS ストリームを再生できる特殊な BonDriver
+  ・主に TvtPlay で使用します
+  ・TvtPlay26 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+・BonDriver_UDP.dll … UDP 経由で TS ストリームを再生できる特殊な BonDriver
+  ・主に TvtPlay や EpgTimerPlugIn で使用します
+  ・http://www.axfc.net/u/3753613 (BonDriver_UDP 1.20 mod2) をビルドしたものを同梱しています
+・BonDriver_TCP.dll … TCP 経由で TS ストリームを再生できる特殊な BonDriver
+  ・主に TvtPlay や EpgTimerPlugIn で使用します
+  ・http://www.axfc.net/u/3753613 (BonDriver_UDP 1.20 mod2) 内の BonDriver_TCP をビルドしたものを同梱しています
+・BonDriver_UDP.txt … BonDriver_UDP・BonDriver_TCP の説明書
+・filter-install.bat … 同梱している DirectShow フィルタをインストールするバッチ（私が作成したもの）
+  ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をインストールします
+  ・TVCaptionMod2 で必要なフォントも一緒にインストールします
+  ・インストールには管理者権限が必要です
+・filter-uninstall.bat … 同梱している DirectShow フィルタをアンインストールするバッチ（私が作成したもの）
+  ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をアンインストールします
+  ・アンインストールには管理者権限が必要です
+・LogoData … 私の環境（関東圏）で取得した 地上波・BS・CS110 のロゴデータ
+  ・地上波のロゴデータは関東以外では役に立たないと思いますが、BS・CS110 のロゴデータは全国共通なので、いちいち取得する手間を省けると思います
+・LogoData.ini … ロゴデータについての情報が記載された ini ファイル
+  ・LogoData か LogoData.ini どちらかを削除してしまった場合、ロゴを表示できなくなります（ロゴの再取得が必要）
+・sqlite3.exe … SQLite (データベース管理ソフト)
+  ・NicoJK は SQLite を使用して Chrome のデータベースから Cookie を取得しているため、NicoJK を使う場合は必須です
+・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ ( DirectShow フィルタ)
+  ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと音がおかしくなったり、出なくなることがあります
+  ・通常の視聴で TvtAudioStretchFilter を使う場合も同様です
+  ・TVTest と TvtPlay 用 TVTest とで分け、TvtPlay 用 TVTest にのみ TvtAudioStretchFilter を使うよう設定してください
+  ・filter-install.bat にてインストールされます
+  ・TvtPlay26 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+・TVTestVideoDecoder.ax … TVTest の作者が公開している MPEG2 デコーダー ( DirectShow フィルタ)
+  ・Windows10 では Microsoft DTV-DVD Video Decoder が入っていないため、このデコーダーを使用します
+  ・filter-install.bat にてインストールされます
+  ・TVTestVideoDecoder 0.3.0 (https://github.com/DBCTRADO/TVTestVideoDecoder) に入っているものを同梱しています
+・TVTestVideoDecoder.txt … TVTestVideoDecoder の説明書
+・Plugins/CasProcessor.tvtp … CAS 処理 (スクランブル解除) を行う TVTest のプラグイン
+  ・CasProcessor はTSプロセッサーのプラグインとして動作し、別途 B25.tvcas もしくは SPHD.tvcas を読み込んで B-CAS カードを使い CAS 処理を行います
+  ・TVTest 0.9.0 以降はスクランブル解除機能が削除されたため、このプラグインは必須です
+  ・https://github.com/logue/CasProcessor をビルドしたものを同梱しています
+・Plugins/NicoJK.tvtp … ニコニコ実況を表示できる TVTest のプラグイン
+  ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
+  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK) に入っているものを同梱しています
+・Plugins/NicoJK.ini … NicoJK の設定ファイル
+  ・87行目の execGetCookie のみ、自分のユーザー名を設定してください
+  ・execGetCookie が正しく設定されていない場合は、コメントを投稿することができません
+  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+・Plugins/NicoJK_Readme.txt … NicoJK の説明書
+・Plugins/TVCaptionMod2.tvtp … 字幕を表示できる TVTest のプラグイン
+  ・字幕が鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
+  ・TVCaptionMod2　master-180327 (https://github.com/xtne6f/TVCaptionMod2) に入っているものを同梱しています
+・Plugins/TVCaptionMod2.ini … TVCaptionMod2 の設定ファイル
+  ・[映像への字幕合成機能を使う] にチェックを入れると、TVCaptionMod2 を有効にしている間は上のように TVTest でキャプチャした時に字幕を画像の中に含める事ができます
+  ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください
+  ・TVCaptionMod2　master-180327 (https://github.com/xtne6f/TVCaptionMod2) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
+・Plugins/TvtPlay.tvtp … 録画した TS ファイルを TVTest で見れるようにするプラグイン
+  ・先述のように音声フィルタを変更する必要があるなどの理由で、通常視聴用の TVTest にて有効にすることはおすすめしません。
+  ・TVTest フォルダをコピーして TvtPlay とリネームし、TvtPlay 用 TVTest にて有効にすることをおすすめします
+  ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます、常に有効にしたい場合はショートカットのプロパティから、パスの末尾に /tvtplay と追記し、追記したショートカットから起動するようにしてください
+  ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
+  ・ニコニコ実況の過去ログが Plugins/NicoJK 以下にあれば、(NicoJK が有効になっている場合) 過去ログを同時に再生できます
+  ・過去ログの保存フォルダは NicoJK.ini から変更できます
+・Plugins/TvtPlay_Readme.txt … TvtPlay の説明書
+
+=====================================================================

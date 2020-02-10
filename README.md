@@ -10,16 +10,22 @@ BonDriver 関連ファイルをセットアップするだけで利用できる�
 ## 注意
 BonDriver 関連ファイルは同梱していません。各自でセットアップしてください。  
 また、フォントは全て Meiryo UI に統一しています。  
-
-VS2017 にてビルドしています。別途ランタイムが必要かもしれません。    
-古いバージョンには現在のバージョンでは同梱しているファイルが入っていない事があります。  
 基本的に動くかどうかの保証はありません。自己責任にてお願いします。
 
+VS2019 (TVTest-0.10.0-200202・EDCB-200209 より、それ以前は VS2017) にてビルドしています。別途ランタイムが必要かもしれません。    
+ビルド毎に同梱するファイルを更新したり入れ替えたりしているため、古いバージョンには現在のバージョンでは同梱しているファイルが入っていない事があります。  
+できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-200209 以前の TVTest・EDCB は諸都合でおすすめしません）。    
+
 [TVTest](https://github.com/tsukumijima/TVTest) はよく使われるプラグイン一式を同梱しています。  
+ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
+
 [EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版 に EpgTimer 関連のパッチを当てた tkntrec 版をビルドしています。  
+（ EDCB_Material_WebUI も同梱していますが、使用する場合は別途設定が必要です）  
+ビルドの詳細は [EDCB_Build.txt](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
+
 BonDriverProxyEx は B25 Decode 版をビルドしています。  
 BonDriver_Proxy や BonDriver_Splitter も一緒に同梱しています。  
-BonDriver_Proxy と BonDriver_Splitter は BonDriverProxy と BonDriverProxyEx で共通です。
+BonDriver_Proxy と BonDriver_Splitter の内容は BonDriverProxy と BonDriverProxyEx で共通です。
 
 ffmpeg は pthread などのライブラリ全部入りでビルドしています。  
 Static とつく方はライブラリをそれぞれの exe にまとめたバージョン、  
@@ -27,11 +33,13 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
 
 ## ダウンロード
  - **TVTest**
+   - TVTest-0.10.0-200202 … [TVTest-0.10.0-200202.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200202.zip)
    - TVTest-0.10.0-200103 … [TVTest-0.10.0-200103.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200103.zip)
    - TVTest-0.10.0-191129 … [TVTest-0.10.0-191129.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-191129.zip)
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-200209 … [EDCB-200209.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200209.zip)
    - EDCB-191222 … [EDCB-191222.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-191222.zip)
    - EDCB-191129 … [EDCB-191129.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-191129.zip)
    - EDCB-190814 … [EDCB-190814.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-190814.zip)
