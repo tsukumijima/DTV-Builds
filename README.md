@@ -17,11 +17,11 @@ VS2019 (TVTest-0.10.0-200202・EDCB-200209 より、それ以前は VS2017) に�
 できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-200209 以前の TVTest・EDCB は諸都合でおすすめしません）。    
 
 [TVTest](https://github.com/tsukumijima/TVTest) はよく使われるプラグイン一式を同梱しています。  
-ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
+ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TVTest_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
 
 [EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版 に EpgTimer 関連のパッチを当てた tkntrec 版をビルドしています。  
 （ EDCB_Material_WebUI も同梱していますが、使用する場合は別途設定が必要です）  
-ビルドの詳細は [EDCB_Build.txt](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
+ビルドの詳細は [EDCB_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/EDCB_Build.txt) に記載しています（内容はアーカイブに同梱の README と同じです）
 
 BonDriverProxyEx は B25 Decode 版をビルドしています。  
 BonDriver_Proxy や BonDriver_Splitter も一緒に同梱しています。  
