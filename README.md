@@ -5,6 +5,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 32bit 版・64bit 版を両方同梱しています。  
 必須・よく使われるプラグイン等を一式まとめ、BonDriver 関連ファイルをセットアップするだけで利用できる状態にしてあります。  
 基本的に一番上の最新版をダウンロードするようにしてください。  
+過去のアーカイブは念のため残しているだけなので、利用は推奨しません。
 
 ## 注意
 - BonDriver 関連ファイルは同梱していません。各自でセットアップしてください。  
@@ -16,9 +17,12 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 - VS2019 (TVTest-0.10.0-200202・EDCB-200209 より、それ以前は VS2017) にてビルドしています。別途ランタイムが必要かもしれません。
   - ビルド毎に同梱するファイルを更新したり構成を変更したりしているため、古いバージョンには現在のバージョンでは同梱しているファイルが入っていない事があります。  
   - できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-200209 以前の TVTest・EDCB は諸都合でおすすめしません）。   
+  - EDCB-200419 以前に同梱していた局ロゴは EMWUI で読み込まれないことが判明したため、EDCB-200712 以降の EDCB では差し替えた局ロゴを同梱しています（申し訳ありません）。
 - 万全は期しているつもりですが、基本的に動くかどうかの保証はありません。利用は自己責任にてお願いします。  
 
 ## 内容について
+各 .txt ファイルはいずれも最新のアーカイブについての内容になっています。使い始める前に一読しておくことをおすすめします。
+
 [TVTest](https://github.com/tsukumijima/TVTest) はよく使われるプラグイン一式を同梱しています。  
 ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TVTest_Build.txt) に記載しています。
 
@@ -44,6 +48,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
 
 ## ダウンロード
  - **TVTest**
+   - TVTest-0.10.0-200629 … [TVTest-0.10.0-200629.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200629.zip)
    - TVTest-0.10.0-200508 … [TVTest-0.10.0-200508.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200508.zip)
    - TVTest-0.10.0-200202 … [TVTest-0.10.0-200202.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200202.zip)
    - TVTest-0.10.0-200103 … [TVTest-0.10.0-200103.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200103.zip)
@@ -51,6 +56,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-200712 … [EDCB-200712.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200712.zip)
    - EDCB-200419 … [EDCB-200419.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200419.zip)
    - EDCB-200209 … [EDCB-200209.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200209.zip)
    - EDCB-191222 … [EDCB-191222.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-191222.zip)
