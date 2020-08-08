@@ -42,7 +42,7 @@ BonDriver_Proxy と BonDriver_Splitter の内容は BonDriverProxy と BonDriver
 ビルドの詳細は [BonDriverProxyEx_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxyEx_Build.txt) に記載しています。  
 BonDriverProxy のビルドの詳細は [BonDriverProxy_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxy_Build.txt) に記載しています。
 
-FFmpeg は pthread などのライブラリ全部入りで、4.2 系以降は libaribb24 も入れてビルドしています。  
+FFmpeg は pthread・QSV・AMD_AMF などのライブラリ全部入りで、4.2 系以降は libaribb24 も入れてビルドしています。  
 Static とつく方はライブラリをそれぞれの exe にまとめたバージョン、  
 Shared とつく方はライブラリを dll にまとめてファイルサイズを抑えたバージョンです。   
 ファイルサイズが大きいので 32bit・64bit を分けていますが、32bit の PC でない限り 64bit の方を使うことをおすすめします。
