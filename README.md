@@ -42,9 +42,10 @@ BonDriver_Proxy と BonDriver_Splitter の内容は BonDriverProxy と BonDriver
 ビルドの詳細は [BonDriverProxyEx_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxyEx_Build.txt) に記載しています。  
 BonDriverProxy のビルドの詳細は [BonDriverProxy_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxy_Build.txt) に記載しています。
 
-ffmpeg は pthread などのライブラリ全部入りでビルドしています。  
+FFmpeg は pthread などのライブラリ全部入りで、4.2 系以降は libaribb24 も入れてビルドしています。  
 Static とつく方はライブラリをそれぞれの exe にまとめたバージョン、  
-Shared とつく方はライブラリを dll にまとめてファイルサイズを抑えたバージョンです。 
+Shared とつく方はライブラリを dll にまとめてファイルサイズを抑えたバージョンです。   
+ファイルサイズが大きいので 32bit・64bit を分けていますが、32bit の PC でない限り 64bit の方を使うことをおすすめします。
 
 ## ダウンロード
  - **TVTest**
@@ -72,12 +73,16 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - BonDriverProxyEx-1.1.6.6 … [BonDriverProxyEx-1.1.6.6.zip](https://github.com/tsukumijima/DTV-Built/raw/master/BonDriverProxyEx-1.1.6.6.zip)
  - **BonDriverProxy**
    - BonDriverProxy-1.1.6.5 … [BonDriverProxy-1.1.6.5.zip](https://github.com/tsukumijima/DTV-Built/raw/master/BonDriverProxy-1.1.6.5.zip)
- - **ffmpeg**
-   - ffmpeg-4.2.1-static … [ffmpeg-4.2.1-static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.2.1-static.7z)
-   - ffmpeg-4.2.1-shared … [ffmpeg-4.2.1-shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.2.1-shared.7z)
-   - ffmpeg-4.2-static … [ffmpeg-4.2-static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.2-static.7z)
-   - ffmpeg-4.2-shared … [ffmpeg-4.2-shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.2-shared.7z)
-   - ffmpeg-4.1.4-static … [ffmpeg-4.1.4-static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.1.4-static.7z)
-   - ffmpeg-4.1.4-shared … [ffmpeg-4.1.4-shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.1.4-shared.7z)
-   - ffmpeg-4.1.1-static … [ffmpeg-4.1.1-static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.1.1-static.7z)
-   - ffmpeg-4.1.1-shared … [ffmpeg-4.1.1-shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/ffmpeg-4.1.1-shared.7z)
+ - **FFmpeg**
+   - FFmpeg-4.1.6-32bit-Static … [FFmpeg-4.1.6-32bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.1.6-32bit-Static.7z)
+   - FFmpeg-4.1.6-32bit-Shared … [FFmpeg-4.1.6-32bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.1.6-32bit-Shared.7z)
+   - FFmpeg-4.1.6-64bit-Static … [FFmpeg-4.1.6-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.1.6-64bit-Static.7z)
+   - FFmpeg-4.1.6-64bit-Shared … [FFmpeg-4.1.6-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.1.6-64bit-Shared.7z)
+   - FFmpeg-4.2.4-32bit-Static … [FFmpeg-4.2.4-32bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.2.4-32bit-Static.7z)
+   - FFmpeg-4.2.4-32bit-Shared … [FFmpeg-4.2.4-32bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.2.4-32bit-Shared.7z)
+   - FFmpeg-4.2.4-64bit-Static … [FFmpeg-4.2.4-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.2.4-64bit-Static.7z)
+   - FFmpeg-4.2.4-64bit-Shared … [FFmpeg-4.2.4-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.2.4-64bit-Shared.7z)
+   - FFmpeg-4.3.1-32bit-Static … [FFmpeg-4.3.1-32bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-32bit-Static.7z)
+   - FFmpeg-4.3.1-32bit-Shared … [FFmpeg-4.3.1-32bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-32bit-Shared.7z)
+   - FFmpeg-4.3.1-64bit-Static … [FFmpeg-4.3.1-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Static.7z)
+   - FFmpeg-4.3.1-64bit-Shared … [FFmpeg-4.3.1-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Shared.7z)
