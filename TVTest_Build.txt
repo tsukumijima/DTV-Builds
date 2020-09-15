@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                       TVTest 0.10.0 - 2020/06/29                    
+                       TVTest 0.10.0 - 2020/09/13                    
 =====================================================================
 
 ◆ ビルドにあたって
@@ -30,7 +30,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・BonDriver_Pipe.dll … パイプ経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay で使用します
-  ・TvtPlay26 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・BonDriver_UDP.dll … UDP 経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay や EpgTimerPlugIn で使用します
@@ -65,18 +65,18 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・通常の視聴で TvtAudioStretchFilter を使う場合も同様です
   ・TVTest と TvtPlay 用 TVTest とで分け、TvtPlay 用 TVTest にのみ TvtAudioStretchFilter を使うよう設定してください
   ・filter-install.bat にてインストールされます
-  ・TvtPlay26 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・TVTestVideoDecoder.ax … TVTest の作者が公開している MPEG2 デコーダー ( DirectShow フィルタ)
   ・Windows10 では Microsoft DTV-DVD Video Decoder が入っていないため、このデコーダーを使用します
   ・filter-install.bat にてインストールされます
-  ・TVTestVideoDecoder 0.3.0 (https://github.com/DBCTRADO/TVTestVideoDecoder) に入っているものを同梱しています
+  ・TVTestVideoDecoder ver.0.3.0 (https://github.com/DBCTRADO/TVTestVideoDecoder/releases) に入っているものを同梱しています
 
 ・TVTestVideoDecoder.txt … TVTestVideoDecoder の説明書
 
 ・Logo/*.bmp … 私の環境（関東圏）で取得した 地上波・BS・CS110 の局ロゴ画像 (BMP 形式)
   ・TVTest 内で表示する局ロゴは LogoData ファイル内に格納されているものから読み込まれているので必要性は薄いと思いますが一応…
-  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] にチェックを入れてから局ロゴを採取してください（一度 BMP 形式で保存しない状態で局ロゴを取得してしまった場合、LogoData と LogoData.ini を削除しないと保存できないらしい？）。
+  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] にチェックを入れてから局ロゴを取得してください（一度 BMP 形式で保存しない状態で局ロゴを取得してしまった場合、LogoData と LogoData.ini を削除しないと保存できないらしい？）。
 
 ・Plugins/CasProcessor.tvtp … CAS 処理 (スクランブル解除) を行う TVTest のプラグイン
   ・CasProcessor はTSプロセッサーのプラグインとして動作し、別途 B25.tvcas もしくは SPHD.tvcas を読み込んで B-CAS カードを使い CAS 処理を行います
@@ -85,26 +85,26 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・Plugins/NicoJK.tvtp … ニコニコ実況を表示できる TVTest のプラグイン
   ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK) に入っているものを同梱しています
+  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
   ・Chrome 80 以降で Cookie が AES-GCM で暗号化されて保存されるようになってしまい現在の NicoJK では Cookie を取得できないため、
   　Chrome 80 以降でニコニコの Cookie を取得できる NicoCookie4Chrome を同梱し、それを使うようにしました
   ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
   ・Firefox をお使いの場合は NicoJK.ini の execGetCookie の項目をコメントアウト後自分のユーザー名に合わせて編集してください
-  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
 
 ・Plugins/NicoJK_Readme.txt … NicoJK の説明書
 
 ・Plugins/TVCaptionMod2.tvtp … 字幕を表示できる TVTest のプラグイン
   ・字幕が鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2) に入っているものを同梱しています
+  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものを同梱しています
 
 ・Plugins/TVCaptionMod2.ini … TVCaptionMod2 の設定ファイル
   ・[映像への字幕合成機能を使う] にチェックを入れると、TVCaptionMod2 を有効にしている間は上のように TVTest でキャプチャした時に字幕を画像の中に含める事ができます
   ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください
   ・字幕を映像に合成する場合、一部の環境では字幕の描画が乱れる場合があります（原因は不明）
-  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
 
 ・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
 
@@ -115,6 +115,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
   ・ニコニコ実況の過去ログが Plugins/NicoJK 以下にあれば、(NicoJK が有効になっている場合) 過去ログを同時に再生できます
   ・過去ログの保存フォルダは NicoJK.ini から変更できます
+  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・Plugins/TvtPlay_Readme.txt … TvtPlay の説明書
 
