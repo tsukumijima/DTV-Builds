@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                       TVTest 0.10.0 - 2020/09/13                    
+                       TVTest 0.10.0 - 2021/01/13                    
 =====================================================================
 
 ◆ ビルドにあたって
@@ -51,6 +51,12 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をアンインストールします
   ・アンインストールには管理者権限が必要です
 
+・jkcnsl.exe … ニコニコ生放送に移行した新しいニコニコ実況のコメントを取得するコマンドラインツール
+  ・NicoJK と連携して動作します
+
+・jq.exe … JSON データから簡単に値を抽出するためのコマンドラインツール
+  ・NicoJK が Chrome 系ブラウザのデータベースの復号鍵を取得するときに利用します
+
 ・LogoData … 私の環境（関東圏）で取得した 地上波・BS・CS110 の局ロゴデータ
   ・地上波の局ロゴデータは関東以外では役に立たないと思いますが、BS・CS110 の局ロゴデータは全国共通なので、いちいち取得する手間を省けると思います
 
@@ -58,7 +64,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・LogoData か LogoData.ini どちらかを削除してしまった場合、局ロゴを表示できなくなります（局ロゴの再取得が必要）
 
 ・sqlite3.exe … SQLite (データベース管理ソフト)
-  ・NicoJK は SQLite を使用して Chrome のデータベースから Cookie を取得しているため、NicoJK を使う場合は必須です
+  ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します
 
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ ( DirectShow フィルタ)
   ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと音がおかしくなったり、出なくなることがあります
@@ -76,7 +82,8 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・Logo/*.bmp … 私の環境（関東圏）で取得した 地上波・BS・CS110 の局ロゴ画像 (BMP 形式)
   ・TVTest 内で表示する局ロゴは LogoData ファイル内に格納されているものから読み込まれているので必要性は薄いと思いますが一応…
-  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] にチェックを入れてから局ロゴを取得してください（一度 BMP 形式で保存しない状態で局ロゴを取得してしまった場合、LogoData と LogoData.ini を削除しないと保存できないらしい？）。
+  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] に
+  　チェックを入れてから局ロゴを取得してください（一度 BMP 形式で保存しない状態で局ロゴを取得してしまった場合、LogoData と LogoData.ini を削除しないと再保存できないらしい？）。
 
 ・Plugins/CasProcessor.tvtp … CAS 処理 (スクランブル解除) を行う TVTest のプラグイン
   ・CasProcessor はTSプロセッサーのプラグインとして動作し、別途 B25.tvcas もしくは SPHD.tvcas を読み込んで B-CAS カードを使い CAS 処理を行います
@@ -84,15 +91,19 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・https://github.com/logue/CasProcessor をビルドしたものを同梱しています
 
 ・Plugins/NicoJK.tvtp … ニコニコ実況を表示できる TVTest のプラグイン
+  ・ニコニコ生放送に移行した新しいニコニコ実況に対応した NicoJK を同梱しています
+    ・jkcnsl.exe は新ニコニコ実況の受信クライアントで、NicoJK と連携して動作します
+    ・有志のコミュニティによって運営されている BS 各局（BS日テレなど）のニコニコ実況も表示できるよう設定済みです
   ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
+  ・NicoJK (xtn6f版) dev-210111 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
-  ・Chrome 80 以降で Cookie が AES-GCM で暗号化されて保存されるようになってしまい現在の NicoJK では Cookie を取得できないため、
-  　Chrome 80 以降でニコニコの Cookie を取得できる NicoCookie4Chrome を同梱し、それを使うようにしました
-  ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
-  ・Firefox をお使いの場合は NicoJK.ini の execGetCookie の項目をコメントアウト後自分のユーザー名に合わせて編集してください
-  ・NicoJK (xtn6f版) dev-180326 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+  ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります
+    ・同梱済みの NicoCookie4Chrome を使うことで、Chrome 80.0 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます
+    ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します
+    ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
+    ・Firefox をお使いの場合は NicoJK.ini の execGetCookie の項目をコメントアウト後自分のユーザー名に合わせて編集してください
+  ・NicoJK (xtn6f版) dev-210111 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
 
 ・Plugins/NicoJK_Readme.txt … NicoJK の説明書
 
@@ -111,11 +122,20 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 ・Plugins/TvtPlay.tvtp … 録画した TS ファイルを TVTest で見れるようにするプラグイン
   ・先述のように音声フィルタを変更する必要があるなどの理由で、通常視聴用の TVTest にて有効にすることはおすすめしません
   ・TVTest フォルダをコピーして TvtPlay とリネームし、TvtPlay 用 TVTest にて有効にすることをおすすめします
-  ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます、常に有効にしたい場合はショートカットのプロパティからパスの末尾に /tvtplay と追記 (引数を追加) して保存し、そのショートカットから起動するようにしてください
+  ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます、常に有効にしたい場合はショートカットのプロパティからパスの末尾に
+  　/tvtplay と追記（引数を追加）して保存し、そのショートカットから起動するようにしてください
   ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
-  ・ニコニコ実況の過去ログが Plugins/NicoJK 以下にあれば、(NicoJK が有効になっている場合) 過去ログを同時に再生できます
+  ・ニコニコ実況の過去ログが過去ログの保存フォルダにあれば、(NicoJK が有効になっている場合) 過去ログを同時に再生できます
   ・過去ログの保存フォルダは NicoJK.ini から変更できます
   ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+
+・Plugins/TvtPlay_Buttons24.bmp … TvtPlay のボタン用画像（ 24px 版）
+  ・標準ではコントロールのボタンは縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルと TvtPlay_Buttons32.bmp へ差し替えることができます
+  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです 
+
+・Plugins/TvtPlay_Buttons32.bmp … TvtPlay のボタン用画像（ 32px 版）
+  ・標準ではコントロールのボタンは縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルと TvtPlay_Buttons24.bmp へ差し替えることができます
+  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです 
 
 ・Plugins/TvtPlay_Readme.txt … TvtPlay の説明書
 
