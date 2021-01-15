@@ -60,6 +60,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-201011 … [EDCB-201011.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-201011.zip)
    - EDCB-200911 … [EDCB-200911.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200911.zip)
    - EDCB-200712 … [EDCB-200712.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200712.zip)
    - EDCB-200419 … [EDCB-200419.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200419.zip)
