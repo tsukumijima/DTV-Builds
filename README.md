@@ -19,7 +19,10 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
   - できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-200209 以前の TVTest・EDCB は諸都合でおすすめしません）。
   - TVTest-0.10.0-210113 以降に同梱している NicoJK はニコニコ生放送に移行した新しいニコニコ実況に対応したバージョンを同梱しています。
   - EDCB-200419 以前に同梱していた局ロゴは EMWUI で読み込まれないことが判明したため、EDCB-200712 以降の EDCB では差し替えた局ロゴを同梱しています（申し訳ありません）。
-- 万全は期しているつもりですが、基本的に動くかどうかの保証はありません。利用は自己責任にてお願いします。  
+  - EDCB-200913・EDCB-201011 に同梱している EpgDataCap_Bon.exe にはウインドウを表示させたまま長時間放置した場合に描画がおかしくなったり、操作不能になったりする不具合があります。
+    - 詳細：https://github.com/tsukumijima/EDCB/pull/1
+    - できるだけ速やかに EDCB-210216 へ更新することを推奨します（申し訳ありません）。
+- 万全は期しているつもりですが、基本的に動くかどうかの保証はありません。利用は各自自己責任にてお願いします。  
 
 ## 内容について
 各 .txt ファイルはいずれも最新のアーカイブについての内容になっています。使い始める前に一読しておくことをおすすめします。
@@ -60,6 +63,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-210216 … [EDCB-210216.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-210216.zip)
    - EDCB-201011 … [EDCB-201011.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-201011.zip)
    - EDCB-200911 … [EDCB-200911.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200911.zip)
    - EDCB-200712 … [EDCB-200712.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-200712.zip)
