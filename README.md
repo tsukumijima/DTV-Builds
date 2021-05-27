@@ -76,6 +76,8 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-190623.zip)
  - **TSTask**
+   - TSTask-0.2.0-210528 … [TSTask-0.2.0-210528.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-0.2.0-210528.zip)
+   - TSTask-SPHD-0.2.0-210528 … [TSTask-SPHD-0.2.0-210528.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-SPHD-0.2.0-210528.zip)
    - TSTask-0.2.0-210523 … [TSTask-0.2.0-210523.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-0.2.0-210523.zip)
    - TSTask-SPHD-0.2.0-210523 … [TSTask-SPHD-0.2.0-210523.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-SPHD-0.2.0-210523.zip)
    - TSTask-0.2.0-200510 … [TSTask-0.2.0-200510.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-0.2.0-200510.zip)
