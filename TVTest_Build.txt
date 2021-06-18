@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                       TVTest 0.10.0 - 2021/01/13                    
+                       TVTest 0.10.0 - 2021/04/25                    
 =====================================================================
 
 ◆ ビルドにあたって
@@ -11,6 +11,7 @@
 ・変更したコードは https://github.com/tsukumijima/TVTest にて公開しています。
 ・NicoJK・TVCaptionMod2・局ロゴデータの各設定ファイルを同梱しています（後述）。
   ・そのため、NicoJK・TVCaptionMod2 の設定をすでに変更している場合、単純に上書きしてしまうと設定ファイルも同梱されているもので上書きされてしまいます。
+    ・NicoJK は Plugins/NicoJK.ini 、TVCaptionMod2 は Plugins/TVCaptionMod2.ini が設定ファイルです。
   ・視聴地域が関東圏以外の場合は局ロゴデータ（LogoData）・局ロゴデータ設定ファイル (LogoData.ini) も異なるため、既に局ロゴを取得している場合はLogoData・LogoData.ini も上書きしないことをおすすめします。
     ・上書きした場合、再取得するまで関東圏以外の地デジの放送局の局ロゴが表示されなくなります（未検証）。
   ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームして置換されないようにしてから上書きしてください。
@@ -20,13 +21,14 @@
 
 TVTest を利用する上で必須、またはあった方が良さそうなファイルを一緒に同梱しています。
 
-・B25.tvcas … CasProcessor プラグインが使用する CAS 関連のファイル ( TVCAS_B25.tvcas 互換)
+・B25.tvcas … CasProcessor プラグインが使用する CAS 処理用 tvcas プラグイン ( TVCAS_B25.tvcas と同様)
   ・地デジ・BS・CS110 の再生に使用します
-  ・https://github.com/logue/TvCas をビルドしたものを同梱しています
+  ・https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています
 
-・SPHD.tvcas … CasProcessor プラグインが使用する CAS 関連のファイル ( TVCAS_B1.tvcas 互換)
-  ・スカパー！プレミアムサービス の再生に使用します
-  ・B25.tvcas 同様 https://github.com/logue/TvCas をビルドしたものを同梱しています
+・B1.tvcas … CasProcessor プラグインが使用する CAS 処理用 tvcas プラグイン ( TVCAS_B1.tvcas と同様)
+  ・スカパー！プレミアムサービス (SPHD) の再生に使用します
+  ・B25.tvcas 同様 https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています
+  ・以前のバージョンで同梱していた SPHD.tvcas は機能しないものだったため、独自にパッチを適用し SPHD 対応を行いました
 
 ・BonDriver_Pipe.dll … パイプ経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay で使用します
@@ -86,7 +88,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   　チェックを入れてから局ロゴを取得してください（一度 BMP 形式で保存しない状態で局ロゴを取得してしまった場合、LogoData と LogoData.ini を削除しないと再保存できないらしい？）。
 
 ・Plugins/CasProcessor.tvtp … CAS 処理 (スクランブル解除) を行う TVTest のプラグイン
-  ・CasProcessor はTSプロセッサーのプラグインとして動作し、別途 B25.tvcas もしくは SPHD.tvcas を読み込んで B-CAS カードを使い CAS 処理を行います
+  ・CasProcessor はTSプロセッサーのプラグインとして動作し、別途 B25.tvcas もしくは B1.tvcas を読み込んで B-CAS カードを使い CAS 処理を行います
   ・TVTest 0.9.0 以降は TVTest 本体のスクランブル解除機能が削除されたため、このプラグインは必須です
   ・https://github.com/logue/CasProcessor をビルドしたものを同梱しています
 
@@ -95,7 +97,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
     ・jkcnsl.exe は新ニコニコ実況の受信クライアントで、NicoJK と連携して動作します
     ・有志のコミュニティによって運営されている BS 各局（BS日テレなど）のニコニコ実況も表示できるよう設定済みです
   ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・NicoJK (xtn6f版) dev-210111 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
+  ・NicoJK (xtn6f版) master-210605 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
   ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります
@@ -103,19 +105,21 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
     ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します
     ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
     ・Firefox をお使いの場合は NicoJK.ini の execGetCookie の項目をコメントアウト後自分のユーザー名に合わせて編集してください
-  ・NicoJK (xtn6f版) dev-210111 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+  ・NicoJK (xtn6f版) master-210605 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
 
 ・Plugins/NicoJK_Readme.txt … NicoJK の説明書
 
+・Plugins/NicoJK/jkimlog.exe … 外部のログファイルを NicoJK フォルダに取り込むコマンドラインツール
+
 ・Plugins/TVCaptionMod2.tvtp … 字幕を表示できる TVTest のプラグイン
   ・字幕が鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものを同梱しています
+  ・TVCaptionMod2 master-210508 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものを同梱しています
 
 ・Plugins/TVCaptionMod2.ini … TVCaptionMod2 の設定ファイル
   ・[映像への字幕合成機能を使う] にチェックを入れると、TVCaptionMod2 を有効にしている間は上のように TVTest でキャプチャした時に字幕を画像の中に含める事ができます
   ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください
   ・字幕を映像に合成する場合、一部の環境では字幕の描画が乱れる場合があります（原因は不明）
-  ・TVCaptionMod2 master-180327 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
+  ・TVCaptionMod2 master-210508 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものをすぐに使いやすいよう編集した上で同梱しています
 
 ・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
 
@@ -131,11 +135,11 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・Plugins/TvtPlay_Buttons24.bmp … TvtPlay のボタン用画像（ 24px 版）
   ・標準ではコントロールのボタンは縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルと TvtPlay_Buttons32.bmp へ差し替えることができます
-  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです 
+  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです
 
 ・Plugins/TvtPlay_Buttons32.bmp … TvtPlay のボタン用画像（ 32px 版）
   ・標準ではコントロールのボタンは縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルと TvtPlay_Buttons24.bmp へ差し替えることができます
-  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです 
+  ・4K などの超高解像度な液晶を使っている場合に画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです
 
 ・Plugins/TvtPlay_Readme.txt … TvtPlay の説明書
 
