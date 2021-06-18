@@ -102,4 +102,10 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - FFmpeg-4.3.1-64bit-Static … [FFmpeg-4.3.1-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Static.7z)
    - FFmpeg-4.3.1-64bit-Shared … [FFmpeg-4.3.1-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Shared.7z)
   - **その他のツール**
-    - arib-b25-stream-test.exe … [arib-b25-stream-test_32bit.exe](https://github.com/tsukumijima/DTV-Built/raw/master/arib-b25-stream-test_32bit.exe) [arib-b25-stream-test_64bit.exe](https://github.com/tsukumijima/DTV-Built/raw/master/arib-b25-stream-test_64bit.exe)
+    - arib-b25-stream-test.exe … [arib-b25-stream-test.zip](https://github.com/tsukumijima/DTV-Built/raw/master/arib-b25-stream-test.zip)
+      - [arib-b25-stream-test_for_win](https://github.com/daig0rian/arib-b25-stream-test_for_win) の2021年6月時点での最新版をビルドしたものです。
+    - libaribb1 (B1Decoder.dll・b1.exe) … [libaribb1.zip](https://github.com/tsukumijima/DTV-Built/raw/master/libaribb1.zip)
+      - [libaribb25](https://github.com/epgdatacapbon/libaribb25) の2021年6月時点での最新版に [SPHD 用のパッチ](https://www.axfc.net/u/3985543) を当てビルドしたものです。
+      - スカパー！プレミアムサービス環境がないため動くかどうかは未検証です。
+    - libaribb25 (B25Decoder.dll・b25.exe) … [libaribb25.zip](https://github.com/tsukumijima/DTV-Built/raw/master/libaribb25.zip)
+      - [libaribb25](https://github.com/epgdatacapbon/libaribb25) の2021年6月時点での最新版をビルドしたものです。
