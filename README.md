@@ -101,6 +101,10 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - FFmpeg-4.3.1-32bit-Shared … [FFmpeg-4.3.1-32bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-32bit-Shared.7z)
    - FFmpeg-4.3.1-64bit-Static … [FFmpeg-4.3.1-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Static.7z)
    - FFmpeg-4.3.1-64bit-Shared … [FFmpeg-4.3.1-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.3.1-64bit-Shared.7z)
+   - FFmpeg-4.4-32bit-Static … [FFmpeg-4.4-32bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.4-32bit-Static.7z)
+   - FFmpeg-4.4-32bit-Shared … [FFmpeg-4.4-32bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.4-32bit-Shared.7z)
+   - FFmpeg-4.4-64bit-Static … [FFmpeg-4.4-64bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.4-64bit-Static.7z)
+   - FFmpeg-4.4-64bit-Shared … [FFmpeg-4.4-64bit-Shared.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.4-64bit-Shared.7z)
   - **その他のツール**
     - arib-b25-stream-test.exe … [arib-b25-stream-test.zip](https://github.com/tsukumijima/DTV-Built/raw/master/arib-b25-stream-test.zip)
       - [arib-b25-stream-test_for_win](https://github.com/daig0rian/arib-b25-stream-test_for_win) の2021年6月時点での最新版をビルドしたものです。
