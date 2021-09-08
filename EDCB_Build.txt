@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                       EDCB (tkntrec版) 2021/05/15                   
+                       EDCB (tkntrec版) 2021/08/28                   
 =====================================================================
 
 ◆ ビルドにあたって
@@ -18,17 +18,27 @@
 
 EDCB を利用する上で必須、またはあった方が良さそうなファイルを一緒に同梱しています。
 
-・B25Decoder.dll … B-CAS カードを使い CAS 処理（スクランブル解除）を行うライブラリ
-  ・B25Decoder がないと CAS 処理を行えないため、必須のライブラリです（このファイルがないと録画できても見れない）
-  ・https://github.com/epgdatacapbon/libaribb25 をビルドしたものを同梱しています
+・B25Decoder.dll・B1Decoder.dll … B-CAS カードまたはスカパー！カードを使い CAS 処理（スクランブル解除）を行うライブラリ
+  ・B25Decoder.dll・B1Decoder.dll がないとスクランブル解除を行えないため、必須のライブラリです（このライブラリがないと録画できても視聴できない）
+  ・B25Decoder.dll は B-CAS カードを用いる 地デジ・BS・CS110 向けのスクランブル解除ライブラリです
+    ・https://github.com/epgdatacapbon/libaribb25 をビルドしたものを同梱しています
     ・libaribb25 は B25Decoder（本家）互換です
     ・libaribb25.dll を B25Decoder.dll にリネームしています
+  ・B1Decoder.dll はスカパー！カードを用いるスカパー！プレミアムサービス (SPHD) 向けのスクランブル解除ライブラリです
+    ・https://github.com/epgdatacapbon/libaribb25 に SPHD 用のパッチ (https://www.axfc.net/u/3985543) を当てビルドしたものを同梱しています
+    ・SPHD の環境がないため、実際に動作するかまでは検証できていません
 
-・lua52.dll・zlib.dll … EDCB_Material_WebUI を実行するために必要なライブラリ
-  ・このライブラリがないと EDCB_Material_WebUI を実行できません
+・lua52.dll・zlib.dll … EDCB Material WebUI を動作させるために必要なライブラリ
+  ・このライブラリがないと EDCB Material WebUI が動作しません
   ・EDCB-Work-Plus-s (https://github.com/xtne6f/EDCB/releases) に入っていたものを同梱しています
 
-・Readme_EMWUI.md … EDCB_Material_WebUI の説明書（markdown 形式）
+・libcrypto-1_1.dll・libssl-1_1.dll・openssl.exe … EDCB Material WebUI を HTTPS で動作させるために必要なライブラリ
+　・HTTP で動作させる場合はこのライブラリがなくても動作しますが、HTTPS で動作させる場合は必須です
+  ・openssl.exe はライブラリではありませんが、HTTPS 化する際に必要な自己署名証明書の生成に利用します
+  ・https://curl.se/windows/ にて配布されているものを同梱しています
+  ・詳細は Readme_Mod.txt 内の「CivetWebの組み込みについて」に記載されています
+
+・Readme_EMWUI.md … EDCB Material WebUI の説明書（markdown 形式）
 
 ・EdcbPlugIn/ch2chset.vbs・EdcbPlugIn/EdcbPlugIn.ini・EdcbPlugIn_Readme.txt … EdcbPlugIn 用のファイル
   ・ch2chset.vbs は TVTest のチャンネル設定ファイルを EDCB のチャンネル設定ファイルに変換するスクリプトです
@@ -36,21 +46,21 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・いずれもソースの EdcbPlugIn/EdcbPlugIn/ フォルダに入っているものをコピーしています
 
 ・EdcbPlugIn/Write_Multi.dll・EdcbPlugIn/Write_OneService.dll … EdcbPlugIn を使う場合に必要なファイル書き出し用プラグイン
-  ・EdcbPlugIn を使う場合は TVTest.exe と同じフォルダに置く必要があります
+  ・EdcbPlugIn を使う場合はこれらをプラグイン本体とは別に TVTest.exe と同じフォルダに配置する必要があります
   ・Write_Multi.dll は https://github.com/xtne6f/Write_Multi をビルドしたものです
-  ・Write_OneService.dll はソースの Tools フォルダに入っているものをコピーしたものです
+  ・Write_OneService.dll は Write フォルダに入っているものをコピーしたものです
 
-・HttpPublic/api/・HttpPublic/EMWUI/・HttpPublic/img/・HttpPublic/video/ … EDCB_Material_WebUI 本体
-  ・PWA 対応などの改良を行った EDCB_Material_WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています 
+・HttpPublic/api/・HttpPublic/EMWUI/・HttpPublic/img/・HttpPublic/video/ … EDCB Material WebUI 本体
+  ・PWA 対応などの改良を行った EDCB Material WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています
   ・HttpPublic/img/logo/ には私が関東圏にて取得した 地デジ・BS・CS110 の局ロゴ (bmp) を同梱しています
   ・局ロゴが表示されない放送局がある場合は、TVTest で取得した局ロゴを (ONID(16進数4桁))(SID(16進数4桁)).bmp(または.png) にリネームした上で HttpPublic/img/logo/ に入れてみてください
-  ・EDCB_Material_WebUI を使う場合は別途いくつか設定が必要です、https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に設定を行ってください
+  ・EDCB Material WebUI を使う場合は別途いくつか設定が必要です、https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に設定を行ってください
 
-・Setting/HttpPublic.ini … EDCB_Material_WebUI の設定ファイル
+・Setting/HttpPublic.ini … EDCB Material WebUI の設定ファイル
   ・すぐに使えるよう、予めいくつかの設定を行っています
   ・先述の通り、すでに設定を変更している場合は上書きしないように注意してください
 
-・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB_Material_WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
+・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB Material WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
   ・ffmpeg-4.1.4-shared (https://ffmpeg.zeranoe.com/builds/) を同梱しています
   ・ffmpeg-4.1.4-shared のうち、ffplay.exe は不要なため削除しています
   ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わったことにより字幕付きの番組でエンコードに失敗するため、敢えて FFmpeg 4.1.4 を同梱しています
