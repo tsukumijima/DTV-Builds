@@ -44,14 +44,16 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・BonDriver_UDP.txt … BonDriver_UDP・BonDriver_TCP の説明書
 
-・filter-install.ps1 … 同梱している DirectShow フィルタをインストールする PowerShell スクリプト（私が作成したツール）
+・filter-install.jse … 同梱している DirectShow フィルタをインストールする PowerShell スクリプト（私が作成したツール）
   ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をインストールします
-  ・TVCaptionMod2 に必要なフォントも一緒にインストールします
-  ・右クリックメニュー → [PowerShell で実行] から実行してください インストールには管理者権限が必要です
+  ・TVCaptionMod2 に必要なフォントも合わせてインストールします
+  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています
+  ・インストールには管理者権限が必要です
 
-・filter-uninstall.ps1 … 同梱している DirectShow フィルタをアンインストールする PowerShell スクリプト（私が作成したツール）
+・filter-uninstall.jse … 同梱している DirectShow フィルタをアンインストールする PowerShell スクリプト（私が作成したツール）
   ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をアンインストールします
-  ・右クリックメニュー → [PowerShell で実行] から実行してください アンインストールには管理者権限が必要です
+  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています
+  ・アンインストールには管理者権限が必要です
 
 ・jkcnsl.exe … ニコニコ生放送に移行した新しいニコニコ実況のコメントを取得するコマンドラインツール
   ・NicoJK と連携して動作します
@@ -69,12 +71,12 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します
 
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ
-  ・filter-install.ps1 を実行するとインストールされる DirectShow フィルタです
+  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
   ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと倍速再生時に音がおかしくなったり、出なくなることがあります
   ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・TVTestVideoDecoder.ax … TVTest の開発者の方が公開している MPEG2 ビデオデコーダー
-  ・filter-install.ps1 を実行するとインストールされる DirectShow フィルタです
+  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
   ・Windows10 では Microsoft DTV-DVD Video Decoder が入っていないため、このデコーダーを使用します
   ・https://github.com/DBCTRADO/TVTestVideoDecoder をビルドしたものを同梱しています
 
