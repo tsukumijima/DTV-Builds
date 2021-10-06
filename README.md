@@ -12,9 +12,8 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 
 ## 注意
 
-- BonDriver 関連ファイルは同梱していません。各自でセットアップしてください。  
-- フォントは全て Meiryo UI に統一しています。
-  - MS ゴシックだと見づらいので…  
+- BonDriver 関連のファイルは同梱されていません。各自で準備してください。  
+- UI やダイヤログのフォントは全て Meiryo UI に統一しています。
 - 前述の通り、使いやすいよう設定ファイルを変更したり、必要/よく使われるプラグインを同梱したりといくつか構成を変更している箇所があります。
   - 本家のソースコードをそのままビルドしただけのアーカイブではないことに注意してください。
   - 信頼できないようであれば自ビルドすることを推奨します。
@@ -36,11 +35,11 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TVTest_Build.txt) に記載しています。
 
 [EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版 に EpgTimer 関連のパッチを適用した tkntrec 版をビルドしています。  
-（ EDCB_Material_WebUI も同梱していますが、使用する場合は別途設定が必要です）  
+[EDCB Material WebUI](https://github.com/tsukumijima/EDCB_Material_WebUI) も同梱していますが、利用する場合は別途設定が必要です。  
 ビルドの詳細は [EDCB_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/EDCB_Build.txt) に記載しています。
 
-[TSTask](https://github.com/tsukumijima/TSTask) は RecTask 相当にするパッチを適用しスクランブル解除できるようにしたものをビルドしています。  
-[TSTask-SPHD](https://github.com/tsukumijima/TSTask/tree/SPHD) は先ほどの TSTask にさらにスカパー！プレミアムサービス対応にするパッチを適用したものをビルドしています。  
+[TSTask](https://github.com/tsukumijima/TSTask) は RecTask 相当にするパッチを適用してスクランブル解除できるようにしたものをビルドしています。  
+[TSTask-SPHD](https://github.com/tsukumijima/TSTask/tree/SPHD) は先ほどの TSTask にさらにスカパー！プレミアムサービス (SPHD) 対応にするパッチを適用したものをビルドしています。  
 ビルドの詳細は [TSTask_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TSTask_Build.txt) に記載しています。
 
 BonDriverProxyEx はスクランブル解除が可能な [epgdatacapbon 氏のフォーク](https://github.com/epgdatacapbon/BonDriverProxyEx/tree/decode)をビルドしています。  
@@ -62,6 +61,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
 ## ダウンロード
 
  - **TVTest**
+   - TVTest-0.10.0-210812 … [TVTest-0.10.0-210812.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-210812.zip)
    - TVTest-0.10.0-210425 … [TVTest-0.10.0-210425.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-210425.zip)
    - TVTest-0.10.0-210113 … [TVTest-0.10.0-210113.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-210113.zip)
    - TVTest-0.10.0-200913 … [TVTest-0.10.0-200913.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-200913.zip)
@@ -122,6 +122,6 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
       - [arib-b25-stream-test_for_win](https://github.com/daig0rian/arib-b25-stream-test_for_win) の2021年6月時点での最新版をビルドしたものです。
     - libaribb1 (B1Decoder.dll・b1.exe) … [libaribb1.zip](https://github.com/tsukumijima/DTV-Built/raw/master/libaribb1.zip)
       - [libaribb25](https://github.com/epgdatacapbon/libaribb25) の2021年6月時点での最新版に [SPHD 用のパッチ](https://www.axfc.net/u/3985543) を当てビルドしたものです。
-      - スカパー！プレミアムサービス環境がないため動くかどうかは未検証です。
+      - スカパー！プレミアムサービスの環境がないため、動くかどうかは検証できていません。
     - libaribb25 (B25Decoder.dll・b25.exe) … [libaribb25.zip](https://github.com/tsukumijima/DTV-Built/raw/master/libaribb25.zip)
       - [libaribb25](https://github.com/epgdatacapbon/libaribb25) の2021年6月時点での最新版をビルドしたものです。
