@@ -19,12 +19,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
   - 信頼できないようであれば自ビルドすることを推奨します。
 - Visual Studio 2019 (TVTest-0.10.0-200202・EDCB-200209 より、それ以前は Visual Studio 2017) にてビルドしています。別途ランタイムが必要かもしれません。
   - ビルド毎に同梱するファイルを更新したり構成を変更したりしているため、古いバージョンには現在のバージョンでは同梱しているファイルが入っていない事があります。  
-  - できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-200209 以前の TVTest・EDCB は諸都合でおすすめしません）。
-  - TVTest-0.10.0-210113 以降に同梱している NicoJK はニコニコ生放送に移行した新しいニコニコ実況に対応したバージョンを同梱しています。
-  - EDCB-200419 以前に同梱していた局ロゴは EMWUI で読み込まれないことが判明したため、EDCB-200712 以降の EDCB では差し替えた局ロゴを同梱しています（申し訳ありません）。
-  - EDCB-200913・EDCB-201011 に同梱している EpgDataCap_Bon.exe にはウインドウを表示させたまま長時間放置した場合に描画がおかしくなったり、操作不能になったりする不具合があります。
-    - 詳細：https://github.com/tsukumijima/EDCB/pull/1
-    - できるだけ速やかに EDCB-210216 へ更新することを推奨します（申し訳ありません）。
+  - できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-210216 以前の TVTest・EDCB は諸都合でおすすめしません）。
 - 万全は期しているつもりですが、基本的に動くかどうかの保証はありません。利用は各自の責任にてお願いします。  
 
 ## 内容について
@@ -42,9 +37,8 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 [TSTask-SPHD](https://github.com/tsukumijima/TSTask/tree/SPHD) は先ほどの TSTask にさらにスカパー！プレミアムサービス (SPHD) 対応にするパッチを適用したものをビルドしています。  
 ビルドの詳細は [TSTask_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TSTask_Build.txt) に記載しています。
 
-BonDriverProxyEx はスクランブル解除が可能な [epgdatacapbon 氏のフォーク](https://github.com/epgdatacapbon/BonDriverProxyEx/tree/decode)をビルドしています。  
-BonDriver_Proxy や BonDriver_Splitter も一緒に同梱しています。    
-BonDriver_Proxy と BonDriver_Splitter の設定ファイル等を分かりやすいよう変更している部分があります。  
+BonDriverProxyEx はスクランブル解除が可能で、さらにいくつかの機能が追加されている [HaijinW 氏のフォーク](https://github.com/HaijinW/BonDriverProxyEx) をビルドしています。  
+BonDriverProxyEx の Windows サービス版と、BonDriver_Proxy も一緒に同梱しています。  
 ビルドの詳細は [BonDriverProxyEx_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxyEx_Build.txt) に記載しています。  
 
 [px4_drv for WinUSB](https://github.com/nns779/px4_drv/tree/winusb) はテストモードにしなくてもドライバをインストールできるよう、自己署名証明書を利用するように変更したドライバのインストールファイル (.inf) を同梱しています。  
