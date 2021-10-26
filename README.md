@@ -44,9 +44,8 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 
 BonDriverProxyEx はスクランブル解除が可能な [epgdatacapbon 氏のフォーク](https://github.com/epgdatacapbon/BonDriverProxyEx/tree/decode)をビルドしています。  
 BonDriver_Proxy や BonDriver_Splitter も一緒に同梱しています。    
-BonDriver_Proxy と BonDriver_Splitter の内容は BonDriverProxy と BonDriverProxyEx で共通ですが、設定ファイル等を分かりやすいよう変更している部分があります。  
+BonDriver_Proxy と BonDriver_Splitter の設定ファイル等を分かりやすいよう変更している部分があります。  
 ビルドの詳細は [BonDriverProxyEx_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxyEx_Build.txt) に記載しています。  
-BonDriverProxy のビルドの詳細は [BonDriverProxy_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxy_Build.txt) に記載しています。
 
 [px4_drv for WinUSB](https://github.com/nns779/px4_drv/tree/winusb) はテストモードにしなくてもドライバをインストールできるよう、自己署名証明書を利用するように変更したドライバのインストールファイル (.inf) を同梱しています。  
 ビルドの詳細でも記述していますが、ドライバのインストールの前に同梱の自己署名証明書をインストールする必要があります。  
@@ -96,8 +95,6 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TSTask-SPHD-0.2.0-200510 … [TSTask-SPHD-0.2.0-200510.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TSTask-SPHD-0.2.0-200510.zip)
  - **BonDriverProxyEx**
    - BonDriverProxyEx-1.1.6.6 … [BonDriverProxyEx-1.1.6.6.zip](https://github.com/tsukumijima/DTV-Built/raw/master/BonDriverProxyEx-1.1.6.6.zip)
- - **BonDriverProxy**
-   - BonDriverProxy-1.1.6.5 … [BonDriverProxy-1.1.6.5.zip](https://github.com/tsukumijima/DTV-Built/raw/master/BonDriverProxy-1.1.6.5.zip)
  - **px4_drv for WinUSB**
    - px4_drv for WinUSB (2021/09/09) … [px4_drv_winusb-210909.zip](https://github.com/tsukumijima/DTV-Built/raw/master/px4_drv_winusb-210909.zip)
  - **FFmpeg**
