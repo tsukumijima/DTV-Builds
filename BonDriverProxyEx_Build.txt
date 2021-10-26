@@ -1,25 +1,25 @@
 ﻿
 =====================================================================
-            BonDriverProxyEx 1.1.6.6 (decode) - 2018/04/10           
-      BonDriver_Proxy & BonDriver_Splitter 1.1.6.5 - 2016/10/01      
+            BonDriverProxyEx 1.1.6.6 (patch) - 2020/09/27            
 =====================================================================
 
 ◆ ビルドにあたって
 
-・VS2019 でビルドしています。別途ランタイムが必要かもしれません。
-・スクランブル解除が可能な epgdatacapbon 氏のフォーク (https://github.com/epgdatacapbon/BonDriverProxyEx/tree/decode) をビルドしています。
-・32bit 版・64bit 版両方を同梱しています。BonDriverProxyEx_32bit 以下が 32bit 版、BonDriverProxyEx_64bit 以下が 64bit 版です。
-・BonDriverProxyEx にはコマンドラインから利用しサービスに登録して利用するサービス版もあります。
-　・サービス版は BonDriverProxyEx-Service_32bit 以下が 32bit 版、BonDriverProxyEx-Service_64bit 以下が 64bit 版です。
-　・付属の BonDriverProxyEx_Install.bat・BonDriverProxyEx_Remove.bat を使ってサービスのインストール・アンインストールができます。
-　　・サービス版は使ってないので未検証ですが…
+・Visual Studio 2019 でビルドしています。別途ランタイムが必要かもしれません。
+・スクランブル解除が可能で、さらにいくつかの機能が追加されている HaijinW 氏のフォーク (https://github.com/HaijinW/BonDriverProxyEx) をビルドしています。
+  ・B25 デコードの機能を内蔵せず、BonDriverProxyEx.exe と同じフォルダの B25Decoder.dll を利用する構成でビルドしています。
+・32bit 版・64bit 版の両方を同梱しています。BonDriverProxyEx_32bit 以下が 32bit 版、BonDriverProxyEx_64bit 以下が 64bit 版です。
+・BonDriverProxyEx には Windows サービス版もあります。
+  ・スタートアップの種類を [自動] にしておけば、ログオンしているかや再起動後かに関わらず、バックグラウンドで動作させることができます。
+  ・サービス版は BonDriverProxyEx-Service_32bit 以下が 32bit 版、BonDriverProxyEx-Service_64bit 以下が 64bit 版になっています。
+  ・付属の service-install.jse・service-uninstall.jse を実行すると、サービスのインストール・アンインストールができます。
+    ・サービスのインストール・アンインストールには管理者権限が必要です。
 ・BonDriver_Proxy・BonDriver_Spliter を同梱しています。
-　・BonDriver_Proxy・BonDriver_Splitter は Spinel の BonDriver_Spinel のように BonDriverProxyEx と対になる BonDriver です。
-　・BonDriverProxyEx.ini はサーバー側とクライアント側で ini が同じで分かりづらかったため、独自に設定項目を分けある程度設定を行ったものを同梱しています。
-　・BonDriverProxyEx.ini がサーバー（BonDriverProxyEx）用、BonDriver_Proxy_T.ini が地上波、BonDriver_Proxy_S.ini が BS・CS のクライアント用設定ファイルです。
-　　・BonDriver_Proxy_T.dll・BonDriver_Proxy_S.dll は分かりやすいようにビルドした BonDriver_Proxy.dll をリネームしたもので、内容は同一です。
-　・BonDriverProxyEx.ini 内の BonDriver のファイル名、BonDriver_Proxy_T/S.ini 内のサーバーの IP アドレスは適宜変更してください。
-　・BonDriver_Splitter は仮想3波チューナーにする BonDriver のようですが、使い方がわからない（解説すらない）ので内容はそのままです…
+  ・BonDriver_Proxy は、BonDriverProxyEx（サーバー）と対になる BonDriver（クライアント）です。
+  ・BonDriver_Proxy_T.dll・BonDriver_Proxy_S.dll は分かりやすいようにビルドした BonDriver_Proxy.dll をリネームしたもので、ファイル内容は同じです。
+・BonDriverProxyEx.ini はサーバー側とクライアント側で ini が同じで分かりづらかったため、独自に設定項目を分けある程度設定を行ったものを同梱しています。
+・BonDriverProxyEx.ini がサーバー（BonDriverProxyEx）用、BonDriver_Proxy_T.ini が地上波、BonDriver_Proxy_S.ini が BS・CS のクライアント用設定ファイルです。
+・BonDriverProxyEx.ini 内の利用する BonDriver の指定と、BonDriver_Proxy_T(S).ini 内のサーバーの IP アドレスを適宜変更してください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 =====================================================================
