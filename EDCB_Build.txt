@@ -21,12 +21,8 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
 ・B25Decoder.dll・B1Decoder.dll … B-CAS カードまたはスカパー！カードを使い CAS 処理（スクランブル解除）を行うライブラリ
   ・B25Decoder.dll・B1Decoder.dll がないとスクランブル解除を行えないため、必須のライブラリです（このライブラリがないと録画できても視聴できない）
   ・B25Decoder.dll は B-CAS カードを用いる 地デジ・BS・CS110 向けのスクランブル解除ライブラリです
-    ・https://github.com/epgdatacapbon/libaribb25 をビルドしたものを同梱しています
-    ・libaribb25 は B25Decoder（本家）互換です
-    ・libaribb25.dll を B25Decoder.dll にリネームしています
   ・B1Decoder.dll はスカパー！カードを用いるスカパー！プレミアムサービス (SPHD) 向けのスクランブル解除ライブラリです
-    ・https://github.com/epgdatacapbon/libaribb25 に SPHD 用のパッチ (https://www.axfc.net/u/3985543) を当てビルドしたものを同梱しています
-    ・SPHD の環境がないため、実際に動作するかまでは検証できていません
+  ・https://github.com/tsukumijima/libaribb25 をビルドしたものを同梱しています
 
 ・lua52.dll・zlib.dll … EDCB Material WebUI を動作させるために必要なライブラリ
   ・このライブラリがないと EDCB Material WebUI が動作しません
