@@ -1,12 +1,13 @@
 ﻿
 =====================================================================
-                    EDCB (tkntrec版) - 2021/08/28                    
+                    EDCB (tkntrec版) - 2021/11/19                    
 =====================================================================
 
 ◆ ビルドにあたって
 
 ・Visual Studio 2019 でビルドしています。別途ランタイムが必要かもしれません。
 ・32bit 版・64bit 版の両方を同梱しています。EDCB_32bit 以下が 32bit 版、EDCB_64bit 以下が 64bit 版です。
+・現在主流の xtne6f 版をベースに EpgTimer 周辺の機能が改善されている、tkntrec 版をビルドしています。
 ・EpgDataCap_Bon・EpgTimerSrv などのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと、EpgDataCap_Bon の画面の背景色を白に変更したこと以外の変更は行っていません。
   ・変更したコードは https://github.com/tsukumijima/EDCB にて公開しています。
 ・HttpPublic.ini を同梱しています（後述）。
@@ -50,6 +51,7 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・PWA 対応などの改良を行った EDCB Material WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています
   ・HttpPublic/img/logo/ には私が関東圏にて取得した 地デジ・BS・CS110 の局ロゴ (bmp) を同梱しています
   ・局ロゴが表示されない放送局がある場合は、TVTest で取得した局ロゴを (ONID(16進数4桁))(SID(16進数4桁)).bmp(または.png) にリネームした上で HttpPublic/img/logo/ に入れてみてください
+    ・TVTestLogoRenamer (https://gist.github.com/tsukumijima/bc1d9988b2a9b3edeced7be39d47449c) を使うと一括でリネームできます
   ・EDCB Material WebUI を使う場合は別途いくつか設定が必要です、https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に設定を行ってください
 
 ・Setting/HttpPublic.ini … EDCB Material WebUI の設定ファイル
@@ -57,7 +59,7 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・先述の通り、すでに設定を変更している場合は上書きしないように注意してください
 
 ・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB Material WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
-  ・ffmpeg-4.1.4-shared (https://ffmpeg.zeranoe.com/builds/) を同梱しています
+  ・ffmpeg-4.1.4-shared (https://web.archive.org/web/2/https://ffmpeg.zeranoe.com/builds/) を同梱しています
   ・ffmpeg-4.1.4-shared のうち、ffplay.exe は不要なため削除しています
   ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わったことにより字幕付きの番組でエンコードに失敗するため、敢えて FFmpeg 4.1.4 を同梱しています
   ・Shared 版にしている理由は ffmpeg と ffprobe でライブラリを共通化でき、ファイルサイズを半分近くにまで減らせるためです
