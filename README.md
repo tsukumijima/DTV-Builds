@@ -13,7 +13,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 ## 注意
 
 - BonDriver 関連のファイルは同梱されていません。各自で準備してください。  
-- UI やダイヤログのフォントは全て Meiryo UI に統一しています。
+- UI やダイヤログのフォントはすべて Meiryo UI に統一しています。
 - 前述の通り、使いやすいよう設定ファイルを変更したり、必要/よく使われるプラグインを同梱したりといくつか構成を変更している箇所があります。
   - 本家のソースコードをそのままビルドしただけのアーカイブではないことに注意してください。
   - 信頼できないようであれば自ビルドすることを推奨します。
@@ -29,7 +29,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 [TVTest](https://github.com/tsukumijima/TVTest) はよく使われるプラグイン一式を同梱しています。  
 ビルドの詳細は [TVTest_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/TVTest_Build.txt) に記載しています。
 
-[EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版 に EpgTimer 関連のパッチを適用した tkntrec 版をビルドしています。  
+[EDCB](https://github.com/tsukumijima/EDCB) は現在主流の xtne6f 版をベースに EpgTimer 周辺の機能が改善されている tkntrec 版をビルドしています。
 [EDCB Material WebUI](https://github.com/tsukumijima/EDCB_Material_WebUI) も同梱していますが、利用する場合は別途設定が必要です。  
 ビルドの詳細は [EDCB_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/EDCB_Build.txt) に記載しています。
 
@@ -66,6 +66,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TVTest-0.10.0-190808 … [TVTest-0.10.0-190808.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190808.zip)
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Built/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
+   - EDCB-211119 … [EDCB-211119.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-211119.zip)
    - EDCB-210828 … [EDCB-210828.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-210828.zip)
    - EDCB-210515 … [EDCB-210515.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-210515.zip)
    - EDCB-210216 … [EDCB-210216.zip](https://github.com/tsukumijima/DTV-Built/raw/master/EDCB-210216.zip)
