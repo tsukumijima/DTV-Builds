@@ -41,9 +41,9 @@ BonDriverProxyEx はスクランブル解除が可能で、さらにいくつか
 BonDriverProxyEx の Windows サービス版と、BonDriver_Proxy も一緒に同梱しています。  
 ビルドの詳細は [BonDriverProxyEx_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/BonDriverProxyEx_Build.txt) に記載しています。  
 
-[px4_drv for WinUSB](https://github.com/nns779/px4_drv/tree/winusb) はテストモードにしなくてもドライバをインストールできるよう、自己署名証明書を利用するように変更したドライバのインストールファイル (.inf) を同梱しています。  
+[px4_drv for WinUSB](https://github.com/tsukumijima/px4_drv) はテストモードにしなくてもドライバをインストールできるよう、自己署名証明書を利用するように変更したドライバのインストールファイル (.inf) を同梱しています。  
 ビルドの詳細でも記述していますが、ドライバのインストールの前に同梱の自己署名証明書をインストールする必要があります。  
-また、すぐに使えるようにファームウェアを含め動作に必要なファイル一式をまとめて配置しています。  
+また、すぐに使えるようにファームウェアを含め動作に必要なファイル一式をまとめて配置しているほか、BonDriver にエラー発生時のメッセージボックスを表示しないオプションを追加しています。  
 ビルドの詳細は [px4_drv_winusb_Build.txt](https://github.com/tsukumijima/DTV-Built/blob/master/px4_drv_winusb_Build.txt) に記載しています。
 
 FFmpeg は pthread・QSV・AMD_AMF などのライブラリ全部入りで、4.2 系以降は libaribb24 も入れてビルドしています。  
@@ -90,6 +90,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
  - **BonDriverProxyEx**
    - BonDriverProxyEx-1.1.6.6 … [BonDriverProxyEx-1.1.6.6.zip](https://github.com/tsukumijima/DTV-Built/raw/master/BonDriverProxyEx-1.1.6.6.zip)
  - **px4_drv for WinUSB**
+   - px4_drv for WinUSB (2022/01/19) … [px4_drv_winusb-220119.zip](https://github.com/tsukumijima/DTV-Built/raw/master/px4_drv_winusb-220119.zip)
    - px4_drv for WinUSB (2021/09/09) … [px4_drv_winusb-210909.zip](https://github.com/tsukumijima/DTV-Built/raw/master/px4_drv_winusb-210909.zip)
  - **FFmpeg**
    - FFmpeg-4.4-32bit-Static … [FFmpeg-4.4-32bit-Static.7z](https://github.com/tsukumijima/DTV-Built/raw/master/FFmpeg-4.4-32bit-Static.7z)
