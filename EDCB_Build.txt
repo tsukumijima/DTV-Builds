@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                    EDCB (tkntrec版) - 2021/11/19                    
+                    EDCB (tkntrec版) - 2022/02/25                    
 =====================================================================
 
 ◆ ビルドにあたって
@@ -45,7 +45,6 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
 ・EdcbPlugIn/Write_Multi.dll・EdcbPlugIn/Write_OneService.dll … EdcbPlugIn を使う場合に必要なファイル書き出し用プラグイン
   ・EdcbPlugIn を使う場合はこれらをプラグイン本体とは別に TVTest.exe と同じフォルダに配置する必要があります
   ・Write_Multi.dll は https://github.com/xtne6f/Write_Multi をビルドしたものです
-  ・Write_OneService.dll は Write フォルダに入っているものをコピーしたものです
 
 ・HttpPublic/api/・HttpPublic/EMWUI/・HttpPublic/img/・HttpPublic/video/ … EDCB Material WebUI 本体
   ・PWA 対応などの改良を行った EDCB Material WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています
