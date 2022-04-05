@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                      TVTest 0.10.0 - 2021/08/12                     
+                      TVTest 0.10.0 - 2022/03/23                     
 =====================================================================
 
 ◆ ビルドにあたって
@@ -14,7 +14,7 @@
     ・NicoJK は Plugins/NicoJK.ini 、TVCaptionMod2 は Plugins/TVCaptionMod2.ini が設定ファイルです。
   ・視聴地域が関東圏以外の場合は局ロゴデータ（LogoData）・局ロゴデータ設定ファイル (LogoData.ini) も異なるため、既に局ロゴを取得している場合はLogoData・LogoData.ini も上書きしないことをおすすめします。
     ・上書きした場合、再取得するまで関東圏以外の地デジの放送局の局ロゴが表示されなくなります（未検証）。
-  ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームして置換されないようにしてから上書きしてください。
+  ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームするなどして置換されないようにしてから上書きしてください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 ◆ 同梱ファイル (TVTest 本体に付属のファイル以外)
@@ -32,7 +32,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・BonDriver_Pipe.dll … 名前付きパイプ経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay での録画ファイル再生に使用します
-  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・BonDriver_UDP.dll … UDP 経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay や EpgTimerPlugIn で使用します
@@ -73,7 +73,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ
   ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
   ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと倍速再生時に音がおかしくなったり、出なくなることがあります
-  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・TVTestVideoDecoder.ax … TVTest の開発者の方が公開している MPEG2 ビデオデコーダー
   ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
@@ -96,15 +96,15 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
     ・jkcnsl.exe は新しいニコニコ実況の受信クライアントで、NicoJK と連携して動作します
     ・有志のコミュニティによって運営されている BS 各局のニコニコ実況も表示できるよう設定済みです
   ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・NicoJK (xtn6f版) master-210910 (https://github.com/xtne6f/NicoJK/releases) に入っているものを同梱しています
+  ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) をビルドしたものを同梱しています
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
   ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります
-    ・同梱の NicoCookie4Chrome を使うことで、Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます
+    ・同梱の NicoCookie4Chrome (http://vb45wb5b.seesaa.net/#NicoCookie4Chrome) を使うことで、Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます
     ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します
     ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
     ・Firefox をお使いの場合は、NicoJK.ini の execGetCookie の項目をコメントアウト後、自分のユーザー名に合わせて編集してください
-  ・NicoJK (xtn6f版) master-210910 (https://github.com/xtne6f/NicoJK/releases) に入っているものをすぐに使えるよう編集した上で同梱しています
+  ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) に入っているものをすぐに使えるよう編集した上で同梱しています
 
 ・Plugins/NicoJK_Readme.txt … NicoJK の説明書
 
@@ -112,13 +112,13 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・Plugins/TVCaptionMod2.tvtp … 字幕を表示できる TVTest のプラグイン
   ・字幕が鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・TVCaptionMod2 master-210508 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものを同梱しています
+  ・TVCaptionMod2 (https://github.com/xtne6f/TVCaptionMod2) をビルドしたものを同梱しています
 
 ・Plugins/TVCaptionMod2.ini … TVCaptionMod2 の設定ファイル
   ・[映像への字幕合成機能を使う] にチェックを入れると、TVCaptionMod2 を有効にしている間は上のように TVTest でキャプチャした時に字幕を画像の中に含める事ができます
   ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください
   ・字幕を映像に合成する場合、一部の環境では字幕の描画が乱れることがあります
-  ・TVCaptionMod2 master-210508 (https://github.com/xtne6f/TVCaptionMod2/releases) に入っているものをすぐに使えるよう編集した上で同梱しています
+  ・TVCaptionMod2 (https://github.com/xtne6f/TVCaptionMod2) に入っているものをすぐに使えるよう編集した上で同梱しています
 
 ・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
 
@@ -129,10 +129,10 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
   ・NicoJK が有効になっている場合、再生中の番組のニコニコ実況の過去ログが保存されていれば、その過去ログを同時に再生できます
   ・過去ログを保存するフォルダは NicoJK.ini から変更できます
-  ・TvtPlay master-200216 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・Plugins/TvtPlay_Buttons24.bmp … TvtPlay のボタン用画像 (24px 版)
-  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルぁ TvtPlay_Buttons32.bmp へ差し替えることができます
+  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons32.bmp へ差し替えることができます
   ・4K などの HiDPI ディスプレイを使っている場合、画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです
 
 ・Plugins/TvtPlay_Buttons32.bmp … TvtPlay のボタン用画像 (24px 版)
