@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                      TVTest 0.10.0 - 2022/03/23                     
+                      TVTest 0.10.0 - 2022/07/11
 =====================================================================
 
 ◆ ビルドにあたって
@@ -12,14 +12,14 @@
 ・NicoJK・TVCaptionMod2・局ロゴデータの各設定ファイルを同梱しています（後述）。
   ・そのため、NicoJK・TVCaptionMod2 の設定をすでに変更している場合、単純に上書きしてしまうと設定ファイルも同梱されているもので上書きされてしまいます。
     ・NicoJK は Plugins/NicoJK.ini 、TVCaptionMod2 は Plugins/TVCaptionMod2.ini が設定ファイルです。
-  ・視聴地域が関東圏以外の場合は局ロゴデータ（LogoData）・局ロゴデータ設定ファイル (LogoData.ini) も異なるため、既に局ロゴを取得している場合はLogoData・LogoData.ini も上書きしないことをおすすめします。
+  ・視聴地域が関東圏以外の場合は局ロゴデータ（LogoData）・局ロゴデータ設定ファイル (LogoData.ini) が異なるため、既に局ロゴを取得している場合は LogoData・LogoData.ini ともに上書きしないことをおすすめします。
     ・上書きした場合、再取得するまで関東圏以外の地デジの放送局の局ロゴが表示されなくなります（未検証）。
-  ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームするなどして置換されないようにしてから上書きしてください。
+  ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームや削除して置換されないようにしてから上書きしてください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 ◆ 同梱ファイル (TVTest 本体に付属のファイル以外)
 
-TVTest を利用する上で必須、またはあった方が良さそうなファイルを一緒に同梱しています。
+TVTest を利用する上で必須、またはあった方が良さそうなファイル・プラグインを一緒に同梱しています。
 
 ・B25.tvcas … CasProcessor プラグインが使用する CAS 処理用 tvcas プラグイン ( TVCAS_B25.tvcas と同様)
   ・地上波・BS・CS110 の再生に使用します
@@ -32,7 +32,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・BonDriver_Pipe.dll … 名前付きパイプ経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay での録画ファイル再生に使用します
-  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・BonDriver_UDP.dll … UDP 経由で TS ストリームを再生できる特殊な BonDriver
   ・主に TvtPlay や EpgTimerPlugIn で使用します
@@ -69,11 +69,12 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・sqlite3.exe … SQLite (データベース管理ソフト)
   ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します
+  ・https://www.sqlite.org/download.html にある sqlite-tools-win32-x86-3390000.zip に入っているものを同梱しています
 
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ
   ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
   ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと倍速再生時に音がおかしくなったり、出なくなることがあります
-  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・TVTestVideoDecoder.ax … TVTest の開発者の方が公開している MPEG2 ビデオデコーダー
   ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
@@ -102,7 +103,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります
     ・同梱の NicoCookie4Chrome (http://vb45wb5b.seesaa.net/#NicoCookie4Chrome) を使うことで、Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます
     ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します
-    ・ログインできない（投稿フォームが表示されない）場合は NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
+    ・ログインできない（投稿フォームが表示されない）場合は Plugins/NicoCookie4Chrome/NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
     ・Firefox をお使いの場合は、NicoJK.ini の execGetCookie の項目をコメントアウト後、自分のユーザー名に合わせて編集してください
   ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) に入っているものをすぐに使えるよう編集した上で同梱しています
 
@@ -122,14 +123,26 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
 
-・Plugins/TvtPlay.tvtp … 録画した TS ファイルを TVTest で見れるようにするプラグイン
+・Plugins/TVTDataBroadcastingWV2.tvtp … データ放送を表示できる TVTest のプラグイン
+　・利用する場合、あらかじめ Edge WebView2 ランタイム (https://go.microsoft.com/fwlink/p/?LinkId=2124703) をインストールしてください
+  ・プラグイン設定から『TVTest起動時にプラグインを有効にする』を有効にしておくことをおすすめします
+  ・プラグインを有効にした状態でパネル設定から『データ放送』を有効にすると、パネルの『データ放送』タブにデータ放送用のリモコンが表示されます
+  ・キー割り当て設定から、各リモコン操作にショートカットキーを割り当てられます
+　・データ放送のうち、双方向通信機能（通信コンテンツ）は既定で無効化されています
+    ・双方向通信機能を利用する場合は、リモコン下の「通信機能を有効化」をクリックしてください
+　・データ放送のデータは Plugins/TVTDataBroadcastingWV2/WebView2Data/ に保存されます
+  ・TVTDataBroadcastingWV2 (https://github.com/otya128/TVTDataBroadcastingWV2) の GitHub Actions の Artifacts を同梱しています
+
+・Plugins/TVTDataBroadcastingWV2_Readme.txt … TVTDataBroadcastingWV2 の説明書
+
+・Plugins/TvtPlay.tvtp … 録画した TS ファイルを TVTest で見れるようにする TVTest のプラグイン
   ・TvtPlay を有効にする TVTest は、通常の TVTest とフォルダを分けて配置することを推奨します
   ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます
     常に有効にしたい場合は、ショートカットのプロパティでパスの末尾に /tvtplay と追記し、そのショートカットから起動するようにしてください
   ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
   ・NicoJK が有効になっている場合、再生中の番組のニコニコ実況の過去ログが保存されていれば、その過去ログを同時に再生できます
   ・過去ログを保存するフォルダは NicoJK.ini から変更できます
-  ・TvtPlay master-220318 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
 
 ・Plugins/TvtPlay_Buttons24.bmp … TvtPlay のボタン用画像 (24px 版)
   ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons32.bmp へ差し替えることができます
