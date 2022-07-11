@@ -1,6 +1,6 @@
 ﻿
 =====================================================================
-                    EDCB (tkntrec版) - 2022/02/25                    
+                    EDCB (tkntrec版) - 2022/06/24
 =====================================================================
 
 ◆ ビルドにあたって
@@ -62,5 +62,10 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・ffmpeg-4.1.4-shared のうち、ffplay.exe は不要なため削除しています
   ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わったことにより字幕付きの番組でエンコードに失敗するため、敢えて FFmpeg 4.1.4 を同梱しています
   ・Shared 版にしている理由は ffmpeg と ffprobe でライブラリを共通化でき、ファイルサイズを半分近くにまで減らせるためです
+
+・Tools/psisiarc.exe・Tools/tsmemseg.exe・Tools/tsreadex.exe … EDCB Legacy WebUI がストリーミング再生に利用するユーティリティソフト
+  ・psisiarc (https://github.com/xtne6f/psisiarc) はデータ放送が含まれるデータカルーセルをアーカイブ化するソフトです
+  ・tsmemseg (https://github.com/xtne6f/tsmemseg) は MPEG-TS ストリームをインメモリで HLS 配信するためのソフトです
+  ・tsreadex (https://github.com/xtne6f/tsreadex) は放送波のストリーミング再生を安定化させるためのソフトです
 
 =====================================================================
