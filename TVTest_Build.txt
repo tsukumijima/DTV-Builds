@@ -1,157 +1,185 @@
 ﻿
-=====================================================================
-                      TVTest 0.10.0 - 2022/07/11
-=====================================================================
+================================================================================
+                           TVTest 0.10.0 - 2023/00/00
+================================================================================
 
 ◆ ビルドにあたって
 
-・Visual Studio 2019 でビルドしています。別途ランタイムが必要かもしれません。
+・Visual Studio 2019 でビルドしています。
+  ・環境によっては、別途 Visual C++ 2015-2022 ランタイムのインストールが必要かもしれません。
+  ・32bit 版のランタイムのインストーラーは https://aka.ms/vs/17/release/vc_redist.x86.exe からダウンロードできます。
+  ・64bit 版のランタイムのインストーラーは https://aka.ms/vs/17/release/vc_redist.x64.exe からダウンロードできます。
 ・32bit 版・64bit 版の両方を同梱しています。TVTest_32bit 以下が 32bit 版、TVTest_64bit 以下が 64bit 版です。
 ・プラグインのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと以外の変更は行っていません。
-・変更したコードは https://github.com/tsukumijima/TVTest にて公開しています。
-・NicoJK・TVCaptionMod2・局ロゴデータの各設定ファイルを同梱しています（後述）。
-  ・そのため、NicoJK・TVCaptionMod2 の設定をすでに変更している場合、単純に上書きしてしまうと設定ファイルも同梱されているもので上書きされてしまいます。
-    ・NicoJK は Plugins/NicoJK.ini 、TVCaptionMod2 は Plugins/TVCaptionMod2.ini が設定ファイルです。
-  ・視聴地域が関東圏以外の場合は局ロゴデータ（LogoData）・局ロゴデータ設定ファイル (LogoData.ini) が異なるため、既に局ロゴを取得している場合は LogoData・LogoData.ini ともに上書きしないことをおすすめします。
-    ・上書きした場合、再取得するまで関東圏以外の地デジの放送局の局ロゴが表示されなくなります（未検証）。
-  ・設定や局ロゴを上書きしたくない場合は、ファイルをリネームや削除して置換されないようにしてから上書きしてください。
+  ・変更したコードは https://github.com/tsukumijima/TVTest にて公開しています。
+・NicoJK・TVCaptionMod2・TVTDataBroadcastingWV2・局ロゴデータの各設定ファイルを同梱しています（後述）。
+  ・NicoJK・TVCaptionMod2・TVTDataBroadcastingWV2 の設定をすでに変更している場合、
+    単純に上書きしてしまうと、設定ファイルも同梱されているもので上書きされてしまいます。
+  ・プラグインと設定ファイルの対応は以下の通りです。
+    ・NicoJK: Plugins/NicoJK.ini
+    ・TVCaptionMod2: Plugins/TVCaptionMod2.ini
+    ・TVTDataBroadcastingWV2: Plugins/TVTDataBroadcastingWV2.ini
+  ・追加で局ロゴを取得している場合は、LogoData・LogoData.ini ともに上書きしないことをおすすめします。
+    ・上書きしてしまった場合、ロゴを再取得するまで、関東圏以外の地デジ放送局の局ロゴが表示されなくなります。
+    ・同梱の LogoData・LogoData.ini には関東圏以外の地上波放送局の局ロゴが含まれていないためです。
+  ・設定や局ロゴを上書きしたくない場合は、当該ファイルをリネームや移動して、置換されないようにしてから上書きしてください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 ◆ 同梱ファイル (TVTest 本体に付属のファイル以外)
 
 TVTest を利用する上で必須、またはあった方が良さそうなファイル・プラグインを一緒に同梱しています。
 
-・B25.tvcas … CasProcessor プラグインが使用する CAS 処理用 tvcas プラグイン ( TVCAS_B25.tvcas と同様)
-  ・地上波・BS・CS110 の再生に使用します
-  ・https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています
+・B25.tvcas … CasProcessor プラグインが利用する CAS 処理用 tvcas プラグイン (TVCAS_B25.tvcas と同様)
+  ・地上波・BS・CS110 の再生に利用します。
+  ・https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています。
 
-・B1.tvcas … CasProcessor プラグインが使用する CAS 処理用 tvcas プラグイン ( TVCAS_B1.tvcas と同様)
-  ・スカパー！プレミアムサービス (SPHD) の再生に使用します
-  ・B25.tvcas 同様 https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています
-  ・以前のバージョンで同梱していた SPHD.tvcas は機能しないものだったため、独自にパッチを適用し SPHD 対応を行いました
+・B1.tvcas … CasProcessor プラグインが利用する CAS 処理用 tvcas プラグイン (TVCAS_B1.tvcas と同様)
+  ・スカパー！プレミアムサービス (SPHD) の再生に利用します。
+  ・https://github.com/tsukumijima/TvCas をビルドしたものを同梱しています。
+  ・以前同梱していた SPHD.tvcas は機能しないものだったため、独自にパッチを適用し SPHD 対応を行いました。
 
 ・BonDriver_Pipe.dll … 名前付きパイプ経由で TS ストリームを再生できる特殊な BonDriver
-  ・主に TvtPlay での録画ファイル再生に使用します
-  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・主に TvtPlay での録画ファイル再生に利用します。
+  ・https://github.com/xtne6f/TvtPlay (work-plus ブランチ) 内の BonDriver_Pipe_src/ フォルダ以下をビルドしたものを同梱しています。
 
 ・BonDriver_UDP.dll … UDP 経由で TS ストリームを再生できる特殊な BonDriver
-  ・主に TvtPlay や EpgTimerPlugIn で使用します
-  ・https://github.com/tsukumijima/BonDriver_UDP-TCP をビルドしたものを同梱しています
+  ・主に TvtPlay や EpgTimerPlugIn で利用します。
+  ・https://github.com/tsukumijima/BonDriver_UDP-TCP をビルドしたものを同梱しています。
 
 ・BonDriver_TCP.dll … TCP 経由で TS ストリームを再生できる特殊な BonDriver
-  ・主に TvtPlay や EpgTimerPlugIn で使用します
-  ・https://github.com/tsukumijima/BonDriver_UDP-TCP をビルドしたものを同梱しています
+  ・主に TvtPlay や EpgTimerPlugIn で利用します。
+  ・https://github.com/tsukumijima/BonDriver_UDP-TCP をビルドしたものを同梱しています。
 
 ・BonDriver_UDP.txt … BonDriver_UDP・BonDriver_TCP の説明書
 
 ・filter-install.jse … 同梱している DirectShow フィルタをインストールする PowerShell スクリプト（私が作成したツール）
-  ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をインストールします
-  ・TVCaptionMod2 に必要なフォントも合わせてインストールします
-  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています
-  ・インストールには管理者権限が必要です
+  ・実行すると、TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax と、TVCaptionMod2 に必要なフォントがインストールされます。
+  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています。
+  ・インストールの実行には管理者権限が必要です。
 
 ・filter-uninstall.jse … 同梱している DirectShow フィルタをアンインストールする PowerShell スクリプト（私が作成したツール）
-  ・TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax をアンインストールします
-  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています
-  ・アンインストールには管理者権限が必要です
+  ・実行すると、TVTestVideoDecoder.ax・TvtAudioStretchFilter.ax がアンインストールされます。
+  ・WSH (JScript) と組み合わせることで、ダブルクリックで実行できるようにしています。
+  ・アンインストールの実行には管理者権限が必要です。
 
 ・jkcnsl.exe … ニコニコ生放送に移行した新しいニコニコ実況のコメントを取得するコマンドラインツール
-  ・NicoJK と連携して動作します
+  ・NicoJK と連携して動作します。
+  ・https://github.com/xtne6f/jkcnsl をビルドしたものを同梱しています。
 
 ・jq.exe … JSON データから簡単に値を抽出するためのコマンドラインツール
-  ・NicoJK が Chrome 系ブラウザの Cookie データベースの復号鍵を取得するときに利用します
+  ・NicoJK が Chrome 系ブラウザの Cookie データベースの復号鍵を取得するときに利用します。
+  ・https://github.com/stedolan/jq/releases にて配布されているものを同梱しています。
 
 ・LogoData … 私の環境（関東圏）で取得した 地上波・BS・CS110 の局ロゴデータ
-  ・地上波の局ロゴデータは関東以外では役に立たないと思いますが、BS・CS110 の局ロゴデータは全国共通なので、いちいち取得する手間を省けると思います
+  ・地上波の局ロゴデータは関東以外では役に立たないと思いますが、BS・CS110 の局ロゴデータは全国共通なので、いちいち取得する手間を省けるはずです。
+  ・追加で局ロゴを取得している場合は、アップデート時に上書きしないように注意してください。
 
 ・LogoData.ini … 局ロゴデータについての情報が記載された ini ファイル
-  ・LogoData か LogoData.ini どちらかを削除してしまった場合、局ロゴを表示できなくなります（局ロゴの再取得が必要）
+  ・LogoData か LogoData.ini どちらかを削除してしまった場合、局ロゴを表示できなくなります（局ロゴの再取得が必要）。
+  ・追加で局ロゴを取得している場合は、アップデート時に上書きしないように注意してください。
 
 ・sqlite3.exe … SQLite (データベース管理ソフト)
-  ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します
-  ・https://www.sqlite.org/download.html にある sqlite-tools-win32-x86-3390000.zip に入っているものを同梱しています
+  ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します。
+  ・https://www.sqlite.org/download.html にある sqlite-tools-win32-x86-(バージョン番号).zip に入っているものを同梱しています。
 
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ
-  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
-  ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと倍速再生時に音がおかしくなったり、出なくなることがあります
-  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです。
+  ・TvtPlay を使う場合、TvtAudioStretchFilter を使わないと倍速再生時に音がおかしくなったり、出なくなることがあります。
+  ・https://github.com/xtne6f/TvtPlay (work-plus ブランチ) 内の TvtAudioStretchFilter_src/ フォルダ以下をビルドしたものを同梱しています。
 
 ・TVTestVideoDecoder.ax … TVTest の開発者の方が公開している MPEG2 ビデオデコーダー
-  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです
-  ・Windows10 では Microsoft DTV-DVD Video Decoder が入っていないため、このデコーダーを使用します
-  ・https://github.com/DBCTRADO/TVTestVideoDecoder をビルドしたものを同梱しています
+  ・filter-install.jse を実行するとインストールされる DirectShow フィルタです。
+  ・Windows10 では Microsoft DTV-DVD Video Decoder が入っていないため、このデコーダーを利用します。
+  ・https://github.com/tsukumijima/TVTestVideoDecoder をビルドしたものを同梱しています。
 
 ・TVTestVideoDecoder.txt … TVTestVideoDecoder の説明書
 
 ・Logo/*.bmp … 関東圏で取得した 地上波・BS・CS110 の局ロゴ画像 (BMP 形式)
   ・TVTest 内で表示する局ロゴは LogoData ファイル内に格納されているものから読み込まれているので必要性は薄いと思いますが一応…
-  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] にチェックを入れてから局ロゴを取得してください
+  ・関東以外にお住まいの場合で地上波の局ロゴを BMP 形式で保存したい場合、
+    TVTest の設定 → [EPG/番組情報] → [放送局ロゴ] → [BMP形式のロゴを保存する] にチェックを入れてから局ロゴを取得してください。
 
 ・Plugins/CasProcessor.tvtp … CAS 処理（スクランブル解除）を行う TVTest のプラグイン
-  ・CasProcessor は TVTest のTSプロセッサー機能のプラグインとして動作し、B25.tvcas もしくは B1.tvcas を読み込んで CAS 処理を行います
-  ・TVTest 0.9.0 以降は TVTest 本体のスクランブル解除機能が削除されたため、このプラグインは必須です
-  ・https://github.com/logue/CasProcessor をビルドしたものを同梱しています
+  ・CasProcessor は TVTest のTSプロセッサー機能のプラグインとして動作し、B25.tvcas もしくは B1.tvcas を読み込んで CAS 処理を行います。
+  ・TVTest 0.9.0 以降は TVTest 本体のスクランブル解除機能が削除されたため、このプラグインは必須です。
+  ・https://github.com/tsukumijima/CasProcessor をビルドしたものを同梱しています。
 
 ・Plugins/NicoJK.tvtp … ニコニコ実況を表示できる TVTest のプラグイン
-  ・ニコニコ生放送に統合された新しいニコニコ実況に対応した NicoJK を同梱しています
-    ・jkcnsl.exe は新しいニコニコ実況の受信クライアントで、NicoJK と連携して動作します
-    ・有志のコミュニティによって運営されている BS 各局のニコニコ実況も表示できるよう設定済みです
-  ・コメントが鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) をビルドしたものを同梱しています
+  ・ニコニコ生放送に統合された新しいニコニコ実況に対応した NicoJK を同梱しています。
+    ・jkcnsl.exe は新しいニコニコ実況の受信クライアントで、NicoJK と連携して動作します。
+    ・有志のコミュニティによって運営されている BS 各局のニコニコ実況も表示できるよう設定済みです。
+  ・コメントが鬱陶しい場合は、右クリックメニューから有効 / 無効の切り替えができます。
+  ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) をビルドしたものを同梱しています。
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
-  ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります
-    ・同梱の NicoCookie4Chrome (http://vb45wb5b.seesaa.net/#NicoCookie4Chrome) を使うことで、Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます
-    ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します
-    ・ログインできない（投稿フォームが表示されない）場合は Plugins/NicoCookie4Chrome/NicoCookie4Chrome.ini を編集し、Cookies・Local State への絶対パスを指定してください
-    ・Firefox をお使いの場合は、NicoJK.ini の execGetCookie の項目をコメントアウト後、自分のユーザー名に合わせて編集してください
-  ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) に入っているものをすぐに使えるよう編集した上で同梱しています
+  ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります。
+    ・同梱の NicoCookie4Chrome (http://vb45wb5b.seesaa.net/#NicoCookie4Chrome) を使うことで、
+      Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます。
+    ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します。
+    ・ログインできない（投稿フォームが表示されない）場合は Plugins/NicoCookie4Chrome/NicoCookie4Chrome.ini を編集し、
+      Cookies・Local State への絶対パスを指定してください。
+    ・Firefox をお使いの場合は、NicoJK.ini の execGetCookie の項目をコメントアウト後、自分のユーザー名に合わせて編集してください。
+  ・https://github.com/xtne6f/NicoJK に入っている設定データを、すぐに使えるよう事前に編集した上で同梱しています。
+  ・NicoJK.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Plugins/NicoJK_Readme.txt … NicoJK の説明書
 
 ・Plugins/NicoJK/jkimlog.exe … 外部のログファイルを NicoJK フォルダに取り込むコマンドラインツール
 
+・Plugins/NicoJK/jkrdlog.exe … 保存済みのログデータをニコニコ実況 ID やチャンネルと時間指定で絞り込んで出力するコマンドラインツール
+
 ・Plugins/TVCaptionMod2.tvtp … 字幕を表示できる TVTest のプラグイン
-  ・字幕が鬱陶しい場合は右クリックメニューから有効 / 無効の切り替えができます
-  ・TVCaptionMod2 (https://github.com/xtne6f/TVCaptionMod2) をビルドしたものを同梱しています
+  ・右クリックメニューから有効 / 無効の切り替えができます。
+  ・https://github.com/tsukumijima/TVCaptionMod2 をビルドしたものを同梱しています。
 
 ・Plugins/TVCaptionMod2.ini … TVCaptionMod2 の設定ファイル
-  ・[映像への字幕合成機能を使う] にチェックを入れると、TVCaptionMod2 を有効にしている間は上のように TVTest でキャプチャした時に字幕を画像の中に含める事ができます
-  ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください
-  ・字幕を映像に合成する場合、一部の環境では字幕の描画が乱れることがあります
-  ・TVCaptionMod2 (https://github.com/xtne6f/TVCaptionMod2) に入っているものをすぐに使えるよう編集した上で同梱しています
+  ・[映像への字幕合成機能を使う] にチェックを入れると、TVTest でキャプチャしたときに字幕を画像の中に含める事ができます (TVCaptionMod2 有効時のみ)。
+  ・もしチェックを外した（字幕を映像に合成しない）場合は、[描画方式] のところを 2: レイヤードウインドウ に変更してください。
+  ・字幕を映像に合成する場合、一部の環境では字幕の描画が乱れることがあります。
+  ・https://github.com/tsukumijima/TVCaptionMod2 によって生成される設定データを、すぐに使えるよう事前に編集した上で同梱しています。
+  ・TVCaptionMod2.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Plugins/TVCaptionMod2_Readme.txt … TVCaptionMod2 の説明書
 
 ・Plugins/TVTDataBroadcastingWV2.tvtp … データ放送を表示できる TVTest のプラグイン
-　・利用する場合、あらかじめ Edge WebView2 ランタイム (https://go.microsoft.com/fwlink/p/?LinkId=2124703) をインストールしてください
-  ・プラグイン設定から『TVTest起動時にプラグインを有効にする』を有効にしておくことをおすすめします
-  ・プラグインを有効にした状態でパネル設定から『データ放送』を有効にすると、パネルの『データ放送』タブにデータ放送用のリモコンが表示されます
-  ・キー割り当て設定から、各リモコン操作にショートカットキーを割り当てられます
-　・データ放送のうち、双方向通信機能（通信コンテンツ）は既定で無効化されています
-    ・双方向通信機能を利用する場合は、リモコン下の「通信機能を有効化」をクリックしてください
-　・データ放送のデータは Plugins/TVTDataBroadcastingWV2/WebView2Data/ に保存されます
-  ・TVTDataBroadcastingWV2 (https://github.com/otya128/TVTDataBroadcastingWV2) の GitHub Actions の Artifacts を同梱しています
+  ・利用する場合、あらかじめ Edge WebView2 ランタイム (https://go.microsoft.com/fwlink/p/?LinkId=2124703) をインストールしておいてください。
+  ・プラグインを有効にした状態でパネル設定から『データ放送』を有効にすると、パネルの『データ放送』タブにデータ放送用のリモコンが表示されます。
+  ・キー割り当て設定から、データ放送のリモコン操作にショートカットキーを割り当てられます。
+  ・各データ放送の NVRAM データは Plugins/TVTDataBroadcastingWV2/WebView2Data/ に保存されます。
+  ・https://github.com/tsukumijima/TVTDataBroadcastingWV2 をビルドしたものを同梱しています。
+
+・Plugins/TVTDataBroadcastingWV2.ini … TVTDataBroadcastingWV2 の設定ファイル
+  ・データ放送のうち、双方向通信機能（通信コンテンツ）は既定で無効化されています。
+    ・通信機能を有効化するには、Plugins/TVTDataBroadcastingWV2.ini を編集して "EnableNetwork=0" の部分を "EnableNetwork=1" に変更してください。
+    ・リモコン下の『通信機能を無効化』/ 『通信機能を有効化』ボタンは、一時的に通信機能を無効化/有効化するためのボタンです。
+      ・いわく『テレビにつなげた LAN ケーブルを一時的に引っこ抜くような機能』とのこと。
+      ・このボタンで切り替えた通信機能の有効/無効の状態は、TVTest の再起動後には反映されません。
+  ・https://github.com/tsukumijima/TVTDataBroadcastingWV2 によって生成される設定データを、すぐに使えるよう事前に編集した上で同梱しています。
+  ・TVTDataBroadcastingWV2.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Plugins/TVTDataBroadcastingWV2_Readme.txt … TVTDataBroadcastingWV2 の説明書
 
 ・Plugins/TvtPlay.tvtp … 録画した TS ファイルを TVTest で見れるようにする TVTest のプラグイン
-  ・TvtPlay を有効にする TVTest は、通常の TVTest とフォルダを分けて配置することを推奨します
-  ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます
-    常に有効にしたい場合は、ショートカットのプロパティでパスの末尾に /tvtplay と追記し、そのショートカットから起動するようにしてください
-  ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います
-  ・NicoJK が有効になっている場合、再生中の番組のニコニコ実況の過去ログが保存されていれば、その過去ログを同時に再生できます
-  ・過去ログを保存するフォルダは NicoJK.ini から変更できます
-  ・TvtPlay master-220601 (https://github.com/xtne6f/TvtPlay/releases) に入っているものを同梱しています
+  ・TvtPlay を有効にする TVTest は、通常の TVTest とフォルダを分けて配置することを推奨します。
+  ・TvtPlay はウインドウを開くたびにデフォルトで無効化されます。
+    ・常に有効にしたい場合は、ショートカットのプロパティでパスの末尾に /tvtplay と追記し、そのショートカットから起動するようにしてください。
+  ・録画した TS ファイルは BonDriver_Pipe・BonDriver_UDP・BonDriver_TCP 経由で再生できますが、BonDriver_Pipe が一番安定していると思います。
+  ・NicoJK が有効になっている場合、再生中の番組のニコニコ実況の過去ログが保存されていれば、その過去ログを同時に再生できます。
+    ・ニコニコ実況の過去ログを保存するフォルダは NicoJK.ini から変更できます。
+  ・https://github.com/xtne6f/TvtPlay (work-plus ブランチ) 内の src/ フォルダ以下をビルドしたものを同梱しています。
 
 ・Plugins/TvtPlay_Buttons24.bmp … TvtPlay のボタン用画像 (24px 版)
-  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons32.bmp へ差し替えることができます
-  ・4K などの HiDPI ディスプレイを使っている場合、画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです
+  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、
+    TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons32.bmp へ差し替えることができます。
+  ・4K などの HiDPI ディスプレイを使っている場合、画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです。
+  ・https://github.com/xtne6f/TvtPlay (work-plus ブランチ) 内の src/Buttons24.bmp をリネームした上で同梱しています。
 
 ・Plugins/TvtPlay_Buttons32.bmp … TvtPlay のボタン用画像 (24px 版)
-  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons24.bmp へ差し替えることができます
-  ・4K などの HiDPI ディスプレイを使っている場合、画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです
+  ・TvtPlay のコントロールボタンは標準では縦 16px の画像で表示されますが、
+    TvtPlay.ini を編集するとこのファイルか TvtPlay_Buttons24.bmp へ差し替えることができます。
+  ・4K などの HiDPI ディスプレイを使っている場合、画像を 24px または 32px のものに差し替えるとボタンのサイズが大きくなるはずです。
+  ・https://github.com/xtne6f/TvtPlay (work-plus ブランチ) 内の src/Buttons32.bmp をリネームした上で同梱しています。
 
 ・Plugins/TvtPlay_Readme.txt … TvtPlay の説明書
 
-=====================================================================
+================================================================================

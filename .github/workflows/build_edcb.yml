@@ -1,0 +1,229 @@
+
+name: Build EDCB
+
+# 手動実行
+on:
+  workflow_dispatch:
+    inputs:
+      update_repository:
+        type: boolean
+        required: true
+        description: 'リポジトリにビルド済みアーカイブを追加・更新する (本番用)'
+
+# ジョブの定義
+jobs:
+
+  # EDCB (32bit / 64bit) のビルド
+  build:
+    runs-on: windows-2019
+    steps:
+
+      # リポジトリのチェックアウト
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          path: DTV-Builds/
+          fetch-depth: 0
+          token: ${{ secrets.GIT_PUSH_TOKEN }}
+
+      # MSBuild のセットアップ
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      # EDCB のビルド
+      - name: Build EDCB
+        run: |
+          git clone -b master https://github.com/tsukumijima/EDCB.git
+
+          # EDCB 本体のビルド
+          cd EDCB/Document/
+          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
+          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+
+          # EDCB 付属ツール群のビルド
+          cd ../ini/Tools/
+          msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cd IBonCast/
+          msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cd ../tsidmove/
+          msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+
+      # EDCB のバージョンとして用いる日付を取得して保存
+      - id: version
+        name: Set EDCB Version
+        working-directory: EDCB/
+        run: |
+          $version = bash -c 'grep -E \"#define EDCB_VERSION_TAG\" Common/CommonResource.h | sed s/\\\"//g | sed \"s/#define EDCB_VERSION_TAG tkntrec-//g\"'
+          $version_date = [DateTime]::ParseExact($version, "yyMMdd", $null).ToString("yyyy/MM/dd")
+          echo "data=EDCB-$version" >> $ENV:GITHUB_OUTPUT
+          echo "version_date=$version_date" >> $ENV:GITHUB_OUTPUT
+
+      # パッケージングスクリプトを実行し、ビルド成果物を適切なフォルダに配置
+      - name: Arrangement Artifacts
+        run: |
+
+          # パッケージスクリプトを実行
+          mkdir Packages
+          cd EDCB/
+          bash package.sh -a x86 -t Release -o ../Packages/
+          bash package.sh -a x64 -t Release -o ../Packages/
+          cd ../
+
+          # ビルド成果物を配置
+          mkdir ${{steps.version.outputs.data}}
+          cp -Path Packages/x86/release/ -Destination ${{steps.version.outputs.data}}/EDCB_32bit/ -Recurse
+          cp -Path Packages/x64/release/ -Destination ${{steps.version.outputs.data}}/EDCB_64bit/ -Recurse
+          cp -Path DTV-Builds/.github/workflows/assets/EDCB/* -Destination ${{steps.version.outputs.data}}/EDCB_32bit/ -Recurse -Force
+          cp -Path DTV-Builds/.github/workflows/assets/EDCB/* -Destination ${{steps.version.outputs.data}}/EDCB_64bit/ -Recurse -Force
+          mkdir ${{steps.version.outputs.data}}/EDCB_32bit/BonDriver/ -Force
+          mkdir ${{steps.version.outputs.data}}/EDCB_64bit/BonDriver/ -Force
+          mv -Path ${{steps.version.outputs.data}}/EDCB_32bit/LICENSE-Civetweb.md -Destination ${{steps.version.outputs.data}}/EDCB_32bit/License_CivetWeb.md
+          mv -Path ${{steps.version.outputs.data}}/EDCB_64bit/LICENSE-Civetweb.md -Destination ${{steps.version.outputs.data}}/EDCB_64bit/License_CivetWeb.md
+
+          # EDCB_Build.txt を配置
+          cp -Path DTV-Builds/EDCB_Build.txt -Destination ${{steps.version.outputs.data}}/
+          bash -c "sed -i 's| - [0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}| - ${{steps.version.outputs.version_date}}|g' ${{steps.version.outputs.data}}/EDCB_Build.txt"
+          bash -c "dos2unix --keep-bom ${{steps.version.outputs.data}}/EDCB_Build.txt"
+
+      # libaribb25 (B25Decoder.dll / B1Decoder.dll) のビルド
+      - name: Build libaribb25 (B25Decoder.dll / B1Decoder.dll)
+        run: |
+          git clone -b master https://github.com/tsukumijima/libaribb25.git
+          cd libaribb25/
+          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
+          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Win32/Release/libaribb1.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/B1Decoder.dll
+          cp -Path Win32/Release/libaribb25.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/B25Decoder.dll
+          cp -Path x64/Release/libaribb1.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/B1Decoder.dll
+          cp -Path x64/Release/libaribb25.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/B25Decoder.dll
+
+      # OpenSSL ライブラリのダウンロード
+      - name: Download OpenSSL Libraries
+        run: |
+          curl -LO https://web.archive.org/web/2if_/https://curl.se/windows/dl-7.78.0/openssl-1.1.1k-win32-mingw.zip
+          curl -LO https://web.archive.org/web/2if_/https://curl.se/windows/dl-7.78.0/openssl-1.1.1k-win64-mingw.zip
+          7z x -y openssl-1.1.1k-win32-mingw.zip
+          7z x -y openssl-1.1.1k-win64-mingw.zip
+          cp -Path openssl-1.1.1k-win32-mingw/libcrypto-1_1.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-1.1.1k-win32-mingw/libssl-1_1.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-1.1.1k-win32-mingw/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-1.1.1k-win64-mingw/libcrypto-1_1-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+          cp -Path openssl-1.1.1k-win64-mingw/libssl-1_1-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+          cp -Path openssl-1.1.1k-win64-mingw/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+
+      # Lua 5.2 のビルド
+      - name: Build Lua 5.2
+        run: |
+          git clone -b v5.2-luabinaries https://github.com/xtne6f/lua.git
+          cd lua/
+          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/lua52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path x64/Release/lua52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/
+
+      # lua-zlib のビルド
+      - name: Build Lua 5.2 zlib
+        run: |
+          git clone -b v0.5-lua52 https://github.com/xtne6f/lua-zlib.git
+          cd lua-zlib/
+          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/zlib.dll
+          cp -Path x64/Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/zlib.dll
+
+      # Write_Multi (EdcbPlugIn 向け書き出しプラグイン) のビルド
+      - name: Build Write_Multi
+        run: |
+          git clone -b master https://github.com/tsukumijima/Write_Multi.git
+          cd Write_Multi/
+          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/Write_Multi.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/EdcbPlugIn/
+          cp -Path x64/Release/Write_Multi.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/EdcbPlugIn/
+
+      # EDCB Material WebUI のダウンロード
+      - name: Download EDCB Material WebUI
+        run: |
+          git clone -b master https://github.com/tsukumijima/EDCB_Material_WebUI.git
+          cp -Path EDCB_Material_WebUI/HttpPublic/* -Destination ${{steps.version.outputs.data}}/EDCB_32bit/HttpPublic/ -Recurse -Force
+          cp -Path EDCB_Material_WebUI/HttpPublic/* -Destination ${{steps.version.outputs.data}}/EDCB_64bit/HttpPublic/ -Recurse -Force
+          cp -Path EDCB_Material_WebUI/README.md -Destination ${{steps.version.outputs.data}}/EDCB_32bit/Readme_EMWUI.md
+          cp -Path EDCB_Material_WebUI/README.md -Destination ${{steps.version.outputs.data}}/EDCB_64bit/Readme_EMWUI.md
+
+      # FFmpeg 4.1.4 のダウンロード
+      - name: Download FFmpeg 4.1.4
+        run: |
+          curl -LO https://web.archive.org/web/2if_/https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-4.1.4-win32-shared.zip
+          curl -LO https://web.archive.org/web/2if_/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-4.1.4-win64-shared.zip
+          7z x -y ffmpeg-4.1.4-win32-shared.zip
+          7z x -y ffmpeg-4.1.4-win64-shared.zip
+          cp -Path ffmpeg-4.1.4-win32-shared/bin/* -Destination ${{steps.version.outputs.data}}/EDCB_32bit/Tools/
+          cp -Path ffmpeg-4.1.4-win64-shared/bin/* -Destination ${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+          rm ${{steps.version.outputs.data}}/EDCB_32bit/Tools/ffplay.exe
+          rm ${{steps.version.outputs.data}}/EDCB_64bit/Tools/ffplay.exe
+
+      # psisiarc のビルド
+      - name: Build psisiarc
+        run: |
+          git clone -b master https://github.com/xtne6f/psisiarc
+          cd psisiarc/
+          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
+          cp -Path x64/Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+
+      # tsreadex のビルド
+      - name: Build tsmemseg
+        run: |
+          git clone -b master https://github.com/xtne6f/tsmemseg
+          cd tsmemseg/
+          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/tsmemseg.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
+          cp -Path x64/Release/tsmemseg.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+
+      # tsreadex のビルド
+      - name: Build tsreadex
+        run: |
+          git clone -b master https://github.com/xtne6f/tsreadex
+          cd tsreadex/
+          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
+          cp -Path x64/Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+
+      # EDCB のビルドアーカイブを zip で圧縮
+      - name: Compress EDCB Archives
+        run: |
+          7z a -tzip -mx=9 ${{steps.version.outputs.data}}.zip ${{steps.version.outputs.data}}/
+
+      # Artifact としてアップロード
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{steps.version.outputs.data}}.zip
+          path: ${{steps.version.outputs.data}}.zip
+
+      # update_repository にチェックが入っているときのみ、ビルド済みアーカイブを追加してコミット
+      - name: Update Repository
+        working-directory: DTV-Builds/
+        if: ${{ github.event.inputs.update_repository == 'true' }}
+        run: |
+          git config --global core.autocrlf false
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git pull
+          cp -Path ../${{steps.version.outputs.data}}/EDCB_Build.txt -Destination ./
+          cp -Path ../${{steps.version.outputs.data}}.zip -Destination ./
+          git add .
+          git commit -m "Add ${{steps.version.outputs.data}}"
+          git push -u origin master
+
+          bash -c "sed -i 's|^ - \*\*EDCB\*\*| - \*\*EDCB\*\*\n   - ${{steps.version.outputs.data}} … [${{steps.version.outputs.data}}.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/${{steps.version.outputs.data}}.zip)|' Readme.md && dos2unix Readme.md"
+          git add .
+          git commit -m "Update Readme.md"
+          git push -u origin master

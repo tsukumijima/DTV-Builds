@@ -1,0 +1,46 @@
+w=WScript;s=w.ScriptFullName;p=s+'.ps1';a=ActiveXObject;f=new a('ADODB.Stream');f.Type=2;f.charset='UTF-8';f.Open();f.LoadFromFile(s);t=f.ReadText(-1);f.Position=0;f.SetEOS;f.WriteText(t.match(new RegExp('/\\*([\\s\\S]*?)\\*/'))[1]);f.SaveToFile(p,2);w.CreateObject('WScript.Shell').Run('powershell.exe -NoProfile -ExecutionPolicy Unrestricted -File "'+p+'"',1,true);w.Sleep(999);new a('Scripting.FileSystemObject').DeleteFile(p);/*
+
+# 管理者権限で実行されていない場合、自動的に管理者に昇格する
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole('Administrators')) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Unrestricted -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+# カレントディレクトリのパス
+$CurrentPath = (Split-Path $MyInvocation.MyCommand.Path -Parent)
+
+# コンソールウインドウのサイズを変更
+$ErrorActionPreference = 'Stop'  # エラーを確実に catch する
+try { (Get-Host).UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size(120,25) } catch {}
+try { (Get-Host).UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(120,25) } catch {}
+
+Write-Host ''
+Write-Host ''
+
+function Pause {
+    Write-Host ''
+    Write-Host '    終了するには何かキーを押してください。'
+    (Get-Host).UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') | Out-Null
+}
+
+# TVTestVideoDecoder をアンインストール
+regsvr32.exe (Join-Path $CurrentPath TVTestVideoDecoder.ax) /u /s
+if ($? -eq $False) {
+    Write-Host '    DirectShow フィルタのアンインストールに失敗しました。'
+    Pause
+    exit
+}
+
+# TvtAudioStretchFilter をアンインストール
+regsvr32.exe (Join-Path $CurrentPath TvtAudioStretchFilter.ax) /u /s
+if ($? -eq $False) {
+    Write-Host '    DirectShow フィルタのアンインストールに失敗しました。'
+    Pause
+    exit
+}
+
+Write-Host '    DirectShow フィルタのアンインストールに成功しました。'
+Write-Host '    TVTest 本体をアンインストールする場合は、このフォルダごと削除してください。'
+Pause
+
+*/

@@ -1,71 +1,78 @@
 ﻿
-=====================================================================
-                    EDCB (tkntrec版) - 2022/07/28
-=====================================================================
+================================================================================
+                  EDCB (xtne6f & tkntrec version) - 2023/00/00
+================================================================================
 
 ◆ ビルドにあたって
 
-・Visual Studio 2019 でビルドしています。別途ランタイムが必要かもしれません。
+・Visual Studio 2019 でビルドしています。
+  ・環境によっては、別途 Visual C++ 2015-2022 ランタイムのインストールが必要かもしれません。
+  ・32bit 版のランタイムのインストーラーは https://aka.ms/vs/17/release/vc_redist.x86.exe からダウンロードできます。
+  ・64bit 版のランタイムのインストーラーは https://aka.ms/vs/17/release/vc_redist.x64.exe からダウンロードできます。
 ・32bit 版・64bit 版の両方を同梱しています。EDCB_32bit 以下が 32bit 版、EDCB_64bit 以下が 64bit 版です。
-・現在主流の xtne6f 版をベースに EpgTimer 周辺の機能が改善されている、tkntrec 版をビルドしています。
-・EpgDataCap_Bon・EpgTimerSrv などのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと、EpgDataCap_Bon の画面の背景色を白に変更したこと以外の変更は行っていません。
+・現在主流の xtne6f 版をベースに EpgTimer 周りの UI が使いやすく改善されている、tkntrec 版をビルドしています。
+・EpgDataCap_Bon・EpgTimerSrv などのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと、
+  EpgDataCap_Bon の画面の背景色を白に変更したこと以外の変更は行っていません。
   ・変更したコードは https://github.com/tsukumijima/EDCB にて公開しています。
-・HttpPublic.ini を同梱しています（後述）。
-  ・そのため、HttpPublic.ini の設定をすでに変更している場合、単純に上書きしてしまうと設定ファイルも同梱されているもので上書きされてしまいます。
-  ・設定を上書きしたくない場合は、ファイルをリネームして上書きされないようにしてから上書きしてください。
+・HttpPublic.ini (EDCB Material WebUI の設定ファイル) を同梱しています（後述）。
+  ・HttpPublic.ini の設定をすでに変更している場合、単純に上書きしてしまうと、設定ファイルも同梱されているもので上書きされてしまいます。
+  ・設定を上書きしたくない場合は、当該ファイルをリネームや移動して、置換されないようにしてから上書きしてください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 ◆ 同梱ファイル (EDCB 本体付属のファイル以外)
 
 EDCB を利用する上で必須、またはあった方が良さそうなファイルを一緒に同梱しています。
 
-・B25Decoder.dll・B1Decoder.dll … B-CAS カードまたはスカパー！カードを使い CAS 処理（スクランブル解除）を行うライブラリ
-  ・B25Decoder.dll・B1Decoder.dll がないとスクランブル解除を行えないため、必須のライブラリです（このライブラリがないと録画できても視聴できない）
-  ・B25Decoder.dll は B-CAS カードを用いる 地デジ・BS・CS110 向けのスクランブル解除ライブラリです
-  ・B1Decoder.dll はスカパー！カードを用いるスカパー！プレミアムサービス (SPHD) 向けのスクランブル解除ライブラリです
-  ・https://github.com/tsukumijima/libaribb25 をビルドしたものを同梱しています
+・B25Decoder.dll / B1Decoder.dll … B-CAS カードまたはスカパー！カードを使い CAS 処理（スクランブル解除）を行うライブラリ
+  ・B25Decoder.dll / B1Decoder.dll がないとスクランブル解除を行えないため、必須のライブラリです。
+    ・B25Decoder.dll は、地デジ・BS・CS110 (B-CAS) 向けの CAS 処理ライブラリです。
+    ・B1Decoder.dll は、スカパー！プレミアムサービス (SPHD: スカパー！カード) 向けの CAS 処理ライブラリです。
+  ・https://github.com/tsukumijima/libaribb25 をビルドしたものを同梱しています。
 
-・lua52.dll・zlib.dll … EDCB Material WebUI を動作させるために必要なライブラリ
-  ・このライブラリがないと EDCB Material WebUI が動作しません
-  ・EDCB-Work-Plus-s (https://github.com/xtne6f/EDCB/releases) に入っていたものを同梱しています
+・lua52.dll / zlib.dll … EDCB Material WebUI を動作させるために必要なライブラリ
+  ・このライブラリがないと EDCB Material WebUI は動作しません。
+  ・https://github.com/xtne6f/lua・https://github.com/xtne6f/lua-zlib をビルドしたものを同梱しています。
 
-・libcrypto-1_1.dll・libssl-1_1.dll・openssl.exe … EDCB Material WebUI を HTTPS で動作させるために必要なライブラリ
-  ・HTTP で動作させる場合はこのライブラリがなくても動作しますが、HTTPS で動作させる場合は必須です
-  ・openssl.exe はライブラリではありませんが、HTTPS 化する際に必要な自己署名証明書の生成に利用します
-  ・https://curl.se/windows/ にて配布されているものを同梱しています
-  ・詳細は Readme_Mod.txt 内の「CivetWebの組み込みについて」に記載されています
+・libcrypto-1_1(-x64).dll / libssl-1_1(-x64).dll / openssl.exe … EDCB Material WebUI を HTTPS で動作させるために必要なライブラリ
+  ・HTTP で動作させる場合はこのライブラリがなくても動作しますが、HTTPS で動作させる場合は必須です。
+  ・openssl.exe はライブラリではありませんが、HTTPS 化する際に必要な自己署名証明書の生成に利用します。
+    ・HTTPS 化の詳細は Readme_Mod.txt 内の「CivetWebの組み込みについて」に記載されています。
+  ・かつて https://curl.se/windows/ にて配布されていた OpenSSL 1.1.1k (Wayback Machine よりダウンロード) を同梱しています。
 
 ・Readme_EMWUI.md … EDCB Material WebUI の説明書（markdown 形式）
 
-・EdcbPlugIn/ch2chset.vbs・EdcbPlugIn/EdcbPlugIn.ini・EdcbPlugIn_Readme.txt … EdcbPlugIn 用のファイル
-  ・ch2chset.vbs は TVTest のチャンネル設定ファイルを EDCB のチャンネル設定ファイルに変換するスクリプトです
-  ・EdcbPlugIn.ini は EdcbPlugIn の設定ファイル、EdcbPlugIn_Readme.txt は EdcbPlugIn の説明書です
-  ・いずれもソースの EdcbPlugIn/EdcbPlugIn/ フォルダに入っているものをコピーしています
+・EdcbPlugIn/ch2chset.vbs / EdcbPlugIn/EdcbPlugIn.ini / EdcbPlugIn/EdcbPlugIn_Readme.txt … EdcbPlugIn 用の各種ファイル
+  ・ch2chset.vbs は、TVTest のチャンネル設定ファイルを EDCB のチャンネル設定ファイルに変換するスクリプトです。
+  ・EdcbPlugIn.ini は、EdcbPlugIn の設定ファイルです。
+  ・EdcbPlugIn_Readme.txt は、EdcbPlugIn の説明書です。
+  ・いずれもソースコードの EdcbPlugIn/EdcbPlugIn/ フォルダに入っているものを同梱しています。
 
-・EdcbPlugIn/Write_Multi.dll・EdcbPlugIn/Write_OneService.dll … EdcbPlugIn を使う場合に必要なファイル書き出し用プラグイン
-  ・EdcbPlugIn を使う場合はこれらをプラグイン本体とは別に TVTest.exe と同じフォルダに配置する必要があります
-  ・Write_Multi.dll は https://github.com/xtne6f/Write_Multi をビルドしたものです
+・EdcbPlugIn/Write_Multi.dll / EdcbPlugIn/Write_OneService.dll … EdcbPlugIn を使う場合に必要なファイル書き出し用プラグイン
+  ・EdcbPlugIn を使う場合は、これらのファイルを EdcbPlugIn 本体とは別に TVTest.exe と同じフォルダに配置する必要があります。
+  ・Write_Multi.dll は https://github.com/xtne6f/Write_Multi をビルドしたものを同梱しています。
 
 ・HttpPublic/api/・HttpPublic/EMWUI/・HttpPublic/img/・HttpPublic/video/ … EDCB Material WebUI 本体
-  ・PWA 対応などの改良を行った EDCB Material WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています
-  ・HttpPublic/img/logo/ には私が関東圏にて取得した 地デジ・BS・CS110 の局ロゴ (bmp) を同梱しています
-  ・局ロゴが表示されない放送局がある場合は、TVTest で取得した局ロゴを (ONID(16進数4桁))(SID(16進数4桁)).bmp(または.png) にリネームした上で HttpPublic/img/logo/ に入れてみてください
-    ・TVTestLogoRenamer (https://gist.github.com/tsukumijima/bc1d9988b2a9b3edeced7be39d47449c) を使うと一括でリネームできます
-  ・EDCB Material WebUI を使う場合は別途いくつか設定が必要です、https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に設定を行ってください
+  ・独自に PWA 対応などの改良を行った EDCB Material WebUI (https://github.com/tsukumijima/EDCB_Material_WebUI) を同梱しています。
+  ・HttpPublic/img/logo/ には、私が関東圏にて取得した 地デジ・BS・CS110 の局ロゴ (bmp) を同梱しています。
+  ・局ロゴが表示されない放送局がある場合は、TVTest で取得した局ロゴを
+    (ONID(16進数4桁))(SID(16進数4桁)).bmp(または.png) の形式にリネームした上で、HttpPublic/img/logo/ に入れてみてください。
+    ・TVTestLogoRenamer (https://gist.github.com/tsukumijima/bc1d9988b2a9b3edeced7be39d47449c) を使うと、局ロゴを一括でリネームできます。
+  ・EDCB Material WebUI を使う場合は別途いくつか設定が必要です。
+    ・https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に、設定を行ってください。
 
 ・Setting/HttpPublic.ini … EDCB Material WebUI の設定ファイル
-  ・すぐに使えるよう、予めいくつかの設定を行っています
-  ・先述の通り、すでに設定を変更している場合は上書きしないように注意してください
+  ・すぐに使えるように、事前にいくつかの設定を行っています。
+  ・HttpPublic.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB Material WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
-  ・ffmpeg-4.1.4-shared (https://web.archive.org/web/2/https://ffmpeg.zeranoe.com/builds/) を同梱しています
-  ・ffmpeg-4.1.4-shared のうち、ffplay.exe は不要なため削除しています
-  ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わったことにより字幕付きの番組でエンコードに失敗するため、敢えて FFmpeg 4.1.4 を同梱しています
-  ・Shared 版にしている理由は ffmpeg と ffprobe でライブラリを共通化でき、ファイルサイズを半分近くにまで減らせるためです
+  ・かつて https://ffmpeg.zeranoe.com/builds/ にて配布されていた FFmpeg 4.1.4 (Shared 版: Wayback Machine よりダウンロード) を同梱しています。
+  ・FFmpeg 4.1.4 (Shared 版) のうち、ffplay.exe は不要なため削除しています。
+  ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わった影響で字幕付きの番組でエンコードに失敗するため、あえて FFmpeg 4.1.4 を同梱しています。
+  ・Shared 版にしている理由は、ffmpeg と ffprobe でライブラリを共通化でき、ファイルサイズを半分近くにまで減らせるためです。
 
 ・Tools/psisiarc.exe・Tools/tsmemseg.exe・Tools/tsreadex.exe … EDCB Legacy WebUI がストリーミング再生に利用するユーティリティソフト
-  ・psisiarc (https://github.com/xtne6f/psisiarc) はデータ放送が含まれるデータカルーセルをアーカイブ化するソフトです
-  ・tsmemseg (https://github.com/xtne6f/tsmemseg) は MPEG-TS ストリームをインメモリで HLS 配信するためのソフトです
-  ・tsreadex (https://github.com/xtne6f/tsreadex) は放送波のストリーミング再生を安定化させるためのソフトです
+  ・psisiarc (https://github.com/xtne6f/psisiarc) は、データ放送が含まれるデータカルーセルをアーカイブ化するソフトです。
+  ・tsmemseg (https://github.com/xtne6f/tsmemseg) は、MPEG-TS ストリームをインメモリで HLS 配信するためのソフトです。
+  ・tsreadex (https://github.com/xtne6f/tsreadex) は、放送波のストリーミング再生を安定化させるためのソフトです。
 
-=====================================================================
+================================================================================
