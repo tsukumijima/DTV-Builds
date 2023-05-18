@@ -54,6 +54,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
 ## ダウンロード
 
  - **TVTest**
+   - TVTest-0.10.0-230512 … [TVTest-0.10.0-230512.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/TVTest-0.10.0-230512.zip)
    - TVTest-0.10.0-220711 … [TVTest-0.10.0-220711.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/TVTest-0.10.0-220711.zip)
    - TVTest-0.10.0-220323 … [TVTest-0.10.0-220323.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/TVTest-0.10.0-220323.zip)
    - TVTest-0.10.0-210812 … [TVTest-0.10.0-210812.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/TVTest-0.10.0-210812.zip)
