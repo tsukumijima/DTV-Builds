@@ -9,6 +9,10 @@ on:
         type: boolean
         required: true
         description: 'リポジトリにビルド済みアーカイブを追加・更新する (本番用)'
+      update_readme:
+        type: boolean
+        required: true
+        description: 'Readme を更新する (本番用)'
 
 # ジョブの定義
 jobs:
@@ -224,6 +228,11 @@ jobs:
           git commit -m "Add ${{steps.version.outputs.data}}"
           git push -u origin master
 
+      # update_readme にチェックが入っているときのみ、Readme.md を更新
+      - name: Update Readme
+        working-directory: DTV-Builds/
+        if: ${{ github.event.inputs.update_readme == 'true' }}
+        run: |
           bash -c "sed -i 's|^ - \*\*EDCB\*\*| - \*\*EDCB\*\*\n   - ${{steps.version.outputs.data}} … [${{steps.version.outputs.data}}.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/${{steps.version.outputs.data}}.zip)|' Readme.md && dos2unix Readme.md"
           git add .
           git commit -m "Update Readme.md"
