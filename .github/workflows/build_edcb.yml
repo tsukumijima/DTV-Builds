@@ -104,19 +104,17 @@ jobs:
           cp -Path x64/Release/libaribb1.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/B1Decoder.dll
           cp -Path x64/Release/libaribb25.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/B25Decoder.dll
 
-      # OpenSSL ライブラリのダウンロード
-      - name: Download OpenSSL Libraries
+      # OpenSSL 3.0 ライブラリのダウンロード
+      - name: Download OpenSSL 3.0 Libraries
         run: |
-          curl -LO https://web.archive.org/web/2if_/https://curl.se/windows/dl-7.78.0/openssl-1.1.1k-win32-mingw.zip
-          curl -LO https://web.archive.org/web/2if_/https://curl.se/windows/dl-7.78.0/openssl-1.1.1k-win64-mingw.zip
-          7z x -y openssl-1.1.1k-win32-mingw.zip
-          7z x -y openssl-1.1.1k-win64-mingw.zip
-          cp -Path openssl-1.1.1k-win32-mingw/libcrypto-1_1.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
-          cp -Path openssl-1.1.1k-win32-mingw/libssl-1_1.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
-          cp -Path openssl-1.1.1k-win32-mingw/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
-          cp -Path openssl-1.1.1k-win64-mingw/libcrypto-1_1-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
-          cp -Path openssl-1.1.1k-win64-mingw/libssl-1_1-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
-          cp -Path openssl-1.1.1k-win64-mingw/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+          curl -LO https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.0.9.zip
+          7z x -y openssl-3.0.9.zip
+          cp -Path openssl-3.0/x86/bin/libcrypto-3.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-3.0/x86/bin/libssl-3.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-3.0/x86/bin/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
+          cp -Path openssl-3.0/x64/bin/libcrypto-3-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+          cp -Path openssl-3.0/x64/bin/libssl-3-x64.dll -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
+          cp -Path openssl-3.0/x64/bin/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_64bit/
 
       # Lua 5.2 のビルド
       - name: Build Lua 5.2
