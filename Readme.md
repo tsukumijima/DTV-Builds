@@ -101,6 +101,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
  - **BonDriverProxyEx**
    - BonDriverProxyEx-1.1.6.6 … [BonDriverProxyEx-1.1.6.6.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/BonDriverProxyEx-1.1.6.6.zip)
  - **px4_drv for WinUSB**
+   - px4_drv for WinUSB (2023/07/08) … [px4_drv_winusb-230708.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-230708.zip)
    - px4_drv for WinUSB (2022/02/15) … [px4_drv_winusb-220215.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220215.zip)
    - px4_drv for WinUSB (2022/01/19) … [px4_drv_winusb-220119.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220119.zip)
    - px4_drv for WinUSB (2021/09/09) … [px4_drv_winusb-210909.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-210909.zip)
