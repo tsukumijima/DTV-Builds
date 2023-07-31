@@ -14,6 +14,9 @@
 ・EpgDataCap_Bon・EpgTimerSrv などのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと、
   EpgDataCap_Bon の画面の背景色を白に変更したこと以外の変更は行っていません。
   ・変更したコードは https://github.com/tsukumijima/EDCB にて公開しています。
+・EDCB Material WebUI では HW エンコーダーとして QSVEncC / NVEncC を利用できますが、このアーカイブには同梱されていません。
+　・EDCB Material WebUI のリモート視聴機能で HW エンコーダーを利用する際は、別途最新の QSVEncC / NVEncC をダウンロードし、
+  　EDCB\Tools フォルダに配置してください (例: EDCB\Tools\QSVEncC\QSVEncC64.exe) 。
 ・HttpPublic.ini・XCODE_OPTIONS.lua (EDCB Material WebUI の設定ファイル) を同梱しています（後述）。
   ・HttpPublic.ini・XCODE_OPTIONS.lua の設定をすでに変更している場合、単純に上書きしてしまうと、設定ファイルも同梱されているもので上書きされてしまいます。
   ・設定を上書きしたくない場合は、当該ファイルをリネームや移動して、置換されないようにしてから上書きしてください。
