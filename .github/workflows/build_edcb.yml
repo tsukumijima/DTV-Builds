@@ -152,6 +152,8 @@ jobs:
           git clone -b master https://github.com/tsukumijima/EDCB_Material_WebUI.git
           cp -Path EDCB_Material_WebUI/HttpPublic/* -Destination ${{steps.version.outputs.data}}/EDCB_32bit/HttpPublic/ -Recurse -Force
           cp -Path EDCB_Material_WebUI/HttpPublic/* -Destination ${{steps.version.outputs.data}}/EDCB_64bit/HttpPublic/ -Recurse -Force
+          cp -Path EDCB_Material_WebUI/Setting/* -Destination ${{steps.version.outputs.data}}/EDCB_32bit/Setting/ -Recurse -Force
+          cp -Path EDCB_Material_WebUI/Setting/* -Destination ${{steps.version.outputs.data}}/EDCB_64bit/Setting/ -Recurse -Force
           cp -Path EDCB_Material_WebUI/README.md -Destination ${{steps.version.outputs.data}}/EDCB_32bit/Readme_EMWUI.md
           cp -Path EDCB_Material_WebUI/README.md -Destination ${{steps.version.outputs.data}}/EDCB_64bit/Readme_EMWUI.md
 

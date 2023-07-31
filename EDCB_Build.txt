@@ -14,9 +14,11 @@
 ・EpgDataCap_Bon・EpgTimerSrv などのフォントを ＭＳ Ｐゴシック から Meiryo UI に変更したこと、
   EpgDataCap_Bon の画面の背景色を白に変更したこと以外の変更は行っていません。
   ・変更したコードは https://github.com/tsukumijima/EDCB にて公開しています。
-・HttpPublic.ini (EDCB Material WebUI の設定ファイル) を同梱しています（後述）。
-  ・HttpPublic.ini の設定をすでに変更している場合、単純に上書きしてしまうと、設定ファイルも同梱されているもので上書きされてしまいます。
+・HttpPublic.ini・XCODE_OPTIONS.lua (EDCB Material WebUI の設定ファイル) を同梱しています（後述）。
+  ・HttpPublic.ini・XCODE_OPTIONS.lua の設定をすでに変更している場合、単純に上書きしてしまうと、設定ファイルも同梱されているもので上書きされてしまいます。
   ・設定を上書きしたくない場合は、当該ファイルをリネームや移動して、置換されないようにしてから上書きしてください。
+  ・【⚠️⚠️注意⚠️⚠️】EDCB-230326 以前に利用されていた HttpPublic.ini と EDCB-230728 以降で利用されている HttpPublic.ini は互換性がありません！！
+  　EDCB-230326 以前から更新する際は、HttpPublic.ini を EDCB-230728 以降に同梱されている最新版に置き換えてから、カスタマイズを再度行ってください。
 ・万全は尽くしていますが、もしかするとファイルの不備や動かない、といったことがあるかもしれません。自己責任にてお願いします。
 
 ◆ 同梱ファイル (EDCB 本体付属のファイル以外)
@@ -60,9 +62,9 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・EDCB Material WebUI を使う場合は別途いくつか設定が必要です。
     ・https://github.com/tsukumijima/EDCB_Material_WebUI/blob/master/README.md を参考に、設定を行ってください。
 
-・Setting/HttpPublic.ini … EDCB Material WebUI の設定ファイル
+・Setting/HttpPublic.ini・Setting/XCODE_OPTIONS.lua … EDCB Material WebUI の設定ファイル
   ・すぐに使えるように、事前にいくつかの設定を行っています。
-  ・HttpPublic.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
+  ・HttpPublic.ini・XCODE_OPTIONS.lua の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB Material WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
   ・かつて https://ffmpeg.zeranoe.com/builds/ にて配布されていた FFmpeg 4.1.4 (Shared 版: Wayback Machine よりダウンロード) を同梱しています。
