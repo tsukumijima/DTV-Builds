@@ -60,7 +60,7 @@ jobs:
         name: Set EDCB Version
         working-directory: EDCB/
         run: |
-          $version = bash -c 'grep -E \"#define EDCB_VERSION_TAG\" Common/CommonResource.h | sed s/\\\"//g | sed \"s/#define EDCB_VERSION_TAG tkntrec-//g\"'
+          $version = ((Get-Content -Path "Common/CommonResource.h") -match '#define EDCB_VERSION_TAG "(.*)"')[0] -replace '#define EDCB_VERSION_TAG "', '' -replace '"', '' -replace 'tkntrec-', ''
           $version_date = [DateTime]::ParseExact($version, "yyMMdd", $null).ToString("yyyy/MM/dd")
           echo "data=EDCB-$version" >> $ENV:GITHUB_OUTPUT
           echo "version_date=$version_date" >> $ENV:GITHUB_OUTPUT
