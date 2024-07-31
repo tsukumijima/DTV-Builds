@@ -114,10 +114,10 @@ jobs:
         run: |
           git clone -b master https://github.com/xtne6f/jkcnsl.git
           cd jkcnsl/
-          dotnet publish -c Release -r win10-x86 /p:PublishSingleFile=true /p:PublishTrimmed=true
-          dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true
-          cp -Path bin\Release\netcoreapp3.1\win10-x86\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/
-          cp -Path bin\Release\netcoreapp3.1\win10-x64\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/
+          dotnet publish -c Release -r win-x86 /p:PublishSingleFile=true /p:PublishTrimmed=true
+          dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true
+          cp -Path bin\Release\netcoreapp3.1\win-x86\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/
+          cp -Path bin\Release\netcoreapp3.1\win-x64\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/
 
       # jq.exe と sqlite3.exe (設定次第では NicoJK の動作に必要) をダウンロード
       - name: Download jq.exe / sqlite3.exe
