@@ -238,7 +238,7 @@ jobs:
           cp -Path ../${{steps.version.outputs.data}}.zip -Destination ./
           bash -c "/usr/bin/find . -type f -name '*.txt' -exec dos2unix --keep-bom {} \;"
           git add .
-          git commit -m "Add ${{steps.version.outputs.data}}"
+          git commit -m "Add: ${{steps.version.outputs.data}}"
           git push -u origin master
 
       # update_readme にチェックが入っているときのみ、Readme.md を更新
@@ -248,5 +248,5 @@ jobs:
         run: |
           bash -c "sed -i 's|^ - \*\*EDCB\*\*| - \*\*EDCB\*\*\n   - ${{steps.version.outputs.data}} … [${{steps.version.outputs.data}}.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/${{steps.version.outputs.data}}.zip)|' Readme.md && dos2unix Readme.md"
           git add .
-          git commit -m "Update Readme.md"
+          git commit -m "Update: Readme.md"
           git push -u origin master
