@@ -133,8 +133,8 @@ jobs:
           cd lua-zlib/
           msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
           msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          cp -Path Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/zlib.dll
-          cp -Path x64/Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/zlib.dll
+          cp -Path Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/zlib52.dll
+          cp -Path x64/Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/zlib52.dll
 
       # Write_Multi (EdcbPlugIn 向け書き出しプラグイン) のビルド
       - name: Build Write_Multi
@@ -181,6 +181,16 @@ jobs:
           msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
           cp -Path Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+
+      # psisimux のビルド
+      - name: Build psisimux
+        run: |
+          git clone -b master https://github.com/xtne6f/psisimux
+          cd psisimux/
+          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          cp -Path Release/psisimux.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
+          cp -Path x64/Release/psisimux.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
 
       # tsreadex のビルド
       - name: Build tsmemseg
