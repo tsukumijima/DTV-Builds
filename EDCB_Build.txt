@@ -37,15 +37,15 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
     ・B1Decoder.dll は、スカパー！プレミアムサービス (SPHD: スカパー！カード) 向けの CAS 処理ライブラリです。
   ・https://github.com/tsukumijima/libaribb25 をビルドしたものを同梱しています。
 
-・lua52.dll / zlib.dll … EDCB Material WebUI を動作させるために必要なライブラリ
+・lua52.dll / zlib52.dll … EDCB Material WebUI を動作させるために必要なライブラリ
   ・このライブラリがないと EDCB Material WebUI は動作しません。
-  ・https://github.com/xtne6f/lua・https://github.com/xtne6f/lua-zlib をビルドしたものを同梱しています。
+  ・https://github.com/xtne6f/lua, https://github.com/xtne6f/lua-zlib をビルドしたものを同梱しています。
 
 ・libcrypto-1_1(-x64).dll / libssl-1_1(-x64).dll / openssl.exe … EDCB Material WebUI を HTTPS で動作させるために必要なライブラリ
   ・HTTP で動作させる場合はこのライブラリがなくても動作しますが、HTTPS で動作させる場合は必須です。
   ・openssl.exe はライブラリではありませんが、HTTPS 化する際に必要な自己署名証明書の生成に利用します。
     ・HTTPS 化の詳細は Readme_Mod.txt 内の「CivetWebの組み込みについて」に記載されています。
-  ・かつて https://curl.se/windows/ にて配布されていた OpenSSL 1.1.1k (Wayback Machine よりダウンロード) を同梱しています。
+  ・https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.0.9.zip からダウンロードした OpenSSL 3.0.9 を同梱しています。
 
 ・Readme_EMWUI.md … EDCB Material WebUI の説明書（markdown 形式）
 
@@ -73,14 +73,14 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・HttpPublic.ini・XCODE_OPTIONS.lua の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
 ・Tools/ffmpeg.exe・Tools/ffprobe.exe … EDCB Material WebUI がファイル再生やファイル情報の取得に利用する動画変換ソフト / 動画情報取得ソフト
-  ・かつて https://ffmpeg.zeranoe.com/builds/ にて配布されていた FFmpeg 4.1.4 (Shared 版: Wayback Machine よりダウンロード) を同梱しています。
-  ・FFmpeg 4.1.4 (Shared 版) のうち、ffplay.exe は不要なため削除しています。
-  ・FFmpeg 4.2 以降では TS 内に含まれる字幕の取り扱いが変わった影響で字幕付きの番組でエンコードに失敗するため、あえて FFmpeg 4.1.4 を同梱しています。
+  ・かつて https://ffmpeg.zeranoe.com/builds/ にて配布されていた FFmpeg 4.3.1 (Shared 版: Wayback Machine よりダウンロード) を同梱しています。
+  ・FFmpeg 4.3.1 (Shared 版) のうち、ffplay.exe は不要なため削除しています。
   ・Shared 版にしている理由は、ffmpeg と ffprobe でライブラリを共通化でき、ファイルサイズを半分近くにまで減らせるためです。
 
-・Tools/psisiarc.exe・Tools/tsmemseg.exe・Tools/tsreadex.exe … EDCB Legacy WebUI がストリーミング再生に利用するユーティリティソフト
-  ・psisiarc (https://github.com/xtne6f/psisiarc) は、データ放送が含まれるデータカルーセルをアーカイブ化するソフトです。
-  ・tsmemseg (https://github.com/xtne6f/tsmemseg) は、MPEG-TS ストリームをインメモリで HLS 配信するためのソフトです。
-  ・tsreadex (https://github.com/xtne6f/tsreadex) は、放送波のストリーミング再生を安定化させるためのソフトです。
+・Tools/psisiarc.exe・・Tools/psisimux.exe・Tools/tsmemseg.exe・Tools/tsreadex.exe … EDCB Legacy WebUI がストリーミング再生に利用するユーティリティツール
+  ・psisiarc (https://github.com/xtne6f/psisiarc) は、データ放送が含まれるデータカルーセルをアーカイブ化するツールです。
+  ・psisimux (https://github.com/xtne6f/psisimux) は、psisiarc でアーカイブ化したデータカルーセルを再度 MPEG2-TS に戻すためのツールです。
+  ・tsmemseg (https://github.com/xtne6f/tsmemseg) は、MPEG-TS ストリームをインメモリで HLS 配信するためのツールです。
+  ・tsreadex (https://github.com/xtne6f/tsreadex) は、放送波のストリーミング再生を安定化させるためのツールです。
 
 ================================================================================
