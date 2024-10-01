@@ -6,17 +6,20 @@
 ◆ ビルドにあたって
 
 ・Visual Studio 2019 でビルドしています。別途ランタイムが必要かもしれません。
-・px4_drv for WinUSB では、同梱している BonDriver_PX4 または BonDriver_PX-MLT のいずれかの専用の BonDriver が必要です。
-  ・PX-MLT5PE・PX-MLT8PE では BonDriver_PX-MLT を、それ以外の機種では BonDriver_PX4 を利用します。
-  ・BonDriver_BDA (いわゆる radi-sh 版 BonDriver) などの他の BonDriver は利用できず、置き換えが必要になります。
-  ・ドライバの実態は DriverHost_PX4.exe で、ドライバのインストールファイル (.inf) はチューナーデバイスの認識用に過ぎません。
-    ・WinUSB 版という通称は、チューナーデバイスの認識に WinUSB (Windows の汎用 USB ドライバ) を利用していることから来ています。
-    ・BonDriver がアプリケーションから呼ばれた時にユーザーモードドライバである DriverHost_PX4 も起動し、WinUSB を通してチューナーの制御を行う構造になっているようです。
-・32bit 版・64bit 版の両方を同梱しています。
-  ・BonDriver_PX4_32bit 以下は BonDriver_PX4 (px4_drv に対応する、PX-MLT 系以外の機種向けの BonDriver) の 32bit 版です。
-  ・BonDriver_PX4_64bit 以下は BonDriver_PX4 (px4_drv に対応する、PX-MLT 系以外の機種向けの BonDriver) の 64bit 版です。
-  ・BonDriver_PX-MLT_32bit 以下は BonDriver_PX-MLT (px4_drv に対応する、PX-MLT 系の機種向けの BonDriver) の 32bit 版です。
-  ・BonDriver_PX-MLT_64bit 以下は BonDriver_PX-MLT (px4_drv に対応する、PX-MLT 系の機種向けの BonDriver) の 64bit 版です。
+・px4_drv for WinUSB では、チューナー機種ごとに専用の BonDriver が必要です。
+  ・PX4/PX5 シリーズの機種: BonDriver_PX4
+  ・PX-MLT シリーズの機種・DTV02A-4TS-P: BonDriver_PX-MLT
+  ・DTV02A-1T1S-U: BonDriver_ISDB2056
+  ・DTV02A-1T1S-U (ロット番号 2309 以降): BonDriver_ISDB2056N
+  ・PX-M1UR: BonDriver_PX-M1UR
+  ・PX-S1UR: BonDriver_PX-S1UR
+・BonDriver_BDA (いわゆる radi-sh 版 BonDriver) などの他の BonDriver は利用できず、置き換えが必要になります。
+・ドライバの実態は DriverHost_PX4.exe で、ドライバのインストールファイル (.inf) はチューナーデバイスの認識用に過ぎません。
+  ・WinUSB 版という通称は、チューナーデバイスの認識に WinUSB (Windows の汎用 USB ドライバ) を利用していることから来ています。
+  ・BonDriver がアプリケーションから呼ばれた時にユーザーモードドライバである DriverHost_PX4 も起動し、WinUSB を通してチューナーの制御を行う構造になっているようです。
+・32bit 版・64bit 版の両方を同梱しています。BonDriver を利用するアプリケーションのビット数に合わせてご利用ください。
+  ・BonDriver_(機種名)_32bit 以下は BonDriver_(機種名) の 32bit 版です。
+  ・BonDriver_(機種名)_64bit 以下は BonDriver_(機種名) の 64bit 版です。
 ・ドライバのインストールファイル (.inf) に関しては、テストモードにしなくてもインストールできるよう、自己署名証明書 (px4_drv CA) を利用するように若干の修正を行っています。
   ・ドライバをインストールする前に cert-install.jse を管理者権限で実行し、自己署名証明書をインストールしてください。
     ・それ以降は通常の署名付きドライバと同様の手順でインストールできると思います。
@@ -29,18 +32,19 @@
 
 ◆ 同梱ファイル
 
-・BonDriver_PX4・BonDriver_PX-MLT 共通
+・各 BonDriver 共通
   ・BonDriver_PX4-T.ChSet.txt … 地上波のチャンネル定義ファイル
     ・BonDriver_PT3-ST の ChSet.txt と互換性があります
+    ・PX-S1UR に衛星チューナーが搭載されていない関係で、BonDriver_PX-S1UR では BonDriver_PX4-T.ChSet.txt のみ配置されます
   ・BonDriver_PX4-S.ChSet.txt … BS・CS のチャンネル定義ファイル
     ・BonDriver_PT3-ST の ChSet.txt と互換性があります
   ・DriverHost_PX4.exe … px4_drv の実態である、チューナーデバイスのドライバー
-    ・BonDriver_PX4・BonDriver_PX-MLT が TVTest などのアプリケーションから呼ばれた際に自動で起動します
+    ・px4_drv に対応する各 BonDriver が TVTest などのアプリケーションから呼ばれた際に自動で起動します
     ・BonDriver_PT3-ST で言うところの PT3Ctrl.exe にあたります
   ・DriverHost_PX4.ini … チューナーデバイスの定義ファイル
   ・it930x-firmware.bin … チューナーデバイスのファームウェア
-    ・全ての機種において共通で、必ず BonDriver_PX4・BonDriver_PX-MLT や DriverHost_PX4 と一緒に配置する必要があります
-    ・開発者の方が推奨している、CRC32 ハッシュが 0b41a994 のファームウェアを同梱しています
+    ・全ての機種において共通で、必ず BonDriver や DriverHost_PX4 と一緒に配置する必要があります
+    ・かつて開発者の nns779 氏が推奨していた、CRC32 ハッシュが 0b41a994 のファームウェアを同梱しています
 ・BonDriver_PX4
   ・BonDriver_PX4-T.dll … BonDriver_PX4 の地上波向け BonDriver
   ・BonDriver_PX4-T.ini … BonDriver_PX4 の地上波向け BonDriver の設定ファイル
@@ -49,6 +53,18 @@
 ・BonDriver_PX-MLT
   ・BonDriver_PX-MLT.dll … BonDriver_PX-MLT の BonDriver
   ・BonDriver_PX-MLT.ini … BonDriver_PX-MLT の BonDriver の設定ファイル
+・BonDriver_ISDB2056
+  ・BonDriver_ISDB2056.dll … BonDriver_ISDB2056 の BonDriver
+  ・BonDriver_ISDB2056.ini … BonDriver_ISDB2056 の BonDriver の設定ファイル
+・BonDriver_ISDB2056N
+  ・BonDriver_ISDB2056N.dll … BonDriver_ISDB2056N の BonDriver
+  ・BonDriver_ISDB2056N.ini … BonDriver_ISDB2056N の BonDriver の設定ファイル
+・BonDriver_PX-M1UR
+  ・BonDriver_PX-M1UR.dll … BonDriver_PX-M1UR の BonDriver
+  ・BonDriver_PX-M1UR.ini … BonDriver_PX-M1UR の BonDriver の設定ファイル
+・BonDriver_PX-S1UR
+  ・BonDriver_PX-S1UR.dll … BonDriver_PX-S1UR の BonDriver
+  ・BonDriver_PX-S1UR.ini … BonDriver_PX-S1UR の BonDriver の設定ファイル
 ・Driver
   ・cert-install.jse … 自己署名証明書をインストールするバッチファイル
     ・このファイルをダブルクリックで、自己署名証明書をインストールすることができます
