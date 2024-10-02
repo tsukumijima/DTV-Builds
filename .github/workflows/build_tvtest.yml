@@ -164,14 +164,6 @@ jobs:
           cp -Path Win32/Release/CasProcessor.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/
           cp -Path x64/Release/CasProcessor.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/
 
-      # NicoCookie4Chrome (NicoJK でのニコニコへのログインに利用する) のダウンロード
-      - name: Download NicoCookie4Chrome
-        run: |
-          curl -L -o NicoCookie4Chrome.zip https://vb45wb5b.up.seesaa.net/image/NicoCookie4Chrome_1.02.zip
-          7z x -y -mcp=932 -o"NicoCookie4Chrome/" NicoCookie4Chrome.zip
-          cp -Path NicoCookie4Chrome/ -Destination ${{steps.version.outputs.data}}/TVTest_32bit/Plugins/ -Recurse
-          cp -Path NicoCookie4Chrome/ -Destination ${{steps.version.outputs.data}}/TVTest_64bit/Plugins/ -Recurse
-
       # NicoJK のビルド
       - name: Build NicoJK
         run: |

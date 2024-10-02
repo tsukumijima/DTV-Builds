@@ -1,0 +1,98 @@
+w=WScript;s=w.ScriptFullName;p=s+'.ps1';a=ActiveXObject;f=new a('ADODB.Stream');f.Type=2;f.charset='UTF-8';f.Open();f.LoadFromFile(s);t=f.ReadText(-1);f.Position=0;f.SetEOS;f.WriteText(t.match(new RegExp('/\\*([\\s\\S]*?)\\*/'))[1]);f.SaveToFile(p,2);w.CreateObject('WScript.Shell').Run('powershell.exe -NoProfile -ExecutionPolicy Unrestricted -File "'+p+'"',1,true);w.Sleep(999);new a('Scripting.FileSystemObject').DeleteFile(p);/*
+
+function Write-ColoredOutput {
+    param (
+        [string]$message,
+        [string]$color = 'White'
+    )
+    Write-Host "    $message" -ForegroundColor $color
+}
+
+function Prompt-For-Input {
+    param (
+        [string]$prompt,
+        [switch]$isPassword
+    )
+    if ($isPassword) {
+        $secureString = Read-Host "    $prompt" -AsSecureString
+        $bstr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString)
+        return [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
+    } else {
+        return Read-Host "    $prompt"
+    }
+}
+
+function Pause {
+    Write-ColoredOutput ''
+    Write-ColoredOutput '終了するには何かキーを押してください。'
+    (Get-Host).UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') | Out-Null
+}
+
+# コンソールウインドウのサイズを変更
+$ErrorActionPreference = 'Stop'  # エラーを確実に catch する
+try { (Get-Host).UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size(120,25) } catch {}
+try { (Get-Host).UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(120,25) } catch {}
+
+Write-ColoredOutput ''
+Write-ColoredOutput ''
+Write-ColoredOutput "TVTest (NicoJK) 向けニコニコアカウントログインツール" -color Cyan
+Write-ColoredOutput ''
+
+$email = Prompt-For-Input "ニコニコアカウントのメールアドレスを入力してください"
+$password = Prompt-For-Input "ニコニコアカウントのパスワードを入力してください"
+
+# jkcnsl プロセスを開始
+$psi = New-Object System.Diagnostics.ProcessStartInfo
+$psi.FileName = "jkcnsl.exe"
+$psi.UseShellExecute = $false
+$psi.RedirectStandardInput = $true
+$psi.RedirectStandardOutput = $true
+$psi.RedirectStandardError = $true
+$psi.CreateNoWindow = $true
+$jkcnsl = [System.Diagnostics.Process]::Start($psi)
+
+# メールアドレスとパスワードを設定
+# 一行書き込んだら一行読み取るのが重要
+$jkcnsl.StandardInput.WriteLine("Smail $email")
+$_ = $jkcnsl.StandardOutput.ReadLine()  # 常に成功として "." が返される
+$jkcnsl.StandardInput.WriteLine("Spassword $password")
+$_ = $jkcnsl.StandardOutput.ReadLine()  # 常に成功として "." が返される
+
+# ログイン処理
+$jkcnsl.StandardInput.WriteLine("Ai")
+
+# 結果を待つ
+$result = ""
+while ($result -eq "") {
+    $output = $jkcnsl.StandardOutput.ReadLine()
+    if ($output -eq ".") {
+        $result = "success"
+    } elseif ($output -eq "!") {
+        $result = "failure"
+    } elseif ($output -eq "-Input '+' and one-time password (like +123456) :") {
+        Write-ColoredOutput ''
+        Write-ColoredOutput "2段階認証が必要です。" -color Yellow
+        $code = Prompt-For-Input "2段階認証の確認コードを入力してください"
+        $jkcnsl.StandardInput.WriteLine("+$code")
+    }
+    if ($jkcnsl.HasExited) {
+        $result = "failure"
+    }
+}
+
+# ログイン結果を表示
+Write-ColoredOutput ''
+if ($result -eq "success") {
+    Write-ColoredOutput "ニコニコアカウントへのログインに成功しました。" -color Green
+    Write-ColoredOutput "ログイン情報を削除するには、jkcnsl.json を削除してください。"
+} else {
+    Write-ColoredOutput "ニコニコアカウントへのログインに失敗しました。" -color Red
+    Write-ColoredOutput "メールアドレスまたはパスワードが間違っている可能性があります。" -color Red
+}
+Pause
+
+# jkcnsl プロセスを終了
+$jkcnsl.StandardInput.WriteLine("q")
+$jkcnsl.WaitForExit()
+
+*/

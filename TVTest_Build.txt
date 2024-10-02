@@ -66,6 +66,13 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・NicoJK と連携して動作します。
   ・https://github.com/xtne6f/jkcnsl をビルドしたものを同梱しています。
 
+・jkcnsl-login.jse … ニコニコアカウントにログインするための PowerShell スクリプト（私が作成したツール）
+  ・NicoJK を利用する場合は、事前にこの jkcnsl-login.jse を実行して、ニコニコアカウントにログインしてください。
+    ・ログインしなくてもコメントは表示できますが、コメントを投稿するにはログインが必要です。
+    ・jkcnsl-login.jse を実行し、ニコニコアカウントのメールアドレス・パスワード・2段階認証コード (2段階認証有効時のみ)
+      を入力すると、ニコニコアカウントのログイン情報が jkcnsl.json に保存されます。
+    ・正しくログインできていれば、TVTest の NicoJK タブの下部に、ニコニコ実況へのコメント投稿フォームが表示されます。
+
 ・jq.exe … JSON データから簡単に値を抽出するためのコマンドラインツール
   ・NicoJK が Chrome 系ブラウザの Cookie データベースの復号鍵を取得するときに利用します。
   ・https://github.com/stedolan/jq/releases にて配布されているものを同梱しています。
@@ -112,13 +119,14 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
   ・NicoJK (xtne6f版) (https://github.com/xtne6f/NicoJK) をビルドしたものを同梱しています。
 
 ・Plugins/NicoJK.ini … NicoJK の設定ファイル
-  ・NicoJK を使う際は、予め Chrome 等のブラウザでニコニコにログインしておく必要があります。
-    ・同梱の NicoCookie4Chrome (http://vb45wb5b.seesaa.net/#NicoCookie4Chrome) を使うことで、
-      Chrome 80 系以降でも複雑な設定なしに以前同様に Cookie を取得することができます。
-    ・現在は NicoJK 側の機能でも Cookie を取得できますが、設定が少し難しいのでこだわりがなければこちらを使うことを推奨します。
-    ・ログインできない（投稿フォームが表示されない）場合は Plugins/NicoCookie4Chrome/NicoCookie4Chrome.ini を編集し、
-      Cookies・Local State への絶対パスを指定してください。
-    ・Firefox をお使いの場合は、NicoJK.ini の execGetCookie の項目をコメントアウト後、自分のユーザー名に合わせて編集してください。
+  ・NicoJK を利用する場合は、事前に jkcnsl-login.jse を実行して、ニコニコアカウントにログインしてください。
+    ・ログインしなくてもコメントは表示できますが、コメントを投稿するにはログインが必要です。
+    ・従来の TVTest ビルドには、Chromium 系ブラウザからニコニコアカウントへのログイン情報を取得するツール、NicoCookie4Chrome を同梱していました。
+      しかし2023年秋の Chromium 系ブラウザの仕様変更で動作しなくなってしまったため、NicoJK 単独でログインする方式に変更しています。
+      ・したがって、ブラウザでのニコニコアカウントへのログイン状態に関係なく、別途 NicoJK 向けにログインを行う必要があります。
+    ・jkcnsl-login.jse を実行し、ニコニコアカウントのメールアドレス・パスワード・2段階認証コード (2段階認証有効時のみ)
+      を入力すると、ニコニコアカウントのログイン情報が jkcnsl.json に保存されます。
+    ・正しくログインできていれば、TVTest の NicoJK タブの下部に、ニコニコ実況へのコメント投稿フォームが表示されます。
   ・https://github.com/xtne6f/NicoJK に入っている設定データを、すぐに使えるよう事前に編集した上で同梱しています。
   ・NicoJK.ini の設定をすでに変更している場合は、アップデート時に上書きしないように注意してください。
 
