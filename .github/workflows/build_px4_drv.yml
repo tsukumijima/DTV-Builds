@@ -1,0 +1,104 @@
+
+name: Build px4_drv for WinUSB
+
+# 手動実行
+on:
+  workflow_dispatch:
+    inputs:
+      update_repository:
+        type: boolean
+        required: true
+        description: 'リポジトリにビルド済みアーカイブを追加・更新する (本番用)'
+      update_readme:
+        type: boolean
+        required: true
+        description: 'Readme を更新する (本番用)'
+
+# ジョブの定義
+jobs:
+
+  # px4_drv for WinUSB (32bit / 64bit) のビルド
+  build:
+    runs-on: windows-2019
+    steps:
+
+      # リポジトリのチェックアウト
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          path: DTV-Builds/
+          fetch-depth: 0
+          token: ${{ secrets.GIT_PUSH_TOKEN }}
+
+      # MSBuild のセットアップ
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      # px4_drv のビルド
+      - name: Build px4_drv
+        run: |
+          git clone -b develop https://github.com/tsukumijima/px4_drv.git
+          cd px4_drv/winusb/
+          ./build.ps1
+
+      # px4_drv のバージョンとして用いる日付を取得して保存
+      # マージコミットを除いた一番新しいコミットの日付を採用する
+      # ref: https://qiita.com/tatataiki/items/e71f26ab73094f21bca8
+      - id: version
+        name: Set px4_drv Version
+        working-directory: px4_drv/
+        run: |
+          $version = git log --no-merges --date=iso --date=format:"%y%m%d" --pretty=format:"%ad" -1
+          echo "data=px4_drv_winusb-$version" >> $ENV:GITHUB_OUTPUT
+
+      # ビルド成果物を適切なフォルダに配置
+      - name: Arrangement Artifacts
+        run: |
+
+          # ビルド成果物を配置
+          mkdir ${{steps.version.outputs.data}}
+          cp -Path px4_drv/winusb/dist/* -Destination ${{steps.version.outputs.data}}/ -Recurse
+
+          # px4_drv_winusb_Build.txt を配置
+          cp -Path DTV-Builds/px4_drv_winusb_Build.txt -Destination ${{steps.version.outputs.data}}/
+          bash -c "sed -i 's| - [0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}| - $version_date|g' ${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt"
+          bash -c "dos2unix --keep-bom ${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt"
+
+      # px4_drv のビルドアーカイブを zip で圧縮
+      - name: Compress px4_drv Archives
+        run: |
+          7z a -tzip -mx=9 ${{steps.version.outputs.data}}.zip ${{steps.version.outputs.data}}/
+
+      # Artifact としてアップロード
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{steps.version.outputs.data}}.zip
+          path: ${{steps.version.outputs.data}}.zip
+
+      # update_repository にチェックが入っているときのみ、ビルド済みアーカイブを追加してコミット
+      - name: Update Repository
+        working-directory: DTV-Builds/
+        if: ${{ github.event.inputs.update_repository == 'true' }}
+        run: |
+          git config --global core.autocrlf false
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git pull
+          cp -Path ../${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt -Destination ./
+          cp -Path ../${{steps.version.outputs.data}}.zip -Destination ./
+          bash -c "/usr/bin/find . -type f -name '*.txt' -exec dos2unix --keep-bom {} \;"
+          git add .
+          git commit -m "Add: ${{steps.version.outputs.data}}"
+          git push -u origin master
+
+      # update_readme にチェックが入っているときのみ、Readme を更新
+      - name: Update Readme
+        working-directory: DTV-Builds/
+        if: ${{ github.event.inputs.update_readme == 'true' }}
+        run: |
+          bash -c "sed -i 's|^ - \*\*px4_drv for WinUSB\*\*| - \*\*px4_drv for WinUSB\*\*\n   - ${{steps.version.outputs.data}} … [${{steps.version.outputs.data}}.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/${{steps.version.outputs.data}}.zip)|' Readme.md && dos2unix Readme.md"
+          git add .
+          git commit -m "Update: Readme.md"
+          git push -u origin master

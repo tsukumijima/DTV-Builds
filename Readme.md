@@ -17,7 +17,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 ## 注意
 
 - **BonDriver 関連のファイルは同梱されていません。各自で準備してください。**  
-- **TVTest-0.10.0-230512 / EDCB-230326 以降の TVTest / EDCB は、GitHub Actions によって全自動でビルドされるようになりました。**
+- **TVTest-0.10.0-230512 / EDCB-230326 / px4_drv_winusb-241001 以降の TVTest / EDCB / px4_drv for WinUSB は、GitHub Actions によって全自動でビルドされるようになりました。**
   - 手作業由来のミスや属人化の排除により、より透明性の高いビルドに仕上がっています。  
 - UI やダイヤログのフォントはすべて Meiryo UI に統一しています。
   - MS UI Gothic よりも読みやすく美しく、フォント変更によるレイアウト崩れへの影響が少ないためです。
@@ -138,11 +138,11 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190623.zip)
  - **px4_drv for WinUSB**
-   - px4_drv for WinUSB (2024/04/21) … [px4_drv_winusb-240421.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-240421.zip)
-   - px4_drv for WinUSB (2023/07/08) … [px4_drv_winusb-230708.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-230708.zip)
-   - px4_drv for WinUSB (2022/02/15) … [px4_drv_winusb-220215.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220215.zip)
-   - px4_drv for WinUSB (2022/01/19) … [px4_drv_winusb-220119.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220119.zip)
-   - px4_drv for WinUSB (2021/09/09) … [px4_drv_winusb-210909.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-210909.zip)
+   - px4_drv_winusb-240421 … [px4_drv_winusb-240421.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-240421.zip)
+   - px4_drv_winusb-230708 … [px4_drv_winusb-230708.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-230708.zip)
+   - px4_drv_winusb-220215 … [px4_drv_winusb-220215.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220215.zip)
+   - px4_drv_winusb-220119 … [px4_drv_winusb-220119.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-220119.zip)
+   - px4_drv_winusb-210909 … [px4_drv_winusb-210909.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-210909.zip)
  - **BonDriverProxyEx**
    - BonDriverProxyEx-1.1.6.6 … [BonDriverProxyEx-1.1.6.6.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/BonDriverProxyEx-1.1.6.6.zip)
  - **TSTask**
