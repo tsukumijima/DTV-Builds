@@ -17,7 +17,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 ## 注意
 
 - **BonDriver 関連のファイルは同梱されていません。各自で準備してください。**  
-- **TVTest-0.10.0-230512 / EDCB-230326 / px4_drv_winusb-241002 以降の TVTest / EDCB / px4_drv for WinUSB は、GitHub Actions によって全自動でビルドされるようになりました。**
+- **TVTest-0.10.0-230512 / EDCB-230326 / px4_drv_winusb-241003 以降の TVTest / EDCB / px4_drv for WinUSB は、GitHub Actions によって全自動でビルドされるようになりました。**
   - 手作業由来のミスや属人化の排除により、より透明性の高いビルドに仕上がっています。  
 - UI やダイヤログのフォントはすべて Meiryo UI に統一しています。
   - MS UI Gothic よりも読みやすく美しく、フォント変更によるレイアウト崩れへの影響が少ないためです。
