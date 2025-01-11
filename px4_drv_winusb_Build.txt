@@ -11,7 +11,7 @@
   ・PX-MLT シリーズの機種・DTV02A-4TS-P: BonDriver_PX-MLT
   ・DTV02A-1T1S-U: BonDriver_ISDB2056
   ・DTV02A-1T1S-U (ロット番号 2309 以降): BonDriver_ISDB2056N
-  ・DTV03A-1T-U: BonDriver_ISDBT2071
+  ・DTV03A-1TU: BonDriver_ISDBT2071
   ・PX-M1UR: BonDriver_PX-M1UR
   ・PX-S1UR: BonDriver_PX-S1UR
 ・BonDriver_BDA (いわゆる radi-sh 版 BonDriver) などの他の BonDriver は利用できず、置き換えが必要になります。
