@@ -111,6 +111,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - TVTest-0.10.0-190203 … [TVTest-0.10.0-190203.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/TVTest-0.10.0-190203.zip)
  - **EDCB**
    - EDCB-240622 … [EDCB-240622.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-240622.zip)
+   - EDCB-240622 … [EDCB-240622.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-240622.zip)
    - EDCB-240222 … [EDCB-240222.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-240222.zip)
    - EDCB-240213 … [EDCB-240213.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-240213.zip)
    - EDCB-231229 … [EDCB-231229.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-231229.zip)
@@ -138,6 +139,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190623.zip)
  - **px4_drv for WinUSB**
+   - px4_drv_winusb-250111 … [px4_drv_winusb-250111.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-250111.zip)
    - px4_drv_winusb-241003 … [px4_drv_winusb-241003.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-241003.zip)
    - px4_drv_winusb-240421 … [px4_drv_winusb-240421.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-240421.zip)
    - px4_drv_winusb-230708 … [px4_drv_winusb-230708.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-230708.zip)
