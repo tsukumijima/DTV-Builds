@@ -11,6 +11,7 @@
   ・PX-MLT シリーズの機種・DTV02A-4TS-P: BonDriver_PX-MLT
   ・DTV02A-1T1S-U: BonDriver_ISDB2056
   ・DTV02A-1T1S-U (ロット番号 2309 以降): BonDriver_ISDB2056N
+  ・DTV03A-1T-U: BonDriver_ISDBT2071
   ・PX-M1UR: BonDriver_PX-M1UR
   ・PX-S1UR: BonDriver_PX-S1UR
 ・BonDriver_BDA (いわゆる radi-sh 版 BonDriver) などの他の BonDriver は利用できず、置き換えが必要になります。
@@ -35,7 +36,7 @@
 ・各 BonDriver 共通
   ・BonDriver_PX4-T.ChSet.txt … 地上波のチャンネル定義ファイル
     ・BonDriver_PT3-ST の ChSet.txt と互換性があります
-    ・PX-S1UR に衛星チューナーが搭載されていない関係で、BonDriver_PX-S1UR では BonDriver_PX4-T.ChSet.txt のみ配置されます
+    ・衛星チューナーが搭載されていない関係で、BonDriver_PX-S1UR / BonDriver_ISDBT2071 では BonDriver_PX4-T.ChSet.txt のみ配置されます
   ・BonDriver_PX4-S.ChSet.txt … BS・CS のチャンネル定義ファイル
     ・BonDriver_PT3-ST の ChSet.txt と互換性があります
   ・DriverHost_PX4.exe … px4_drv の実態である、チューナーデバイスのドライバー
@@ -59,6 +60,9 @@
 ・BonDriver_ISDB2056N
   ・BonDriver_ISDB2056N.dll … BonDriver_ISDB2056N の BonDriver
   ・BonDriver_ISDB2056N.ini … BonDriver_ISDB2056N の BonDriver の設定ファイル
+・BonDriver_ISDBT2071
+  ・BonDriver_ISDBT2071.dll … BonDriver_ISDBT2071 の BonDriver
+  ・BonDriver_ISDBT2071.ini … BonDriver_ISDBT2071 の BonDriver の設定ファイル
 ・BonDriver_PX-M1UR
   ・BonDriver_PX-M1UR.dll … BonDriver_PX-M1UR の BonDriver
   ・BonDriver_PX-M1UR.ini … BonDriver_PX-M1UR の BonDriver の設定ファイル
