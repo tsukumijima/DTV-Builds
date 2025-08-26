@@ -24,7 +24,7 @@ jobs:
 
       # リポジトリのチェックアウト
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: DTV-Builds/
           fetch-depth: 0
@@ -32,7 +32,7 @@ jobs:
 
       # MSBuild のセットアップ
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.3.1
+        uses: microsoft/setup-msbuild@v2
 
       # px4_drv のビルド
       - name: Build px4_drv
@@ -73,7 +73,7 @@ jobs:
 
       # Artifact としてアップロード
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{steps.version.outputs.data}}.zip
           path: ${{steps.version.outputs.data}}.zip

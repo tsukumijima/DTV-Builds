@@ -208,8 +208,8 @@ jobs:
           git clone -b master --recursive https://github.com/tsukumijima/TVTDataBroadcastingWV2.git
           cd TVTDataBroadcastingWV2/
           nuget restore ./
-          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L\"\"$env:VERSION\"\""
-          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L\"\"$env:VERSION\"\""
+          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L`"$env:VERSION`""
+          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L`"$env:VERSION`""
           cp -Path Release/TVTDataBroadcastingWV2.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/
           cp -Path x64/Release/TVTDataBroadcastingWV2.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/
           cp -Path README.md -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2_Readme.txt
