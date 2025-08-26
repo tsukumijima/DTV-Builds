@@ -25,7 +25,7 @@ jobs:
 
       # リポジトリのチェックアウト
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: DTV-Builds/
           fetch-depth: 0
@@ -33,13 +33,7 @@ jobs:
 
       # MSBuild のセットアップ
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.3.1
-
-      # Node.js 16 のセットアップ
-      - name: Setup Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+        uses: microsoft/setup-msbuild@v2
 
       # TVTest のビルド
       - name: Build TVTest
@@ -198,38 +192,50 @@ jobs:
           cp -Path TVCaptionMod2_Readme.txt -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/
           cp -Path TVCaptionMod2_Readme.txt -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/
 
+      # TVTDataBroadcastingWV2 のバージョンとして用いる日付+SHA を出力
+      - id: tvt_wv2_version
+        name: Set TVTDataBroadcastingWV2 Version
+        run: |
+          $t=[System.DateTimeOffset]::Now.ToOffset([System.TimeSpan]::FromHours(9)).ToString("yyyy-MM-dd-HH-mm-ss")
+          $sha=$env:GITHUB_SHA.Substring(0, 12)
+          echo "VERSION=$t-$sha" >> $ENV:GITHUB_OUTPUT
+
       # TVTDataBroadcastingWV2 のビルド
       - name: Build TVTDataBroadcastingWV2
+        env:
+          VERSION: ${{ steps.tvt_wv2_version.outputs.VERSION }}
         run: |
           git clone -b master --recursive https://github.com/tsukumijima/TVTDataBroadcastingWV2.git
           cd TVTDataBroadcastingWV2/
           nuget restore ./
-          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L\"\"$env:VERSION\"\""
+          msbuild TVTDataBroadcastingWV2.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 "/p:TVTDataBroadcastingWV2Version=L\"\"$env:VERSION\"\""
           cp -Path Release/TVTDataBroadcastingWV2.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/
           cp -Path x64/Release/TVTDataBroadcastingWV2.tvtp -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/
           cp -Path README.md -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2_Readme.txt
           cp -Path README.md -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2_Readme.txt
 
-      # TVTDataBroadcastingWV2 が依存する web-bml のビルド
+      # TVTDataBroadcastingWV2 の JavaScript 側プロジェクトのビルド用に Node.js 22 をセットアップ
+      - name: Setup Node.js 22 (TVTDataBroadcastingWV2 browser)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache-dependency-path: TVTDataBroadcastingWV2/browser/package-lock.json
+
+      # TVTDataBroadcastingWV2 の JavaScript 側プロジェクトのビルド
       - name: Build web-bml
         run: |
           cd TVTDataBroadcastingWV2/browser/
-          yarn install
-          yarn run build
+          npm ci
+          npm run build
           mkdir ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           mkdir ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path dist/TVTDataBroadcastingWV2.js -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path dist/TVTDataBroadcastingWV2.js -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path web-bml/fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path web-bml/fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path TVTDataBroadcastingWV2.html -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/
           cp -Path TVTDataBroadcastingWV2.html -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/
-          cd ../../
-          curl -LO https://github.com/googlefonts/kosugi/raw/main/fonts/ttf/Kosugi-Regular.ttf
-          curl -LO https://github.com/googlefonts/kosugi-maru/raw/main/fonts/ttf/KosugiMaru-Regular.ttf
-          cp -Path Kosugi-Regular.ttf -Destination ${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
-          cp -Path Kosugi-Regular.ttf -Destination ${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
-          cp -Path KosugiMaru-Regular.ttf -Destination ${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
-          cp -Path KosugiMaru-Regular.ttf -Destination ${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
 
       # TvtPlay のビルド
       - name: Build TvtPlay
@@ -281,7 +287,7 @@ jobs:
 
       # Artifact としてアップロード
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{steps.version.outputs.data}}.zip
           path: ${{steps.version.outputs.data}}.zip
