@@ -20,7 +20,7 @@ jobs:
   # TVTest (32bit / 64bit) のビルド
   # ref: https://github.com/SlashNephy/TVTest-builder/
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
 
       # リポジトリのチェックアウト
