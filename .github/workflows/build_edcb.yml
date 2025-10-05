@@ -45,15 +45,15 @@ jobs:
           msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
 
           # EDCB 付属ツール群のビルド
-          cd ../ini/Tools/
+          cd ../Tools/
           msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
           msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          cd IBonCast/
           msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
           msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          cd ../tsidmove/
           msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
           msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild tspgtxt.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
+          msbuild tspgtxt.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
 
       # EDCB のバージョンとして用いる日付を取得して保存
       - id: version
