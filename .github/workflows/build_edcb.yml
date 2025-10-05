@@ -107,8 +107,8 @@ jobs:
       # OpenSSL 3.0 ライブラリのダウンロード
       - name: Download OpenSSL 3.0 Libraries
         run: |
-          curl -LO https://www.firedaemon.com/download-firedaemon-openssl-3.0-zip
-          7z x -y openssl-3.0.9.zip
+          curl -LO https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.0.18.zip
+          7z x -y openssl-3.0.18.zip
           cp -Path openssl-3.0/x86/bin/libcrypto-3.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
           cp -Path openssl-3.0/x86/bin/libssl-3.dll -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
           cp -Path openssl-3.0/x86/bin/openssl.exe -Destination ${{steps.version.outputs.data}}/EDCB_32bit/
