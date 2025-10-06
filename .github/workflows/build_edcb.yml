@@ -34,6 +34,11 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
+      # .NET Framework 4.5.2 Developer Pack のインストール
+      ## windows-2022 には .NET Framework 4.5 がデフォルトでインストールされていないため、明示的にインストールする
+      - name: Install .NET Framework 4.5.2 Developer Pack
+        run: choco install netfx-4.5.2-devpack -y
+
       # EDCB のビルド
       - name: Build EDCB
         run: |
