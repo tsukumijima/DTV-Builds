@@ -34,10 +34,16 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      # .NET Framework 4.5.2 Developer Pack のインストール
-      ## windows-2022 には .NET Framework 4.5 がデフォルトでインストールされていないため、明示的にインストールする
-      - name: Install .NET Framework 4.5.2 Developer Pack
-        run: choco install netfx-4.5.2-devpack -y
+      # .NET Framework 4.5 参照アセンブリのインストール
+      ## windows-2022 には .NET Framework 4.5 の参照アセンブリがデフォルトでインストールされていないため、
+      ## NuGet から Microsoft.NETFramework.ReferenceAssemblies.net45 パッケージをダウンロードして配置する
+      - name: Install .NET Framework 4.5 Reference Assemblies
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://www.nuget.org/api/v2/package/Microsoft.NETFramework.ReferenceAssemblies.net45/1.0.3" -OutFile "$env:TEMP\net45sdk.zip"
+          Expand-Archive -Force -LiteralPath "$env:TEMP\net45sdk.zip" -DestinationPath "$env:TEMP\net45sdk"
+          Remove-Item -Recurse -Force "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5" -ErrorAction SilentlyContinue
+          Move-Item -Force -LiteralPath "$env:TEMP\net45sdk\build\.NETFramework\v4.5" -Destination "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework"
 
       # EDCB のビルド
       - name: Build EDCB
