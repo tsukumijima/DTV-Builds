@@ -50,21 +50,11 @@ jobs:
         run: |
           git clone -b master https://github.com/tsukumijima/EDCB.git
 
-          # EDCB 本体のビルド
+          # EDCB 本体と付属ツール群のビルド
+          # 従来は本体と付属ツールのソリューションが分かれていたが、2025年3月より全て一括でビルドできるようになった
           cd EDCB/Document/
           msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
           msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-
-          # EDCB 付属ツール群のビルド
-          cd ../Tools/
-          msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild misc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild IBonCast.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild tsidmove.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
-          msbuild tspgtxt.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild tspgtxt.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
 
       # EDCB のバージョンとして用いる日付を取得して保存
       - id: version
