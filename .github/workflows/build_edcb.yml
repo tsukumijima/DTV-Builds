@@ -212,6 +212,9 @@ jobs:
           msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
           cp -Path Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
+          # tsreadex.exe を edcbnosuspend.exe として別名コピー
+          cp -Path ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/edcbnosuspend.exe
+          cp -Path ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/edcbnosuspend.exe
 
       # EDCB のビルドアーカイブを zip で圧縮
       - name: Compress EDCB Archives
