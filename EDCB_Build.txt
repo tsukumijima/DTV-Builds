@@ -50,7 +50,7 @@ EDCB を利用する上で必須、またはあった方が良さそうなファ
   ・HTTP で動作させる場合はこのライブラリがなくても動作しますが、HTTPS で動作させる場合は必須です。
   ・openssl.exe はライブラリではありませんが、HTTPS 化する際に必要な自己署名証明書の生成に利用します。
     ・HTTPS 化の詳細は Readme_Mod.txt 内の「CivetWebの組み込みについて」に記載されています。
-  ・https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.0.9.zip からダウンロードした OpenSSL 3.0.9 を同梱しています。
+  ・https://download.firedaemon.com/FireDaemon-OpenSSL/openssl-3.0.18.zip からダウンロードした OpenSSL 3.0.18 を同梱しています。
 
 ・Readme_EMWUI.md … EDCB Material WebUI の説明書（markdown 形式）
 
