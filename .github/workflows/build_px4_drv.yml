@@ -14,6 +14,15 @@ on:
         required: true
         description: 'Readme を更新する (本番用)'
 
+# 同時に公開処理を実行すると同じ master ブランチへのプッシュが競合するため、後続の実行を待機させる
+concurrency:
+  group: build-px4-drv
+  cancel-in-progress: false
+
+# 同じリポジトリへ成果物を追加するため、ジョブごとに発行される GITHUB_TOKEN へ必要最小限の書き込み権限を付与
+permissions:
+  contents: write
+
 # ジョブの定義
 jobs:
 
@@ -22,13 +31,19 @@ jobs:
     runs-on: windows-2022
     steps:
 
+      # Readme だけを更新すると存在しないアーカイブへのリンクが追加されるため、入力の組み合わせを制限
+      - name: Validate Workflow Inputs
+        run: |
+          if ('${{ github.event.inputs.update_readme }}' -eq 'true' -and '${{ github.event.inputs.update_repository }}' -ne 'true') {
+              throw 'update_readme requires update_repository.'
+          }
+
       # リポジトリのチェックアウト
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           path: DTV-Builds/
           fetch-depth: 0
-          token: ${{ secrets.GIT_PUSH_TOKEN }}
 
       # MSBuild のセットアップ
       - name: Setup MSBuild
@@ -66,6 +81,116 @@ jobs:
           bash -c "sed -i 's| - [0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\}| - $version_date|g' ${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt"
           bash -c "dos2unix --keep-bom ${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt"
 
+      # 配布物の欠落やビット数の取り違えを、アーカイブ作成前に検出
+      - name: Validate Artifacts
+        run: |
+          $artifact_root = Join-Path $PWD '${{steps.version.outputs.data}}'
+          $expected_folders = @(
+              'BonDriver_PX4_32bit',
+              'BonDriver_PX4_64bit',
+              'BonDriver_PX-MLT_32bit',
+              'BonDriver_PX-MLT_64bit',
+              'BonDriver_ISDB2056_32bit',
+              'BonDriver_ISDB2056_64bit',
+              'BonDriver_ISDB2056N_32bit',
+              'BonDriver_ISDB2056N_64bit',
+              'BonDriver_ISDBT2071_32bit',
+              'BonDriver_ISDBT2071_64bit',
+              'BonDriver_PX-M1UR_32bit',
+              'BonDriver_PX-M1UR_64bit',
+              'BonDriver_PX-S1UR_32bit',
+              'BonDriver_PX-S1UR_64bit'
+          )
+
+          # PE ヘッダーを直接読み取り、ファイル名だけでは判定できない実際のビット数を確認
+          function Get-PEMachine([string] $path) {
+              $stream = [System.IO.File]::OpenRead($path)
+              try {
+                  $reader = [System.IO.BinaryReader]::new($stream)
+                  $stream.Position = 0x3c
+                  $pe_offset = $reader.ReadInt32()
+                  $stream.Position = $pe_offset + 4
+                  return $reader.ReadUInt16()
+              } finally {
+                  $stream.Dispose()
+              }
+          }
+
+          # Driver フォルダ以外は BonDriver の配布フォルダだけで構成されるため、名前が異なる余分なフォルダも拒否
+          $actual_folders = @(Get-ChildItem $artifact_root -Directory | Where-Object Name -ne 'Driver' | ForEach-Object Name | Sort-Object)
+          $missing_folders = @($expected_folders | Where-Object { $_ -notin $actual_folders })
+          $unexpected_folders = @($actual_folders | Where-Object { $_ -notin $expected_folders })
+          if ($missing_folders.Count -ne 0 -or $unexpected_folders.Count -ne 0) {
+              throw "Unexpected BonDriver folders. missing: $($missing_folders -join ', '), unexpected: $($unexpected_folders -join ', ')"
+          }
+
+          $source_hashes = @{
+              '32bit' = (Get-FileHash 'px4_drv/winusb/build/x86/Release-static/WinSCard.dll' -Algorithm SHA256).Hash
+              '64bit' = (Get-FileHash 'px4_drv/winusb/build/x64/Release-static/WinSCard.dll' -Algorithm SHA256).Hash
+          }
+
+          $expected_machines = @{
+              '32bit' = 0x014c
+              '64bit' = 0x8664
+          }
+          $folder_specific_files = @{
+              'BonDriver_PX4' = @('BonDriver_PX4-S.dll', 'BonDriver_PX4-S.ini', 'BonDriver_PX4-S.ChSet.txt', 'BonDriver_PX4-T.dll', 'BonDriver_PX4-T.ini', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_PX-MLT' = @('BonDriver_PX-MLT.dll', 'BonDriver_PX-MLT.ini', 'BonDriver_PX4-S.ChSet.txt', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_ISDB2056' = @('BonDriver_ISDB2056.dll', 'BonDriver_ISDB2056.ini', 'BonDriver_PX4-S.ChSet.txt', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_ISDB2056N' = @('BonDriver_ISDB2056N.dll', 'BonDriver_ISDB2056N.ini', 'BonDriver_PX4-S.ChSet.txt', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_ISDBT2071' = @('BonDriver_ISDBT2071.dll', 'BonDriver_ISDBT2071.ini', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_PX-M1UR' = @('BonDriver_PX-M1UR.dll', 'BonDriver_PX-M1UR.ini', 'BonDriver_PX4-S.ChSet.txt', 'BonDriver_PX4-T.ChSet.txt')
+              'BonDriver_PX-S1UR' = @('BonDriver_PX-S1UR.dll', 'BonDriver_PX-S1UR.ini', 'BonDriver_PX4-T.ChSet.txt')
+          }
+
+          foreach ($folder_name in $expected_folders) {
+              $folder = Join-Path $artifact_root $folder_name
+              $platform = if ($folder_name.EndsWith('_32bit')) { '32bit' } else { '64bit' }
+              $device_name = $folder_name -replace '_(32|64)bit$', ''
+              $required_files = @('WinSCard.dll', 'DriverHost_PX4.exe', 'DriverHost_PX4.ini', 'it930x-firmware.bin') + $folder_specific_files[$device_name]
+              foreach ($required_file in $required_files) {
+                  if (-not (Test-Path (Join-Path $folder $required_file) -PathType Leaf)) {
+                      throw "Required file is missing. folder: $folder_name, file: $required_file"
+                  }
+              }
+
+              $win_scard_path = Join-Path $folder 'WinSCard.dll'
+              $driver_host_path = Join-Path $folder 'DriverHost_PX4.exe'
+              $bon_drivers = @(Get-ChildItem $folder -File -Filter 'BonDriver_*.dll')
+              if ($bon_drivers.Count -eq 0) {
+                  throw "BonDriver is missing. folder: $folder_name"
+              }
+
+              if ((Get-PEMachine $win_scard_path) -ne $expected_machines[$platform]) {
+                  throw "WinSCard.dll architecture does not match its folder. folder: $folder_name"
+              }
+              if ((Get-PEMachine $driver_host_path) -ne $expected_machines[$platform]) {
+                  throw "DriverHost_PX4.exe architecture does not match its folder. folder: $folder_name"
+              }
+              foreach ($bon_driver in $bon_drivers) {
+                  if ((Get-PEMachine $bon_driver.FullName) -ne $expected_machines[$platform]) {
+                      throw "BonDriver architecture does not match its folder. file: $($bon_driver.FullName)"
+                  }
+              }
+              if ((Get-FileHash $win_scard_path -Algorithm SHA256).Hash -ne $source_hashes[$platform]) {
+                  throw "WinSCard.dll differs from the signed build output. folder: $folder_name"
+              }
+
+              $win_scard_info = (Get-Item $win_scard_path).VersionInfo
+              $driver_host_info = (Get-Item $driver_host_path).VersionInfo
+              if ($win_scard_info.ProductName -ne 'WinSCard_PX4') {
+                  throw "Unexpected WinSCard.dll product name. folder: $folder_name, product: $($win_scard_info.ProductName)"
+              }
+              if ($win_scard_info.FileVersion -ne $driver_host_info.FileVersion) {
+                  throw "WinSCard.dll and DriverHost_PX4.exe versions differ. folder: $folder_name"
+              }
+              foreach ($bon_driver in $bon_drivers) {
+                  if ($bon_driver.VersionInfo.FileVersion -ne $driver_host_info.FileVersion) {
+                      throw "BonDriver and DriverHost_PX4.exe versions differ. file: $($bon_driver.FullName)"
+                  }
+              }
+          }
+
       # px4_drv のビルドアーカイブを zip で圧縮
       - name: Compress px4_drv Archives
         run: |
@@ -87,11 +212,11 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git pull
+          git pull --ff-only
           cp -Path ../${{steps.version.outputs.data}}/px4_drv_winusb_Build.txt -Destination ./
           cp -Path ../${{steps.version.outputs.data}}.zip -Destination ./
-          bash -c "/usr/bin/find . -type f -name '*.txt' -exec dos2unix --keep-bom {} \;"
-          git add .
+          bash -c "dos2unix --keep-bom px4_drv_winusb_Build.txt"
+          git add px4_drv_winusb_Build.txt ${{steps.version.outputs.data}}.zip
           git commit -m "Add: ${{steps.version.outputs.data}}"
           git push -u origin master
 
@@ -101,6 +226,6 @@ jobs:
         if: ${{ github.event.inputs.update_readme == 'true' }}
         run: |
           bash -c "sed -i 's|^ - \*\*px4_drv for WinUSB\*\*| - \*\*px4_drv for WinUSB\*\*\n   - ${{steps.version.outputs.data}} … [${{steps.version.outputs.data}}.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/${{steps.version.outputs.data}}.zip)|' Readme.md && dos2unix Readme.md"
-          git add .
+          git add Readme.md
           git commit -m "Update: Readme.md"
           git push -u origin master
