@@ -139,7 +139,7 @@ jobs:
           7z x -y sqlite32.zip
           7z x -y sqlite64.zip
           cp -Path sqlite-tools-win32-x86-3430200/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_32bit/
-          cp -Path sqlite-tools-win-x64-3530400/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_64bit/
+          cp -Path sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_64bit/
 
       # TvCas (B25.tvcas / B1.tvcas) のビルド
       - name: Build TvCas (B25.tvcas / B1.tvcas)
