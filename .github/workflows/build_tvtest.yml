@@ -250,8 +250,12 @@ jobs:
           mkdir ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path dist/TVTDataBroadcastingWV2.js -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path dist/TVTDataBroadcastingWV2.js -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
-          cp -Path web-bml/fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
-          cp -Path web-bml/fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path node_modules/web-bml-fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path node_modules/web-bml-fonts/*.woff2 -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path node_modules/web-bml-fonts/LICENSE.txt -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/fonts-LICENSE.txt
+          cp -Path node_modules/web-bml-fonts/LICENSE.txt -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/fonts-LICENSE.txt
+          cp -Path dist/TVTDataBroadcastingWV2.js.LICENSE.txt -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
+          cp -Path dist/TVTDataBroadcastingWV2.js.LICENSE.txt -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/dist/
           cp -Path TVTDataBroadcastingWV2.html -Destination ../../${{steps.version.outputs.data}}/TVTest_32bit/Plugins/TVTDataBroadcastingWV2/resources/
           cp -Path TVTDataBroadcastingWV2.html -Destination ../../${{steps.version.outputs.data}}/TVTest_64bit/Plugins/TVTDataBroadcastingWV2/resources/
 
