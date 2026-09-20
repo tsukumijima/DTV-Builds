@@ -8,7 +8,7 @@
 ・Visual Studio 2022 でビルドしています。Visual C++ ランタイムは静的リンクしているため、別途インストールする必要はありません。
 ・px4_drv for WinUSB では、チューナー機種ごとに専用の BonDriver が必要です。
   ・PX4/PX5 シリーズの機種: BonDriver_PX4
-  ・PX-MLT シリーズの機種・DTV02A-4TS-P: BonDriver_PX-MLT
+  ・PX-MLT シリーズの機種・DTV02A-4TS-P・DTV02A-5TS-P: BonDriver_PX-MLT
   ・DTV02A-1T1S-U: BonDriver_ISDB2056
   ・DTV02A-1T1S-U (ロット番号 2309 以降): BonDriver_ISDB2056N
   ・DTV03A-1TU: BonDriver_ISDBT2071
@@ -42,6 +42,7 @@
   ・元の WinSCard.dll を別の名前へ変更するか、別のフォルダへ移動してから入れ替えてください。
 ・カードリーダーの一覧には、px4_drv 対応機器の内蔵カードリーダー、Windows が認識している外付けカードリーダーの順で表示されます。
   ・WinSCard.dll を配置した状態でも、Windows が認識している外付けカードリーダーを引き続き利用できます。
+  ・リモートデスクトップ接続中の外付けカードリーダーは、Windows のスマートカードリダイレクト設定に従います。
 ・受信に使っているチューナーとは別の対応機器に挿入された B-CAS カードも利用できます。
   ・PC に接続されているすべてのチューナーへ B-CAS カードを挿入する必要はありません。
   ・チューナーを使用していない状態でも、対応機器が接続されていれば内蔵カードリーダーを利用できます。
