@@ -24,7 +24,7 @@ jobs:
 
       # リポジトリのチェックアウト
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: DTV-Builds/
           fetch-depth: 0
@@ -32,7 +32,7 @@ jobs:
 
       # MSBuild のセットアップ
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       # .NET Framework 4.5 参照アセンブリのインストール
       ## windows-2022 には .NET Framework 4.5 の参照アセンブリがデフォルトでインストールされていないため、
@@ -223,7 +223,7 @@ jobs:
 
       # Artifact としてアップロード
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{steps.version.outputs.data}}.zip
           path: ${{steps.version.outputs.data}}.zip
