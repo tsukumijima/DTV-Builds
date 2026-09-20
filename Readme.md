@@ -27,6 +27,9 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
 - 現在は TVTest・EDCB は Visual Studio 2019 のツールセット、px4_drv for WinUSB は Visual Studio 2022 のツールセットを使い、Windows Server 2022 上でビルドしています。
   - px4_drv_winusb-260920 以降は Visual Studio 2022 、それ以前の px4_drv for WinUSB は Visual Studio 2019 でビルドしています。
   - TVTest-0.10.0-200202・EDCB-200209 以降は Visual Studio 2019 、それ以前の TVTest・EDCB は Visual Studio 2017 でビルドしています。
+  - TVTest の同梱コンポーネントと EDCB の実行には、Microsoft Visual C++ 2015-2022 再頒布可能パッケージが必要です。32bit 版と 64bit 版の双方を利用する場合は、x86・x64 の両方をインストールしてください。
+  - TVTest-0.10.0-200508 から TVTest-0.10.0-240112 までに同梱している NicoCookie4Chrome は、Microsoft Visual C++ 2012 再頒布可能パッケージも必要です。
+  - px4_drv for WinUSB はすべての公開版で Visual C++ ランタイムを静的リンクしているため、再頒布可能パッケージの追加インストールは不要です。
   - ビルド毎に同梱するファイルを更新したり構成を変更したりしているため、古いバージョンには現在のバージョンでは同梱しているファイルが入っていない事があります。  
   - できるだけ新しいものを使用してください（特に TVTest-0.10.0-200202・EDCB-210216 以前の TVTest・EDCB は諸都合でおすすめしません）。
 - 万全は期しているつもりですが、基本的に動くかどうかの保証はありません。利用は各自の責任にてお願いします。  
