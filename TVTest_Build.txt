@@ -75,7 +75,7 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・jq.exe … JSON データから簡単に値を抽出するためのコマンドラインツール
   ・NicoJK が Chrome 系ブラウザの Cookie データベースの復号鍵を取得するときに利用します。
-  ・https://github.com/stedolan/jq/releases にて配布されているものを同梱しています。
+  ・https://github.com/jqlang/jq/releases にて配布されている jq 1.8.2 を同梱しています。
 
 ・LogoData … 私の環境（関東圏）で取得した 地上波・BS・CS110 の局ロゴデータ
   ・地上波の局ロゴデータは関東以外では役に立たないと思いますが、BS・CS110 の局ロゴデータは全国共通なので、いちいち取得する手間を省けるはずです。
@@ -87,7 +87,8 @@ TVTest を利用する上で必須、またはあった方が良さそうなフ�
 
 ・sqlite3.exe … SQLite (データベース管理ソフト)
   ・NicoJK がブラウザのデータベースから Cookie を取得するときに利用します。
-  ・https://www.sqlite.org/download.html にある sqlite-tools-win32-x86-(バージョン番号).zip に入っているものを同梱しています。
+  ・32bit 版は公式ビルドが 3.44 以降で打ち切られているので、最終リリースの sqlite-tools-win32-x86-3430200.zip (3.43.2) を同梱しています。
+  ・64bit 版は https://www.sqlite.org/download.html からダウンロードした sqlite-tools-win-x64-3530400.zip (3.53.4) を同梱しています。
 
 ・TvtAudioStretchFilter.ax … TvtPlay 用の音声フィルタ
   ・filter-install.jse を実行するとインストールされる DirectShow フィルタです。

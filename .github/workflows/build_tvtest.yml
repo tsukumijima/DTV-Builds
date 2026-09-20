@@ -129,14 +129,17 @@ jobs:
           cp -Path bin\Release\net8.0\win-x64\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/
 
       # jq.exe と sqlite3.exe (設定次第では NicoJK の動作に必要) をダウンロード
+      # 32bit 版 CLI は公式ビルドが 3.44 以降で打ち切られているので、最終リリースの 3.43.2 を使う
       - name: Download jq.exe / sqlite3.exe
         run: |
-          curl -L -o ${{steps.version.outputs.data}}/TVTest_32bit/jq.exe https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win32.exe
-          curl -L -o ${{steps.version.outputs.data}}/TVTest_64bit/jq.exe https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe
-          curl -L -o sqlite.zip https://www.sqlite.org/2023/sqlite-tools-win32-x86-3420000.zip
-          7z x -y sqlite.zip
-          cp -Path sqlite-tools-win32-x86-3420000/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_32bit/
-          cp -Path sqlite-tools-win32-x86-3420000/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_64bit/
+          curl -L -o ${{steps.version.outputs.data}}/TVTest_32bit/jq.exe https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-windows-i386.exe
+          curl -L -o ${{steps.version.outputs.data}}/TVTest_64bit/jq.exe https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-windows-amd64.exe
+          curl -L -o sqlite32.zip https://www.sqlite.org/2023/sqlite-tools-win32-x86-3430200.zip
+          curl -L -o sqlite64.zip https://www.sqlite.org/2026/sqlite-tools-win-x64-3530400.zip
+          7z x -y sqlite32.zip
+          7z x -y sqlite64.zip
+          cp -Path sqlite-tools-win32-x86-3430200/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_32bit/
+          cp -Path sqlite-tools-win-x64-3530400/sqlite3.exe -Destination ${{steps.version.outputs.data}}/TVTest_64bit/
 
       # TvCas (B25.tvcas / B1.tvcas) のビルド
       - name: Build TvCas (B25.tvcas / B1.tvcas)
