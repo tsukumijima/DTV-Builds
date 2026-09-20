@@ -125,8 +125,8 @@ jobs:
           cd jkcnsl/
           dotnet publish -c Release -r win-x86 --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true
           dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true
-          cp -Path bin\Release\net8.0\win-x86\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/
-          cp -Path bin\Release\net8.0\win-x64\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/
+          cp -Path bin\Release\net10.0\win-x86\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_32bit/
+          cp -Path bin\Release\net10.0\win-x64\publish\jkcnsl.exe -Destination ../${{steps.version.outputs.data}}/TVTest_64bit/
 
       # jq.exe と sqlite3.exe (設定次第では NicoJK の動作に必要) をダウンロード
       # 32bit 版 CLI は公式ビルドが 3.44 以降で打ち切られているので、最終リリースの 3.43.2 を使う
