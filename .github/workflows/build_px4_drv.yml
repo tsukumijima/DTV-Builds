@@ -191,6 +191,9 @@ jobs:
               }
           }
 
+          # アーカイブへ入る INF の改行形式とカタログファイルの記述内容を配置後の実ファイルで検証
+          & 'px4_drv/winusb/pkg/signing-tools/verify.ps1' -DriverPath (Join-Path $artifact_root 'Driver')
+
       # px4_drv のビルドアーカイブを zip で圧縮
       - name: Compress px4_drv Archives
         run: |
