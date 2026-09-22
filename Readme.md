@@ -25,7 +25,7 @@ TS抜き (DTV) 関連ソフトウェアのビルド済みアーカイブです�
   - 本家のソースコードをそのままビルドしただけのアーカイブではないことに注意してください。
   - 信頼できないようであれば自ビルドすることを推奨します。
 - 現在は TVTest・EDCB は Visual Studio 2019 のツールセット、px4_drv for WinUSB は Visual Studio 2022 のツールセットを使い、Windows Server 2022 上でビルドしています。
-  - px4_drv_winusb-260920 以降は Visual Studio 2022 、それ以前の px4_drv for WinUSB は Visual Studio 2019 でビルドしています。
+  - px4_drv_winusb-260922 以降は Visual Studio 2022 、それ以前の px4_drv for WinUSB は Visual Studio 2019 でビルドしています。
   - TVTest-0.10.0-200202・EDCB-200209 以降は Visual Studio 2019 、それ以前の TVTest・EDCB は Visual Studio 2017 でビルドしています。
   - TVTest の同梱コンポーネントと EDCB の実行には、Microsoft Visual C++ 2015-2022 再頒布可能パッケージが必要です。32bit 版と 64bit 版の双方を利用する場合は、x86・x64 の両方をインストールしてください。
   - TVTest-0.10.0-200508 から TVTest-0.10.0-240112 までに同梱している NicoCookie4Chrome は、Microsoft Visual C++ 2012 再頒布可能パッケージも必要です。
@@ -151,7 +151,6 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190623.zip)
  - **px4_drv for WinUSB**
-   - px4_drv_winusb-260920 … [px4_drv_winusb-260920.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-260920.zip)
    - px4_drv_winusb-250111 … [px4_drv_winusb-250111.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-250111.zip)
    - px4_drv_winusb-241003 … [px4_drv_winusb-241003.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-241003.zip)
    - px4_drv_winusb-240421 … [px4_drv_winusb-240421.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-240421.zip)
