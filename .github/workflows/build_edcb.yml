@@ -50,6 +50,9 @@ jobs:
         uses: microsoft/setup-msbuild@v3
 
       # EDCB のビルド
+      # Windows SDK を指定しないとランナーに入っている最新の版 (2026年9月時点で 10.0.26100.0) が使われ、ビルドするたびに静的リンクされる UCRT が変わる
+      # 10.0.26100.0 の静的 UCRT でビルドした psisiarc / psisimux / tsmemseg / tsreadex の 32bit 版は多数のウイルス対策ソフトの機械学習判定で誤検知されたため、
+      # このワークフローの全てのビルドを、誤検知がほぼ出なかった Windows SDK 10.0.22621.0 に固定する
       - name: Build EDCB
         run: |
           git clone -b master https://github.com/tsukumijima/EDCB.git
@@ -57,8 +60,8 @@ jobs:
           # EDCB 本体と付属ツール群のビルド
           # 従来は本体と付属ツールのソリューションが分かれていたが、2025年3月より全て一括でビルドできるようになった
           cd EDCB/Document/
-          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
-          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild EDCB_ALL.VS2015.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
 
       # EDCB のバージョンとして用いる日付を取得して保存
       - id: version
@@ -102,8 +105,8 @@ jobs:
         run: |
           git clone -b master https://github.com/tsukumijima/libaribb25.git
           cd libaribb25/
-          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
-          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild arib_std_b25.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Win32/Release/libaribb1.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/B1Decoder.dll
           cp -Path Win32/Release/libaribb25.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/B25Decoder.dll
           cp -Path x64/Release/libaribb1.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/B1Decoder.dll
@@ -126,8 +129,8 @@ jobs:
         run: |
           git clone -b v5.2-luabinaries https://github.com/xtne6f/lua.git
           cd lua/
-          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild lua52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/lua52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/
           cp -Path x64/Release/lua52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/
 
@@ -136,8 +139,8 @@ jobs:
         run: |
           git clone -b v0.5-lua52 https://github.com/xtne6f/lua-zlib.git
           cd lua-zlib/
-          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild zlib52.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/zlib52.dll
           cp -Path x64/Release/zlib52.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/zlib52.dll
 
@@ -146,8 +149,8 @@ jobs:
         run: |
           git clone -b master https://github.com/tsukumijima/Write_Multi.git
           cd Write_Multi/
-          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild Write_Multi.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/Write_Multi.dll -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/EdcbPlugIn/
           cp -Path x64/Release/Write_Multi.dll -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/EdcbPlugIn/
 
@@ -182,8 +185,8 @@ jobs:
         run: |
           git clone -b master https://github.com/xtne6f/psisiarc
           cd psisiarc/
-          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild psisiarc.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/psisiarc.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
 
@@ -192,8 +195,8 @@ jobs:
         run: |
           git clone -b master https://github.com/xtne6f/psisimux
           cd psisimux/
-          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild psisimux.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/psisimux.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/psisimux.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
 
@@ -202,8 +205,8 @@ jobs:
         run: |
           git clone -b master https://github.com/xtne6f/tsmemseg
           cd tsmemseg/
-          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild tsmemseg.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/tsmemseg.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/tsmemseg.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
 
@@ -212,8 +215,8 @@ jobs:
         run: |
           git clone -b master https://github.com/xtne6f/tsreadex
           cd tsreadex/
-          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142
-          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
+          msbuild tsreadex.sln /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142 /p:WindowsTargetPlatformVersion=10.0.22621.0
           cp -Path Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_32bit/Tools/
           cp -Path x64/Release/tsreadex.exe -Destination ../${{steps.version.outputs.data}}/EDCB_64bit/Tools/
           # tsreadex.exe を edcbnosuspend.exe として別名コピー
