@@ -152,6 +152,7 @@ Shared とつく方はライブラリを dll にまとめてファイルサイ�
    - EDCB-190709 … [EDCB-190709.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190709.zip)
    - EDCB-190623 … [EDCB-190623.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/EDCB-190623.zip)
  - **px4_drv for WinUSB**
+   - px4_drv_winusb-261031 … [px4_drv_winusb-261031.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-261031.zip)
    - px4_drv_winusb-260922 … [px4_drv_winusb-260922.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-260922.zip)
    - px4_drv_winusb-250111 … [px4_drv_winusb-250111.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-250111.zip)
    - px4_drv_winusb-241003 … [px4_drv_winusb-241003.zip](https://github.com/tsukumijima/DTV-Builds/raw/master/px4_drv_winusb-241003.zip)
